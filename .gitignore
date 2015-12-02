@@ -1,0 +1,8 @@
+#exclure les fichiers .iml
+*.iml
+
+#exclure le dossier .idea
+.idea
+
+#exclure les fichiers .class
+*.class
