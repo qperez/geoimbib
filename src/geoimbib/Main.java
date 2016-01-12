@@ -1,9 +1,6 @@
 package geoimbib;
 
-import geoimbib.Models.M_Carotte;
 import geoimbib.Views.V_MainWindow;
-
-import java.util.ArrayList;
 
 /**
  * Created by quentin on 02/12/15.

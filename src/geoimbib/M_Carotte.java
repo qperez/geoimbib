@@ -1,4 +1,4 @@
-package geoimbib.Models;
+package geoimbib;
 
 import java.util.ArrayList;
 
@@ -156,5 +156,13 @@ public class M_Carotte {
      */
     public void setMasse(double masse) {
         this.masse = masse;
+    }
+
+    /**
+     * Calcule et retourne la surface de la base de la carotte
+     * @return surface de la carotte
+     */
+    public double calculSurface() {
+        return Math.pow(diametre/2,2) * Math.PI;
     }
 }

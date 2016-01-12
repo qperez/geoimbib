@@ -1,4 +1,4 @@
-package geoimbib.Models;
+package geoimbib;
 
 import java.util.ArrayList;
 import java.util.Date;

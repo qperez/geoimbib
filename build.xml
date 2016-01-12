@@ -2,7 +2,7 @@
     <property name="main.build.dir" value="out"/>
     <property name="main.src.dir" value="src"/>
     <property name="test.build.dir" value="out"/>
-    <property name="test.src.dir" value="tests"/>
+    <property name="test.src.dir" value="test"/>
 
     <path id="classpath.test">
         <pathelement location="lib/junit-4.12.jar"/>
@@ -30,7 +30,7 @@
             </classpath>
             <formatter type="brief" usefile="false" />
             <batchtest>
-                <fileset dir="${test.src.dir}" includes="**/*.java" />
+                <fileset dir="tests" includes="**/*.java" />
             </batchtest>
         </junit>
     </target>
