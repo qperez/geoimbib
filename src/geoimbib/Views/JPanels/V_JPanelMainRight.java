@@ -1,10 +1,10 @@
 package geoimbib.Views.JPanels;
 
+import geoimbib.Controlers.C_ControlButtonMainPanelRight;
 import geoimbib.Views.V_MainWindow;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -31,6 +31,11 @@ public class V_JPanelMainRight extends JPanel {
     public V_JPanelMainRight(V_MainWindow v_mainWindow){
         this.v_mainWindow = v_mainWindow;
         initView();
+        initControlers();
+    }
+
+    private void initControlers() {
+        jbuttonLeave.addActionListener(new C_ControlButtonMainPanelRight(this));
     }
 
     public void initView(){
@@ -74,4 +79,16 @@ public class V_JPanelMainRight extends JPanel {
 
     }
 
+    public void leave() {
+        v_mainWindow.dispose();
+    }
+
+
+    /*
+    * Getters and Setters
+    * */
+
+    public JButton getButtonLeave() {
+        return jbuttonLeave;
+    }
 }
