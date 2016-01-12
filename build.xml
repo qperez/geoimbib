@@ -2,7 +2,7 @@
     <property name="main.build.dir" value="out"/>
     <property name="main.src.dir" value="src"/>
     <property name="test.build.dir" value="out"/>
-    <property name="test.src.dir" value="test"/>
+    <property name="test.src.dir" value="tests"/>
 
     <path id="classpath.test">
         <pathelement location="lib/junit-4.12.jar"/>
