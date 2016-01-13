@@ -1,6 +1,5 @@
 package geoimbib.Models;
 
-import geoimbib.M_Carotte;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -16,7 +15,7 @@ public class M_CarotteUnitTest {
      Résultat attendu = 1.6^2 * Pi
      */
     @Test
-    public void testSurface(){
+    public void testCalculSurface(){
         M_Carotte carotte = new M_Carotte("CarotteToTest", 3.2, 15.2 ,398.4);
         assertEquals(Math.PI * Math.pow(1.6,2), carotte.calculSurface());
     }

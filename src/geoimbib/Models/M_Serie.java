@@ -1,6 +1,7 @@
-package geoimbib;
+package geoimbib.Models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ public class M_Serie {
     private String nom;
     private int nombreMesuresParCarottes;
     private ArrayList<M_Carotte> listCarotte;
-    private Date dateHeure;
+    private Calendar dateHeure;
 
     /**
      * Constructeur M_Serie.
@@ -28,7 +29,7 @@ public class M_Serie {
      * </p>
      */
     public M_Serie(){
-        dateHeure = new Date(System.currentTimeMillis());
+        dateHeure = Calendar.getInstance();;
     }
 
     /**
@@ -46,7 +47,7 @@ public class M_Serie {
     public M_Serie(String nom,
                    int nombreMesuresParCarottes,
                    ArrayList<M_Carotte> listCarotte,
-                   Date dateHeure){
+                   Calendar dateHeure){
         this.nom = nom;
         this.nombreMesuresParCarottes = nombreMesuresParCarottes;
         this.listCarotte = listCarotte;
@@ -66,14 +67,14 @@ public class M_Serie {
         this.nom = nom;
         this.nombreMesuresParCarottes = nombreMesuresParCarottes;
         this.listCarotte = new ArrayList<M_Carotte>();
-        this.dateHeure = new Date(System.currentTimeMillis());
+        this.dateHeure = Calendar.getInstance();
     }
 
     /**
      * Retourne l'objet Date contenant la date et l'heure du syst&egrave;me
      * @return objet Date
      */
-    public Date getDateHeure() {
+    public Calendar getDateHeure() {
         return dateHeure;
     }
 
@@ -81,7 +82,7 @@ public class M_Serie {
      * Met &agrave; jour l'objet Date
      * @param dateHeure le nouvel objet Date
      */
-    public void setDateHeure(Date dateHeure) {
+    public void setDateHeure(Calendar dateHeure) {
         this.dateHeure = dateHeure;
     }
 

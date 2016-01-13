@@ -1,4 +1,4 @@
-package geoimbib;
+package geoimbib.Models;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * <li>Une longueur</li>
  * <li>Un diam&egrave;tre</li>
  * <li>Une masse</li>
- * <li>Une liste de hauteurs de mesures de franges humides</li>
+ * <li>Une liste de Mesures</li>
  * </ul> */
 public class M_Carotte {
 
@@ -19,7 +19,7 @@ public class M_Carotte {
     private double longueur;
     private double diametre;
     private double masse;
-    private ArrayList<double[]> listHauteursMesures;
+    private ArrayList<M_Mesure> listMesures;
 
     /**
      * Constructeur M_Carotte.
@@ -41,14 +41,14 @@ public class M_Carotte {
      * @param diametre Diametre de la carotte
      * @param longueur Longueur de la carotte
      * @param masse Masse de la la carotte
-     * @param listHauteursMesures liste des hauteurs mesurées
+     * @param listMesures liste des hauteurs mesurées
      */
-    public M_Carotte(String nom, double diametre, double longueur ,double masse, ArrayList<double[]> listHauteursMesures) {
+    public M_Carotte(String nom, double diametre, double longueur , double masse, ArrayList<M_Mesure> listMesures) {
         this.nom = nom;
         this.diametre = diametre;
         this.longueur = longueur;
         this.masse = masse;
-        this.listHauteursMesures = listHauteursMesures;
+        this.listMesures = listMesures;
     }
 
     /**
@@ -67,7 +67,7 @@ public class M_Carotte {
         this.diametre = diametre;
         this.longueur = longueur;
         this.masse = masse;
-        listHauteursMesures = new ArrayList<double[]>();
+        listMesures = new ArrayList<M_Mesure>();
     }
 
     /**
@@ -90,24 +90,20 @@ public class M_Carotte {
      * Retourne la liste des hauteurs de franges humides mesur&eacute;es
      * @return liste des hauteurs mesur&eacute;es
      */
-    public ArrayList<double[]> getListHauteursMesures() {
-        return listHauteursMesures;
+    public ArrayList<M_Mesure> getListMesures() {
+        return listMesures;
     }
 
     /**
      * Met &agrave; jour la liste des hauteurs mesur&eacute;es
-     * @param listHauteursMesures liste des hauteurs mesur&eacute;es
+     * @param listMesures liste des hauteurs mesur&eacute;es
      */
-    public void setListHauteursMesures(ArrayList<double[]> listHauteursMesures) {
-        this.listHauteursMesures = listHauteursMesures;
+    public void setListMesures(ArrayList<M_Mesure> listMesures) {
+        this.listMesures = listMesures;
     }
 
-    /**
-     * Met &agrave; jour la liste des hauteurs mesur&eacute;es
-     * @param indice du tableau de mesure
-     */
-    public void getTabHauteursMesures(int indice){
-        listHauteursMesures.get(indice);
+    public void getMesure(int indice){
+        listMesures.get(indice);
     }
 
     /**
@@ -165,4 +161,5 @@ public class M_Carotte {
     public double calculSurface() {
         return Math.pow(diametre/2,2) * Math.PI;
     }
+
 }
