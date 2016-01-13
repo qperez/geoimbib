@@ -1,11 +1,14 @@
 package geoimbib.Views.JPanels;
 
+import geoimbib.Controlers.C_ControlButtonMainPanelLeft;
 import geoimbib.Views.V_MainWindow;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.io.File;
+import java.nio.file.Paths;
 
 /**
  * Created by ravier on 10/01/2016.
@@ -21,6 +24,8 @@ public class V_JPanelMainLeft extends JPanel{
     //JPanel changement de répertoire liste de tests
     private JTextField jtextfieldFolder = null;
     private JPanel jpanelFolder = null;
+
+    JButton jButtonPathFolder = null;
 
     public V_JPanelMainLeft(V_MainWindow v_mainWindow){
         this.v_mainWindow = v_mainWindow;
@@ -40,10 +45,10 @@ public class V_JPanelMainLeft extends JPanel{
         * */
             jpanelFolder = new JPanel();
             jpanelFolder.setLayout(new BoxLayout(jpanelFolder, BoxLayout.X_AXIS));
-            jtextfieldFolder = new JTextField(); //rechercher la préférence lors de l'initialisation de la vue
+            jtextfieldFolder = new JTextField(""); //rechercher la préférence lors de l'initialisation de la vue
 
-            JButton jButtonPathFolder = new JButton("...");
-
+            jButtonPathFolder = new JButton("...");
+            jButtonPathFolder.addActionListener(new C_ControlButtonMainPanelLeft(this));
 
             this.add(jpanelFolder);
             jpanelFolder.add(jtextfieldFolder);
@@ -103,6 +108,33 @@ public class V_JPanelMainLeft extends JPanel{
                     getHeight()/2 - (int)listScroller2.getPreferredSize().getHeight()/2,
                     150,
                     250);
+    }
+
+
+    public void displayChoiceFolder() {
+        JFileChooser chooser = new JFileChooser();
+        /*FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "JPG & GIF Images", "jpg", "gif");
+        chooser.setFileFilter(filter);*/
+        if (jtextfieldFolder.getText().equals("")) {
+            chooser.setCurrentDirectory(new File(Paths.get("/").toString()));
+        } else{
+            chooser.setCurrentDirectory(new File(Paths.get(jtextfieldFolder.getText()).toString()));
+        }
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int returnVal = chooser.showOpenDialog(this);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("You chose to open this file: " +
+                    chooser.getSelectedFile().getPath());
+        }
+    }
+
+    /*
+    * Getters / Setters
+    * */
+    public JButton getButtonFolder() {
+        return jButtonPathFolder;
     }
 
 

@@ -87,7 +87,6 @@ public class V_JPanelMainRight extends JPanel {
     /*
     * Getters and Setters
     * */
-
     public JButton getButtonLeave() {
         return jbuttonLeave;
     }

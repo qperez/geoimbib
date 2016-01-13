@@ -2,7 +2,6 @@ package geoimbib.Controlers;
 
 import geoimbib.Views.JPanels.V_JPanelMainRight;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
