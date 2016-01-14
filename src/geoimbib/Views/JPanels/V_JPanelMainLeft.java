@@ -5,10 +5,10 @@ import geoimbib.Views.V_MainWindow;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.io.File;
+import java.io.*;
 import java.nio.file.Paths;
+import java.util.Vector;
 
 /**
  * Created by ravier on 10/01/2016.
@@ -18,8 +18,8 @@ public class V_JPanelMainLeft extends JPanel{
     private V_MainWindow v_mainWindow;
 
     //JList
-    private JList jList = null;
-    private JList jListEchantillons = null;
+    private JList<String> jList = null;
+    private JList<String> jListEchantillons = null;
 
     //JPanel changement de répertoire liste de tests
     private JTextField jtextfieldFolder = null;
@@ -43,9 +43,11 @@ public class V_JPanelMainLeft extends JPanel{
         /*
         * JTextfield changement de répertoire
         * */
+            String pathLoaded = loadPathFolderSeries();
+
             jpanelFolder = new JPanel();
             jpanelFolder.setLayout(new BoxLayout(jpanelFolder, BoxLayout.X_AXIS));
-            jtextfieldFolder = new JTextField(""); //rechercher la préférence lors de l'initialisation de la vue
+            jtextfieldFolder = new JTextField(pathLoaded);
 
             jButtonPathFolder = new JButton("...");
             jButtonPathFolder.addActionListener(new C_ControlButtonMainPanelLeft(this));
@@ -71,9 +73,14 @@ public class V_JPanelMainLeft extends JPanel{
                 tabStringExemple[i] = "Série "+i;
             }
 
-            jList = new JList(tabStringExemple); //data has type Object[]
+            File file = new File(Paths.get(jtextfieldFolder.getText()).toString());
+            if (file.exists()) {
+                Vector<String> listNameSerie = listNameFolder(file);
+                jList = new JList<String>(listNameSerie);
+            }
+            else
+                jList = new JList<String>();
             jList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-            //jList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
             jList.setVisibleRowCount(-1);
             JScrollPane listScroller = new JScrollPane(jList);
             listScroller.setPreferredSize(new Dimension(150, 250));
@@ -95,7 +102,7 @@ public class V_JPanelMainLeft extends JPanel{
                 tabStringExemple2[i] = "Echantillon "+i;
             }
 
-            jListEchantillons = new JList(tabStringExemple2); //data has type Object[]
+            jListEchantillons = new JList<String>(tabStringExemple2); //data has type Object[]
             jListEchantillons.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             //jList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
             jListEchantillons.setVisibleRowCount(-1);
@@ -113,9 +120,7 @@ public class V_JPanelMainLeft extends JPanel{
 
     public void displayChoiceFolder() {
         JFileChooser chooser = new JFileChooser();
-        /*FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "JPG & GIF Images", "jpg", "gif");
-        chooser.setFileFilter(filter);*/
+
         if (jtextfieldFolder.getText().equals("")) {
             chooser.setCurrentDirectory(new File(Paths.get("/").toString()));
         } else{
@@ -125,9 +130,60 @@ public class V_JPanelMainLeft extends JPanel{
 
         int returnVal = chooser.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println("You chose to open this file: " +
-                    chooser.getSelectedFile().getPath());
+            jtextfieldFolder.setText(chooser.getSelectedFile().getPath());
+            savePathPreferenceInFile(chooser.getSelectedFile().getPath());      //on enregiste les préférences dans un fichier pour le récupérer
+            File file = new File(chooser.getSelectedFile().getPath());          //Créer un fichier qui sera notre dossier cible
+            Vector<String> listNameSerie = listNameFolder(file);                //Récupère le vecteur de séries du dossier
+            jList.setListData(listNameSerie);                                   //On actualise la JList avec le nouveau contenu
         }
+    }
+
+    private void savePathPreferenceInFile(String pathToSave) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(Paths.get("Res/Preferences/pref.txt").toString())));
+            writer.write(pathToSave);
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private String loadPathFolderSeries() {
+        String path = "";
+        String fichier = Paths.get("Res/Preferences/pref.txt").toString();
+
+
+        try{
+            InputStream ips=new FileInputStream(fichier);
+            InputStreamReader ipsr=new InputStreamReader(ips);
+            BufferedReader br=new BufferedReader(ipsr);
+            String ligne;
+            if ((ligne=br.readLine())!=null){
+                path=ligne;
+            }
+            br.close();
+        }
+        catch (Exception e){
+            displayWarnBoxPref();
+        }
+        return path;
+    }
+
+
+    private Vector<String> listNameFolder(File file) {
+        String [] listefichiers;
+        Vector<String> arrayListeseries = new Vector<>();
+        listefichiers=file.list();
+
+        for(int i=0;i<listefichiers.length;i++){
+            if(listefichiers[i].endsWith(".csv")){
+                arrayListeseries.add(listefichiers[i].substring(0,listefichiers[i].length()-4));
+            }
+        }
+
+        return arrayListeseries;
     }
 
     /*
@@ -137,5 +193,18 @@ public class V_JPanelMainLeft extends JPanel{
         return jButtonPathFolder;
     }
 
+
+
+
+    /*
+    * JDialogs catch exceptions
+    * */
+
+    private void displayWarnBoxPref() {
+        JOptionPane.showMessageDialog(this.getParent(),
+                "Aucun répertoire contenant des séries n'est spécifié",
+                "Attention",
+                JOptionPane.WARNING_MESSAGE);
+    }
 
 }
