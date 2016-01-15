@@ -1,6 +1,7 @@
 package geoimbib.Views.JPanels;
 
 import geoimbib.Controlers.C_ControlButtonMainPanelLeft;
+import geoimbib.Models.ModelsJPanelMainLeft.M_GeneralFunctions;
 import geoimbib.Views.V_MainWindow;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ import java.util.Vector;
  * Created by ravier on 10/01/2016.
  */
 public class V_JPanelMainLeft extends JPanel{
+    private M_GeneralFunctions m_generalFunctions = null;
 
     private V_MainWindow v_mainWindow;
 
@@ -28,6 +30,7 @@ public class V_JPanelMainLeft extends JPanel{
     JButton jButtonPathFolder = null;
 
     public V_JPanelMainLeft(V_MainWindow v_mainWindow){
+        m_generalFunctions = new M_GeneralFunctions(this);
         this.v_mainWindow = v_mainWindow;
         initView();
     }
@@ -43,7 +46,7 @@ public class V_JPanelMainLeft extends JPanel{
         /*
         * JTextfield changement de répertoire
         * */
-            String pathLoaded = loadPathFolderSeries();
+            String pathLoaded = m_generalFunctions.loadPathFolderSeries();
 
             jpanelFolder = new JPanel();
             jpanelFolder.setLayout(new BoxLayout(jpanelFolder, BoxLayout.X_AXIS));
@@ -75,7 +78,7 @@ public class V_JPanelMainLeft extends JPanel{
 
             File file = new File(Paths.get(jtextfieldFolder.getText()).toString());
             if (file.exists()) {
-                Vector<String> listNameSerie = listNameFolder(file);
+                Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);
                 jList = new JList<String>(listNameSerie);
             }
             else
@@ -96,13 +99,8 @@ public class V_JPanelMainLeft extends JPanel{
         * JList 2 qui affiche tous les échantillons d'une expérience
         * */
 
-            //tableau de Strings pour exemple jlist
-            String [] tabStringExemple2 = new String[20];
-            for (int i = 0; i<tabStringExemple2.length; ++i){
-                tabStringExemple2[i] = "Echantillon "+i;
-            }
 
-            jListEchantillons = new JList<String>(tabStringExemple2); //data has type Object[]
+            jListEchantillons = new JList<String>(); //data has type Object[]
             jListEchantillons.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             //jList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
             jListEchantillons.setVisibleRowCount(-1);
@@ -131,60 +129,13 @@ public class V_JPanelMainLeft extends JPanel{
         int returnVal = chooser.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             jtextfieldFolder.setText(chooser.getSelectedFile().getPath());
-            savePathPreferenceInFile(chooser.getSelectedFile().getPath());      //on enregiste les préférences dans un fichier pour le récupérer
+            m_generalFunctions.savePathPreferenceInFile(chooser.getSelectedFile().getPath());      //on enregiste les préférences dans un fichier pour le récupérer
             File file = new File(chooser.getSelectedFile().getPath());          //Créer un fichier qui sera notre dossier cible
-            Vector<String> listNameSerie = listNameFolder(file);                //Récupère le vecteur de séries du dossier
+            Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);                //Récupère le vecteur de séries du dossier
             jList.setListData(listNameSerie);                                   //On actualise la JList avec le nouveau contenu
         }
     }
 
-    private void savePathPreferenceInFile(String pathToSave) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(Paths.get("Res/Preferences/pref.txt").toString())));
-            writer.write(pathToSave);
-            writer.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    private String loadPathFolderSeries() {
-        String path = "";
-        String fichier = Paths.get("Res/Preferences/pref.txt").toString();
-
-
-        try{
-            InputStream ips=new FileInputStream(fichier);
-            InputStreamReader ipsr=new InputStreamReader(ips);
-            BufferedReader br=new BufferedReader(ipsr);
-            String ligne;
-            if ((ligne=br.readLine())!=null){
-                path=ligne;
-            }
-            br.close();
-        }
-        catch (Exception e){
-            displayWarnBoxPref();
-        }
-        return path;
-    }
-
-
-    private Vector<String> listNameFolder(File file) {
-        String [] listefichiers;
-        Vector<String> arrayListeseries = new Vector<>();
-        listefichiers=file.list();
-
-        for(int i=0;i<listefichiers.length;i++){
-            if(listefichiers[i].endsWith(".csv")){
-                arrayListeseries.add(listefichiers[i].substring(0,listefichiers[i].length()-4));
-            }
-        }
-
-        return arrayListeseries;
-    }
 
     /*
     * Getters / Setters
@@ -195,12 +146,11 @@ public class V_JPanelMainLeft extends JPanel{
 
 
 
-
     /*
     * JDialogs catch exceptions
     * */
 
-    private void displayWarnBoxPref() {
+    public void displayWarnBoxPref() {
         JOptionPane.showMessageDialog(this.getParent(),
                 "Aucun répertoire contenant des séries n'est spécifié",
                 "Attention",
