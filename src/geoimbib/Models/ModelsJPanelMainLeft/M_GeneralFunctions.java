@@ -3,6 +3,7 @@ package geoimbib.Models.ModelsJPanelMainLeft;
 import geoimbib.Models.ModelsJPanelMainLeft.Threads.M_ThreadWarningNoPath;
 import geoimbib.Views.JPanels.V_JPanelMainLeft;
 
+import java.awt.*;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.Vector;
@@ -32,11 +33,13 @@ public class M_GeneralFunctions {
                 path=ligne;
             }
             br.close();
+
         }
         catch (Exception e){
             M_ThreadWarningNoPath m_threadWarningNoPath = new M_ThreadWarningNoPath(this.v_jPanelMainLeft);
             m_threadWarningNoPath.start();
         }
+
         return path;
     }
 

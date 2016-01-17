@@ -59,8 +59,8 @@ public class V_JPanelMainLeft extends JPanel{
             jpanelFolder.add(jtextfieldFolder);
             jpanelFolder.add(jButtonPathFolder);
             jpanelFolder.setBounds(
-                    getWidth()/2 - (int)jpanelFolder.getPreferredSize().getWidth(),
-                    getHeight()/4,
+                    this.getWidth()/2 - 125,
+                    this.getHeight()/4,
                     250,
                     25
             );
@@ -83,6 +83,7 @@ public class V_JPanelMainLeft extends JPanel{
             }
             else
                 jList = new JList<String>();
+
             jList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             jList.setVisibleRowCount(-1);
             JScrollPane listScroller = new JScrollPane(jList);
@@ -116,6 +117,10 @@ public class V_JPanelMainLeft extends JPanel{
     }
 
 
+    /*
+    * Affiche le choice folder et met à jour le jtextfield en fonction du dossier séléctionné
+    * (Récupère les données dans la classe model "M_GeneralFunctions.java"
+    * */
     public void displayChoiceFolder() {
         JFileChooser chooser = new JFileChooser();
 
