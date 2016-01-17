@@ -1,6 +1,7 @@
 package geoimbib.Views.JPanels;
 
 import geoimbib.Controlers.C_ControlButtonMainPanelRight;
+import geoimbib.Views.JDialogs.V_JDialogNouvelleSerie;
 import geoimbib.Views.V_MainWindow;
 
 import javax.swing.*;
@@ -14,9 +15,14 @@ public class V_JPanelMainRight extends JPanel {
 
     private V_MainWindow v_mainWindow;
 
+    private C_ControlButtonMainPanelRight c_controlButtonMainPanelRight = null;
+
     //JPanel des boutons
     private JPanel jpanelButtons = null;
     private JPanel jpanelLeave = null;
+
+    //JDialogs
+    V_JDialogNouvelleSerie v_jDialogNouvelleSerie = null;
 
     //Boutons
     JButton jbutton1 = null;
@@ -30,6 +36,7 @@ public class V_JPanelMainRight extends JPanel {
 
     public V_JPanelMainRight(V_MainWindow v_mainWindow){
         this.v_mainWindow = v_mainWindow;
+        this.c_controlButtonMainPanelRight = new C_ControlButtonMainPanelRight(this);
         initView();
         initControlers();
     }
@@ -60,6 +67,12 @@ public class V_JPanelMainRight extends JPanel {
         jbutton5 = new JButton("Supprimer");
         jpanelButtons.add(jbutton5);
 
+        jbutton1.addActionListener(c_controlButtonMainPanelRight);
+        jbutton2.addActionListener(c_controlButtonMainPanelRight);
+        jbutton3.addActionListener(c_controlButtonMainPanelRight);
+        jbutton4.addActionListener(c_controlButtonMainPanelRight);
+        jbutton5.addActionListener(c_controlButtonMainPanelRight);
+
 
         jpanelButtons.setBounds(getWidth()/2 - (int)jpanelButtons.getPreferredSize().getWidth()/2,
                 getHeight()/2 - (int)jpanelButtons.getPreferredSize().getHeight(),
@@ -89,5 +102,29 @@ public class V_JPanelMainRight extends JPanel {
     * */
     public JButton getButtonLeave() {
         return jbuttonLeave;
+    }
+
+    public JButton getButton1() {
+        return jbutton1;
+    }
+    public JButton getButton2() {
+        return jbutton2;
+    }
+    public JButton getButton3() {
+        return jbutton3;
+    }
+    public JButton getButton4() {
+        return jbutton4;
+    }
+    public JButton getButton5() {
+        return jbutton5;
+    }
+
+
+    /*
+    * JDialogs
+    * */
+    public void displayJDialogNewSerie() {
+        v_jDialogNouvelleSerie = new V_JDialogNouvelleSerie(this.v_mainWindow, "Nouvelle série", true);
     }
 }

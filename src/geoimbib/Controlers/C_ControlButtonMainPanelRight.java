@@ -21,5 +21,8 @@ public class C_ControlButtonMainPanelRight implements ActionListener {
         if (e.getSource() == v_jPanelMainRight.getButtonLeave()) {
             v_jPanelMainRight.leave();
         }
+
+        if (e.getSource() == v_jPanelMainRight.getButton1())
+            v_jPanelMainRight.displayJDialogNewSerie();
     }
 }
