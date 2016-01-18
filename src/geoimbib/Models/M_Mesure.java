@@ -59,13 +59,28 @@ public class M_Mesure {
     }
 
     /**
-     * Met à jour l'object Calendar dateHeure de la mesure
+     * Met &agrave; jour l'object Calendar dateHeure de la mesure
      * @param dateHeure le nouvelle object calendar contenant la date et l'heure de la mesure
      */
     public void setDateHeure(Calendar dateHeure) {
         this.dateHeure = dateHeure;
     }
 
+    /**
+     * Retourne la hauteur de la frange humide de la mesure
+     * @return double hauteur de la frange humide
+     */
+    public double getHauteurFrangeHumide() {
+        return hauteurFrangeHumide;
+    }
+
+    /**
+     * Met &agrave; jour la hauteur de la frange humide
+     * @param hauteurFrangeHumide la nouvelle hauteur de la frange humide
+     */
+    public void setHauteurFrangeHumide(double hauteurFrangeHumide) {
+        this.hauteurFrangeHumide = hauteurFrangeHumide;
+    }
 
     /**
      * Retourne la date sous le format: "jj/mm/aaaa" de la mesure

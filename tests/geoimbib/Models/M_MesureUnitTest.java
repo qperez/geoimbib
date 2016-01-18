@@ -28,6 +28,5 @@ public class M_MesureUnitTest {
         assertEquals("L'heure de la mesure n'est pas égale à celle attendue",
                 "12:28", mesure.getHeureMesure());
 
-        Calendar dateCurrent2 = Calendar.getInstance();
     }
 }
