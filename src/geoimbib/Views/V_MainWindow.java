@@ -5,7 +5,6 @@ import geoimbib.Views.JPanels.V_JPanelMainLeft;
 import geoimbib.Views.JPanels.V_JPanelMainRight;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by ravier on 07/01/2016.
@@ -63,5 +62,8 @@ public class V_MainWindow extends JFrame {
 
     public V_JPanelMainLeft getJPanelMainLeft() {
         return v_jPanelMainLeft;
+    }
+    public V_JPanelMainRight getJPanelMainRight() {
+        return v_jPanelMainRight;
     }
 }

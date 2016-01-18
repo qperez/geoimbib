@@ -10,6 +10,5 @@ public class V_JPanelMain extends JPanel {
 
     public V_JPanelMain() {
         this.setLayout(null);
-        //setBackground(Color.black);
     }
 }

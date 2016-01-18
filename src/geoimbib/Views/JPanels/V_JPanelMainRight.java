@@ -1,6 +1,7 @@
 package geoimbib.Views.JPanels;
 
 import geoimbib.Controlers.C_ControlButtonMainPanelRight;
+import geoimbib.Controlers.C_ControlDialogSerie;
 import geoimbib.Views.JDialogs.V_JDialogNouvelleSerie;
 import geoimbib.Views.V_MainWindow;
 
@@ -15,14 +16,16 @@ public class V_JPanelMainRight extends JPanel {
 
     private V_MainWindow v_mainWindow;
 
+    //Controlers
     private C_ControlButtonMainPanelRight c_controlButtonMainPanelRight = null;
+    private C_ControlDialogSerie c_controlDialogSerie = null;
 
     //JPanel des boutons
     private JPanel jpanelButtons = null;
     private JPanel jpanelLeave = null;
 
     //JDialogs
-    V_JDialogNouvelleSerie v_jDialogNouvelleSerie = null;
+    private V_JDialogNouvelleSerie v_jDialogNouvelleSerie = null;
 
     //Boutons
     JButton jbutton1 = null;
@@ -37,12 +40,22 @@ public class V_JPanelMainRight extends JPanel {
     public V_JPanelMainRight(V_MainWindow v_mainWindow){
         this.v_mainWindow = v_mainWindow;
         this.c_controlButtonMainPanelRight = new C_ControlButtonMainPanelRight(this);
+
         initView();
+
+        this.c_controlDialogSerie = new C_ControlDialogSerie(this);
+
         initControlers();
     }
 
     private void initControlers() {
         jbuttonLeave.addActionListener(new C_ControlButtonMainPanelRight(this));
+
+        jbutton1.addActionListener(c_controlButtonMainPanelRight);
+        jbutton2.addActionListener(c_controlButtonMainPanelRight);
+        jbutton3.addActionListener(c_controlButtonMainPanelRight);
+        jbutton4.addActionListener(c_controlButtonMainPanelRight);
+        jbutton5.addActionListener(c_controlButtonMainPanelRight);
     }
 
     public void initView(){
@@ -67,11 +80,7 @@ public class V_JPanelMainRight extends JPanel {
         jbutton5 = new JButton("Supprimer");
         jpanelButtons.add(jbutton5);
 
-        jbutton1.addActionListener(c_controlButtonMainPanelRight);
-        jbutton2.addActionListener(c_controlButtonMainPanelRight);
-        jbutton3.addActionListener(c_controlButtonMainPanelRight);
-        jbutton4.addActionListener(c_controlButtonMainPanelRight);
-        jbutton5.addActionListener(c_controlButtonMainPanelRight);
+
 
 
         jpanelButtons.setBounds(getWidth()/2 - (int)jpanelButtons.getPreferredSize().getWidth()/2,
@@ -125,6 +134,17 @@ public class V_JPanelMainRight extends JPanel {
     * JDialogs
     * */
     public void displayJDialogNewSerie() {
-        v_jDialogNouvelleSerie = new V_JDialogNouvelleSerie(this.v_mainWindow, "Nouvelle série", true);
+        v_jDialogNouvelleSerie = new V_JDialogNouvelleSerie(this.v_mainWindow, "Nouvelle série", true, c_controlDialogSerie);
+    }
+
+    public void displayJDialogErrorinputNewSerie() {
+        JOptionPane.showMessageDialog(this.getParent(),
+                "Veillez à remplir correctement les champs",
+                "Erreur",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void displayJDialogChoiceNameCar() {
+        
     }
 }
