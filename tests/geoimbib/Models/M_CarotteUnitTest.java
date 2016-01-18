@@ -2,7 +2,6 @@ package geoimbib.Models;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.Calendar;
