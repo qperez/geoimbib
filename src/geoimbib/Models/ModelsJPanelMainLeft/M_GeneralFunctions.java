@@ -58,7 +58,7 @@ public class M_GeneralFunctions {
 
     public Vector<String> listNameFolder(File file) {
         String [] listefichiers;
-        Vector<String> arrayListeseries = new Vector<>();
+        Vector<String> arrayListeseries = new Vector<String>();
         listefichiers=file.list();
 
         for(int i=0;i<listefichiers.length;i++){

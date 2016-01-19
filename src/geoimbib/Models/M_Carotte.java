@@ -102,10 +102,6 @@ public class M_Carotte {
         this.listMesures = listMesures;
     }
 
-    public void getMesure(int indice){
-        listMesures.get(indice);
-    }
-
     /**
      * Retourne la longueur de la carotte
      * @return longueur de la carotte
@@ -162,4 +158,12 @@ public class M_Carotte {
         return Math.pow(diametre/2,2) * Math.PI;
     }
 
+
+    public double calulMoyenneMesure() {
+        double sommeMesure = 0;
+        for (M_Mesure mesure : listMesures){
+            sommeMesure += mesure.getHauteurFrangeHumide();
+        }
+        return sommeMesure / listMesures.size();
+    }
 }
