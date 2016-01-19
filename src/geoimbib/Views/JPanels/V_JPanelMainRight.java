@@ -2,6 +2,7 @@ package geoimbib.Views.JPanels;
 
 import geoimbib.Controlers.C_ControlButtonMainPanelRight;
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Views.JDialogs.V_JDialogChoiceNameEchant;
 import geoimbib.Views.JDialogs.V_JDialogNouvelleSerie;
 import geoimbib.Views.V_MainWindow;
 
@@ -134,7 +135,19 @@ public class V_JPanelMainRight extends JPanel {
     * JDialogs
     * */
     public void displayJDialogNewSerie() {
-        v_jDialogNouvelleSerie = new V_JDialogNouvelleSerie(this.v_mainWindow, "Nouvelle série", true, c_controlDialogSerie);
+        v_jDialogNouvelleSerie = new V_JDialogNouvelleSerie(
+                this.v_mainWindow,
+                "Nouvelle série",
+                true,
+                c_controlDialogSerie);
+    }
+
+    public void displayJDialogChoiceNameCar() {
+        V_JDialogChoiceNameEchant v_jDialogChoiceNameEchant = new V_JDialogChoiceNameEchant(
+                this.v_mainWindow,
+                "Choix des noms",
+                true,
+                c_controlDialogSerie);
     }
 
     public void displayJDialogErrorinputNewSerie() {
@@ -144,7 +157,5 @@ public class V_JPanelMainRight extends JPanel {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    public void displayJDialogChoiceNameCar() {
-        
-    }
+
 }

@@ -46,7 +46,6 @@ public class V_JDialogNouvelleSerie extends JDialog {
 
         initComposants();
         this.setVisible(true);
-
     }
 
     private void initComposants() {
