@@ -92,7 +92,7 @@ public class V_JPanelMainRight extends JPanel {
 
 
         jpanelLeave.setBounds(getWidth()/2 - (int)jpanelLeave.getPreferredSize().getWidth(),
-                getHeight() - (int)jpanelLeave.getPreferredSize().getHeight()*3,
+                getHeight() - (int)jpanelLeave.getPreferredSize().getHeight()*4,
                 200,
                 50);
         this.add(jpanelLeave);

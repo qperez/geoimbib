@@ -53,20 +53,35 @@ public class V_JPanelMainLeft extends JPanel{
 
             jpanelFolder.setLayout(new BoxLayout(jpanelFolder, BoxLayout.X_AXIS));
 
+            Box boxFolder = Box.createVerticalBox();
+
+            Box boxTitle = Box.createHorizontalBox();
+            boxTitle.add(new JLabel("Dossier de travail : "));
+
+            Box boxFolderField = Box.createHorizontalBox();
+
             jtextfieldFolder = new JTextField(pathLoaded);
 
             jButtonPathFolder = new JButton("...");
             jButtonPathFolder.addActionListener(new C_ControlButtonMainPanelLeft(this));
 
-            this.add(jpanelFolder);
-            jpanelFolder.add(jtextfieldFolder);
-            jpanelFolder.add(jButtonPathFolder);
+            boxFolderField.add(jtextfieldFolder);
+            boxFolderField.add(jButtonPathFolder);
+
+            boxFolder.add(boxTitle);
+            boxFolder.add(boxFolderField);
+
+            jpanelFolder.add(boxFolder);
+
             jpanelFolder.setBounds(
-                    this.getWidth()/2 - 125,
-                    this.getHeight()/4,
-                    250,
-                    25
+                this.getWidth()/2 - 125,
+                this.getHeight()/5,
+                250,
+                43
             );
+
+            this.add(jpanelFolder);
+
 
 
         /*
