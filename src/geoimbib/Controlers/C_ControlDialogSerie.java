@@ -60,6 +60,7 @@ public class C_ControlDialogSerie implements ActionListener {
     * */
 
     public void setV_jDialogNouvelleSerie(V_JDialogNouvelleSerie v_jDialogNouvelleSerie) {
+        resetVariables();
         this.v_jDialogNouvelleSerie = v_jDialogNouvelleSerie;
     }
 }
