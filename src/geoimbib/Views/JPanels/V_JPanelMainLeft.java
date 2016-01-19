@@ -43,13 +43,16 @@ public class V_JPanelMainLeft extends JPanel{
 
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
 
+
         /*
         * JTextfield changement de répertoire
         * */
             String pathLoaded = m_generalFunctions.loadPathFolderSeries();
 
             jpanelFolder = new JPanel();
+
             jpanelFolder.setLayout(new BoxLayout(jpanelFolder, BoxLayout.X_AXIS));
+
             jtextfieldFolder = new JTextField(pathLoaded);
 
             jButtonPathFolder = new JButton("...");

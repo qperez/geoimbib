@@ -55,7 +55,6 @@ public class V_JPanelMainRight extends JPanel {
         jbutton2.addActionListener(c_controlButtonMainPanelRight);
         jbutton3.addActionListener(c_controlButtonMainPanelRight);
         jbutton4.addActionListener(c_controlButtonMainPanelRight);
-        jbutton5.addActionListener(c_controlButtonMainPanelRight);
     }
 
     public void initView(){
@@ -73,12 +72,10 @@ public class V_JPanelMainRight extends JPanel {
         jpanelButtons.add(jbutton1);
         jbutton2 = new JButton("Fusion de séries");
         jpanelButtons.add(jbutton2);
-        jbutton3 = new JButton("Retirer échantillon");
+        jbutton3 = new JButton("Graphique");
         jpanelButtons.add(jbutton3);
-        jbutton4 = new JButton("Graphique");
+        jbutton4 = new JButton("Supprimer");
         jpanelButtons.add(jbutton4);
-        jbutton5 = new JButton("Supprimer");
-        jpanelButtons.add(jbutton5);
 
 
 
@@ -124,9 +121,6 @@ public class V_JPanelMainRight extends JPanel {
     }
     public JButton getButton4() {
         return jbutton4;
-    }
-    public JButton getButton5() {
-        return jbutton5;
     }
 
 
