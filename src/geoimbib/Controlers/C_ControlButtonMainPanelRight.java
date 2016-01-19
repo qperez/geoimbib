@@ -22,7 +22,21 @@ public class C_ControlButtonMainPanelRight implements ActionListener {
             v_jPanelMainRight.leave();
         }
 
-        if (e.getSource() == v_jPanelMainRight.getButton1())
-            v_jPanelMainRight.displayJDialogNewSerie();
+        if (e.getSource() == v_jPanelMainRight.getButton1()) {
+            if (v_jPanelMainRight.getV_jPanelMainLeft().getJtextfieldFolder().getText().equals(""))
+                v_jPanelMainRight.displayWarnBoxPref();
+            else
+                v_jPanelMainRight.displayJDialogNewSerie();
+        }
+
+        if (e.getSource() == v_jPanelMainRight.getButton2()) {
+            if (v_jPanelMainRight.getV_jPanelMainLeft().getJtextfieldFolder().getText().equals(""))
+                v_jPanelMainRight.displayWarnBoxPref();
+        }
+
+        if (e.getSource() == v_jPanelMainRight.getButton3()) {
+            if (v_jPanelMainRight.getV_jPanelMainLeft().getJtextfieldFolder().getText().equals(""))
+                v_jPanelMainRight.displayWarnBoxPref();
+        }
     }
 }

@@ -16,6 +16,7 @@ import java.awt.*;
 public class V_JPanelMainRight extends JPanel {
 
     private V_MainWindow v_mainWindow;
+    private V_JPanelMainLeft v_jPanelMainLeft;
 
     //Controlers
     private C_ControlButtonMainPanelRight c_controlButtonMainPanelRight = null;
@@ -33,14 +34,14 @@ public class V_JPanelMainRight extends JPanel {
     JButton jbutton2 = null;
     JButton jbutton3 = null;
     JButton jbutton4 = null;
-    JButton jbutton5 = null;
 
     JButton jbuttonLeave = null;
 
 
-    public V_JPanelMainRight(V_MainWindow v_mainWindow){
+    public V_JPanelMainRight(V_MainWindow v_mainWindow, V_JPanelMainLeft v_jPanelMainLeft){
         this.v_mainWindow = v_mainWindow;
         this.c_controlButtonMainPanelRight = new C_ControlButtonMainPanelRight(this);
+        this.v_jPanelMainLeft = v_jPanelMainLeft;
 
         initView();
 
@@ -124,6 +125,10 @@ public class V_JPanelMainRight extends JPanel {
         return jbutton4;
     }
 
+    public V_JPanelMainLeft getV_jPanelMainLeft() {
+        return v_jPanelMainLeft;
+    }
+
 
     /*
     * JDialogs
@@ -149,6 +154,13 @@ public class V_JPanelMainRight extends JPanel {
                 "Veillez à remplir correctement les champs",
                 "Erreur",
                 JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void displayWarnBoxPref() {
+        JOptionPane.showMessageDialog(this.getParent(),
+                "Aucun répertoire contenant des séries n'est spécifié",
+                "Attention",
+                JOptionPane.WARNING_MESSAGE);
     }
 
 

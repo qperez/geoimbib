@@ -16,6 +16,5 @@ public class M_ThreadWarningNoPath extends Thread {
     @Override
     public void run() {
         super.run();
-        v_jPanelMainLeft.displayWarnBoxPref();
     }
 }

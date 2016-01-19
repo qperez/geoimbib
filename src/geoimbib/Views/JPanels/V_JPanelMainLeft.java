@@ -95,6 +95,7 @@ public class V_JPanelMainLeft extends JPanel{
             }
 
             File file = new File(Paths.get(jtextfieldFolder.getText()).toString());
+
             if (file.exists()) {
                 Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);
                 jList = new JList<String>(listNameSerie);
@@ -167,17 +168,12 @@ public class V_JPanelMainLeft extends JPanel{
         return jButtonPathFolder;
     }
 
+    public JTextField getJtextfieldFolder() {
+        return jtextfieldFolder;
+    }
 
-
-    /*
-    * JDialogs catch exceptions
-    * */
-
-    public void displayWarnBoxPref() {
-        JOptionPane.showMessageDialog(this.getParent(),
-                "Aucun répertoire contenant des séries n'est spécifié",
-                "Attention",
-                JOptionPane.WARNING_MESSAGE);
+    public M_GeneralFunctions getM_generalFunctions() {
+        return m_generalFunctions;
     }
 
 }
