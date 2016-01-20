@@ -56,7 +56,7 @@ public class V_MainWindow extends JFrame {
         /*
         * Initialisation du panel de droite
         * */
-        v_jPanelMainRight = new V_JPanelMainRight(this);
+        v_jPanelMainRight = new V_JPanelMainRight(this, v_jPanelMainLeft);
         v_jPanelMain.add(v_jPanelMainRight);
     }
 

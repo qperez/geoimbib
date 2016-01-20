@@ -16,6 +16,7 @@ import java.awt.*;
 public class V_JPanelMainRight extends JPanel {
 
     private V_MainWindow v_mainWindow;
+    private V_JPanelMainLeft v_jPanelMainLeft;
 
     //Controlers
     private C_ControlButtonMainPanelRight c_controlButtonMainPanelRight = null;
@@ -33,14 +34,14 @@ public class V_JPanelMainRight extends JPanel {
     JButton jbutton2 = null;
     JButton jbutton3 = null;
     JButton jbutton4 = null;
-    JButton jbutton5 = null;
 
     JButton jbuttonLeave = null;
 
 
-    public V_JPanelMainRight(V_MainWindow v_mainWindow){
+    public V_JPanelMainRight(V_MainWindow v_mainWindow, V_JPanelMainLeft v_jPanelMainLeft){
         this.v_mainWindow = v_mainWindow;
         this.c_controlButtonMainPanelRight = new C_ControlButtonMainPanelRight(this);
+        this.v_jPanelMainLeft = v_jPanelMainLeft;
 
         initView();
 
@@ -56,7 +57,6 @@ public class V_JPanelMainRight extends JPanel {
         jbutton2.addActionListener(c_controlButtonMainPanelRight);
         jbutton3.addActionListener(c_controlButtonMainPanelRight);
         jbutton4.addActionListener(c_controlButtonMainPanelRight);
-        jbutton5.addActionListener(c_controlButtonMainPanelRight);
     }
 
     public void initView(){
@@ -74,12 +74,10 @@ public class V_JPanelMainRight extends JPanel {
         jpanelButtons.add(jbutton1);
         jbutton2 = new JButton("Fusion de séries");
         jpanelButtons.add(jbutton2);
-        jbutton3 = new JButton("Retirer échantillon");
+        jbutton3 = new JButton("Graphique");
         jpanelButtons.add(jbutton3);
-        jbutton4 = new JButton("Graphique");
+        jbutton4 = new JButton("Supprimer");
         jpanelButtons.add(jbutton4);
-        jbutton5 = new JButton("Supprimer");
-        jpanelButtons.add(jbutton5);
 
 
 
@@ -95,7 +93,7 @@ public class V_JPanelMainRight extends JPanel {
 
 
         jpanelLeave.setBounds(getWidth()/2 - (int)jpanelLeave.getPreferredSize().getWidth(),
-                getHeight() - (int)jpanelLeave.getPreferredSize().getHeight()*3,
+                getHeight() - (int)jpanelLeave.getPreferredSize().getHeight()*4,
                 200,
                 50);
         this.add(jpanelLeave);
@@ -126,8 +124,9 @@ public class V_JPanelMainRight extends JPanel {
     public JButton getButton4() {
         return jbutton4;
     }
-    public JButton getButton5() {
-        return jbutton5;
+
+    public V_JPanelMainLeft getV_jPanelMainLeft() {
+        return v_jPanelMainLeft;
     }
 
 
@@ -155,6 +154,13 @@ public class V_JPanelMainRight extends JPanel {
                 "Veillez à remplir correctement les champs",
                 "Erreur",
                 JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void displayWarnBoxPref() {
+        JOptionPane.showMessageDialog(this.getParent(),
+                "Aucun répertoire contenant des séries n'est spécifié",
+                "Attention",
+                JOptionPane.WARNING_MESSAGE);
     }
 
 

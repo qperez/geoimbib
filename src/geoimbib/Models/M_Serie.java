@@ -41,7 +41,7 @@ public class M_Serie {
      * @param nom Nom de la s&eacute;rie
      * @param nombreMesuresParCarottes nombre de mesures faites par carottes
      * @param listCarotte liste de carottes
-     * @param dateHeure objet Date
+     * @param dateHeure objet Calendar
      * @see M_Carotte
      */
     public M_Serie(String nom,
@@ -132,5 +132,14 @@ public class M_Serie {
      */
     public void setNombreMesuresParCarottes(int nombreMesuresParCarottes) {
         this.nombreMesuresParCarottes = nombreMesuresParCarottes;
+    }
+
+
+    public double calculMoyenneSerie() {
+        double sommeMesures = 0;
+        for(M_Carotte carotte : listCarotte){
+            sommeMesures += carotte.calulMoyenneMesure();
+        }
+        return sommeMesures/(listCarotte.size());
     }
 }

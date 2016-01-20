@@ -1,6 +1,7 @@
 package geoimbib.Views.JPanels;
 
 import geoimbib.Controlers.C_ControlButtonMainPanelLeft;
+import geoimbib.Controlers.C_ControlButtonMainPanelList;
 import geoimbib.Models.ModelsJPanelMainLeft.M_GeneralFunctions;
 import geoimbib.Views.V_MainWindow;
 
@@ -27,9 +28,13 @@ public class V_JPanelMainLeft extends JPanel{
     private JTextField jtextfieldFolder = null;
     private JPanel jpanelFolder = null;
 
+    //Controler
+    private C_ControlButtonMainPanelLeft c_controlButtonMainPanelLeft = null;
+
     JButton jButtonPathFolder = null;
 
     public V_JPanelMainLeft(V_MainWindow v_mainWindow){
+        this.c_controlButtonMainPanelLeft = new C_ControlButtonMainPanelLeft(this);
         m_generalFunctions = new M_GeneralFunctions(this);
         this.v_mainWindow = v_mainWindow;
         initView();
@@ -43,27 +48,45 @@ public class V_JPanelMainLeft extends JPanel{
 
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
 
+
         /*
         * JTextfield changement de répertoire
         * */
             String pathLoaded = m_generalFunctions.loadPathFolderSeries();
 
             jpanelFolder = new JPanel();
+
             jpanelFolder.setLayout(new BoxLayout(jpanelFolder, BoxLayout.X_AXIS));
+
+            Box boxFolder = Box.createVerticalBox();
+
+            Box boxTitle = Box.createHorizontalBox();
+            boxTitle.add(new JLabel("Dossier de travail : "));
+
+            Box boxFolderField = Box.createHorizontalBox();
+
             jtextfieldFolder = new JTextField(pathLoaded);
 
             jButtonPathFolder = new JButton("...");
             jButtonPathFolder.addActionListener(new C_ControlButtonMainPanelLeft(this));
 
-            this.add(jpanelFolder);
-            jpanelFolder.add(jtextfieldFolder);
-            jpanelFolder.add(jButtonPathFolder);
+            boxFolderField.add(jtextfieldFolder);
+            boxFolderField.add(jButtonPathFolder);
+
+            boxFolder.add(boxTitle);
+            boxFolder.add(boxFolderField);
+
+            jpanelFolder.add(boxFolder);
+
             jpanelFolder.setBounds(
-                    this.getWidth()/2 - 125,
-                    this.getHeight()/4,
-                    250,
-                    25
+                this.getWidth()/2 - 125,
+                this.getHeight()/5,
+                250,
+                43
             );
+
+            this.add(jpanelFolder);
+
 
 
         /*
@@ -77,6 +100,7 @@ public class V_JPanelMainLeft extends JPanel{
             }
 
             File file = new File(Paths.get(jtextfieldFolder.getText()).toString());
+
             if (file.exists()) {
                 Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);
                 jList = new JList<String>(listNameSerie);
@@ -84,10 +108,13 @@ public class V_JPanelMainLeft extends JPanel{
             else
                 jList = new JList<String>();
 
+            jList.addListSelectionListener(new C_ControlButtonMainPanelList(this));
+
             jList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             jList.setVisibleRowCount(-1);
             JScrollPane listScroller = new JScrollPane(jList);
             listScroller.setPreferredSize(new Dimension(150, 250));
+
 
             this.add(listScroller);
 
@@ -100,8 +127,8 @@ public class V_JPanelMainLeft extends JPanel{
         * JList 2 qui affiche tous les échantillons d'une expérience
         * */
 
-
             jListEchantillons = new JList<String>(); //data has type Object[]
+
             jListEchantillons.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             //jList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
             jListEchantillons.setVisibleRowCount(-1);
@@ -118,7 +145,7 @@ public class V_JPanelMainLeft extends JPanel{
 
 
     /*
-    * Affiche le choice folder et met à jour le jtextfield en fonction du dossier séléctionné
+    * Affiche le choice folder et met à jour le jtextfield en fonction du dossier sélectionné
     * (Récupère les données dans la classe model "M_GeneralFunctions.java"
     * */
     public void displayChoiceFolder() {
@@ -138,7 +165,18 @@ public class V_JPanelMainLeft extends JPanel{
             File file = new File(chooser.getSelectedFile().getPath());          //Créer un fichier qui sera notre dossier cible
             Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);                //Récupère le vecteur de séries du dossier
             jList.setListData(listNameSerie);                                   //On actualise la JList avec le nouveau contenu
+
+
         }
+    }
+
+    /*
+    * Affiche les csv de la série sélectionnée
+     */
+    public void displayChoiceCsv(){
+        File file2 = new File(Paths.get(jtextfieldFolder.getText()).toString() + "\\" + Paths.get(jList.getSelectedValue()).toString());
+        Vector<String> listNameCsv = m_generalFunctions.listNameCsv(file2);
+        jListEchantillons.setListData(listNameCsv);
     }
 
 
@@ -149,17 +187,17 @@ public class V_JPanelMainLeft extends JPanel{
         return jButtonPathFolder;
     }
 
-
-
-    /*
-    * JDialogs catch exceptions
-    * */
-
-    public void displayWarnBoxPref() {
-        JOptionPane.showMessageDialog(this.getParent(),
-                "Aucun répertoire contenant des séries n'est spécifié",
-                "Attention",
-                JOptionPane.WARNING_MESSAGE);
+    public JTextField getJtextfieldFolder() {
+        return jtextfieldFolder;
     }
 
+    public M_GeneralFunctions getM_generalFunctions() {
+        return m_generalFunctions;
+    }
+
+
+
+    public JList<String> getjList() {
+        return jList;
+    }
 }
