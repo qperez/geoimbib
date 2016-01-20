@@ -55,6 +55,10 @@ public class M_GeneralFunctions {
         }
     }
 
+
+    /*
+    * Le nom du répertoire doi commencer par "Serie"
+    * */
     public Vector<String> listNameFolder(File file) {
         String [] listefichiers;
         Vector<String> arrayListeSeries = new Vector<String>();
@@ -70,7 +74,9 @@ public class M_GeneralFunctions {
     }
 
 
-
+    /*
+    * Un échantillon  = un fichier csv, on répertorie tous les fichiers csv du dossier
+    * */
     public Vector<String> listNameCsv(File fileSerie) {
         String [] listefichiers2;
         Vector<String> arrayListeCsv = new Vector<String>();

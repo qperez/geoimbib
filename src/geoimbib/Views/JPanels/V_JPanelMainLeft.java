@@ -162,9 +162,9 @@ public class V_JPanelMainLeft extends JPanel{
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             jtextfieldFolder.setText(chooser.getSelectedFile().getPath());
             m_generalFunctions.savePathPreferenceInFile(chooser.getSelectedFile().getPath());      //on enregiste les préférences dans un fichier pour le récupérer
-            File file = new File(chooser.getSelectedFile().getPath());          //Créer un fichier qui sera notre dossier cible
+            File file = new File(chooser.getSelectedFile().getPath());                              //Créer un fichier qui sera notre dossier cible
             Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);                //Récupère le vecteur de séries du dossier
-            jList.setListData(listNameSerie);                                   //On actualise la JList avec le nouveau contenu
+            jList.setListData(listNameSerie);                                                       //On actualise la JList avec le nouveau contenu
 
 
         }

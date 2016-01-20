@@ -18,7 +18,7 @@ public class C_ControlDialogSerie implements ActionListener {
     private V_JDialogChoiceNameEchant v_jDialogChoiceNameEchant = null;
 
     //Variables d'informations du jdialog v_jDialogNouvelleSerie
-    private String nameSerie;
+    private String nameSerie = "Serie";
     private int nbEchant;
     private boolean fastMesures;
     //Variables d'informations du jdialog v_jDialogChoiceNameEchant
@@ -36,7 +36,7 @@ public class C_ControlDialogSerie implements ActionListener {
         //Récolte le nom + nombre de hauteurs de la série
         if (e.getSource() == v_jDialogNouvelleSerie.getjButtonnext()){
             try {
-                nameSerie = v_jDialogNouvelleSerie.getjTextFieldNomSerie().getText();
+                nameSerie += "_"+v_jDialogNouvelleSerie.getjTextFieldNomSerie().getText();
                 nbEchant = Integer.parseInt(v_jDialogNouvelleSerie.getjTextFieldNombreEchantillons().getText());
                 fastMesures = v_jDialogNouvelleSerie.getStateJCheckBoxFastMesure();
 
@@ -57,6 +57,8 @@ public class C_ControlDialogSerie implements ActionListener {
 
                 v_jDialogChoiceNameEchant.dispose();
 
+                //Test d'affichage pour debug
+                System.out.println(toString());
             }catch(Exception exception) {
                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
             }
@@ -64,7 +66,7 @@ public class C_ControlDialogSerie implements ActionListener {
     }
 
     public void resetVariables() {
-        nameSerie = "";
+        nameSerie = "Serie";
         nbEchant = 0;
         fastMesures = false;
 
