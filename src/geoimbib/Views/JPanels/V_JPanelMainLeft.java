@@ -1,6 +1,7 @@
 package geoimbib.Views.JPanels;
 
 import geoimbib.Controlers.C_ControlButtonMainPanelLeft;
+import geoimbib.Controlers.C_ControlButtonMainPanelList;
 import geoimbib.Models.ModelsJPanelMainLeft.M_GeneralFunctions;
 import geoimbib.Views.V_MainWindow;
 
@@ -27,9 +28,13 @@ public class V_JPanelMainLeft extends JPanel{
     private JTextField jtextfieldFolder = null;
     private JPanel jpanelFolder = null;
 
+    //Controler
+    private C_ControlButtonMainPanelLeft c_controlButtonMainPanelLeft = null;
+
     JButton jButtonPathFolder = null;
 
     public V_JPanelMainLeft(V_MainWindow v_mainWindow){
+        this.c_controlButtonMainPanelLeft = new C_ControlButtonMainPanelLeft(this);
         m_generalFunctions = new M_GeneralFunctions(this);
         this.v_mainWindow = v_mainWindow;
         initView();
@@ -103,10 +108,13 @@ public class V_JPanelMainLeft extends JPanel{
             else
                 jList = new JList<String>();
 
+            jList.addListSelectionListener(new C_ControlButtonMainPanelList(this));
+
             jList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             jList.setVisibleRowCount(-1);
             JScrollPane listScroller = new JScrollPane(jList);
             listScroller.setPreferredSize(new Dimension(150, 250));
+
 
             this.add(listScroller);
 
@@ -119,8 +127,8 @@ public class V_JPanelMainLeft extends JPanel{
         * JList 2 qui affiche tous les échantillons d'une expérience
         * */
 
-
             jListEchantillons = new JList<String>(); //data has type Object[]
+
             jListEchantillons.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             //jList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
             jListEchantillons.setVisibleRowCount(-1);
@@ -137,7 +145,7 @@ public class V_JPanelMainLeft extends JPanel{
 
 
     /*
-    * Affiche le choice folder et met à jour le jtextfield en fonction du dossier séléctionné
+    * Affiche le choice folder et met à jour le jtextfield en fonction du dossier sélectionné
     * (Récupère les données dans la classe model "M_GeneralFunctions.java"
     * */
     public void displayChoiceFolder() {
@@ -157,7 +165,18 @@ public class V_JPanelMainLeft extends JPanel{
             File file = new File(chooser.getSelectedFile().getPath());          //Créer un fichier qui sera notre dossier cible
             Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);                //Récupère le vecteur de séries du dossier
             jList.setListData(listNameSerie);                                   //On actualise la JList avec le nouveau contenu
+
+
         }
+    }
+
+    /*
+    * Affiche les csv de la série sélectionnée
+     */
+    public void displayChoiceCsv(){
+        File file2 = new File(Paths.get(jtextfieldFolder.getText()).toString() + "\\" + Paths.get(jList.getSelectedValue()).toString());
+        Vector<String> listNameCsv = m_generalFunctions.listNameCsv(file2);
+        jListEchantillons.setListData(listNameCsv);
     }
 
 
@@ -176,4 +195,9 @@ public class V_JPanelMainLeft extends JPanel{
         return m_generalFunctions;
     }
 
+
+
+    public JList<String> getjList() {
+        return jList;
+    }
 }

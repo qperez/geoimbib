@@ -55,19 +55,34 @@ public class M_GeneralFunctions {
         }
     }
 
-
     public Vector<String> listNameFolder(File file) {
         String [] listefichiers;
-        Vector<String> arrayListeseries = new Vector<String>();
+        Vector<String> arrayListeSeries = new Vector<String>();
         listefichiers=file.list();
 
         for(int i=0;i<listefichiers.length;i++){
-            if(listefichiers[i].endsWith(".csv")){
-                arrayListeseries.add(listefichiers[i].substring(0,listefichiers[i].length()-4));
+            if(listefichiers[i].startsWith("Serie")){
+                arrayListeSeries.add(listefichiers[i].substring(0,listefichiers[i].length()));
             }
         }
 
-        return arrayListeseries;
+        return arrayListeSeries;
+    }
+
+
+
+    public Vector<String> listNameCsv(File fileSerie) {
+        String [] listefichiers2;
+        Vector<String> arrayListeCsv = new Vector<String>();
+        listefichiers2=fileSerie.list();
+
+        for(int i=0;i<listefichiers2.length;i++){
+            if(listefichiers2[i].endsWith(".csv")){
+                arrayListeCsv.add(listefichiers2[i].substring(0,listefichiers2[i].length()));
+            }
+        }
+
+        return arrayListeCsv;
     }
 
 
