@@ -174,7 +174,7 @@ public class V_JPanelMainLeft extends JPanel{
     * Affiche les csv de la série sélectionnée
      */
     public void displayChoiceCsv(){
-        File file2 = new File(Paths.get(jtextfieldFolder.getText()).toString() + "\\" + Paths.get(jList.getSelectedValue()).toString());
+        File file2 = new File(Paths.get(jtextfieldFolder.getText()).toString() +File.separator+ Paths.get(jList.getSelectedValue()).toString());
         Vector<String> listNameCsv = m_generalFunctions.listNameCsv(file2);
         jListEchantillons.setListData(listNameCsv);
     }

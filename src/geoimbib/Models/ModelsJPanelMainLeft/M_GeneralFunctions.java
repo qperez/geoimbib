@@ -78,6 +78,8 @@ public class M_GeneralFunctions {
     * Un échantillon  = un fichier csv, on répertorie tous les fichiers csv du dossier
     * */
     public Vector<String> listNameCsv(File fileSerie) {
+
+        System.out.println(fileSerie);
         String [] listefichiers2;
         Vector<String> arrayListeCsv = new Vector<String>();
         listefichiers2=fileSerie.list();
@@ -87,6 +89,8 @@ public class M_GeneralFunctions {
                 arrayListeCsv.add(listefichiers2[i].substring(0,listefichiers2[i].length()));
             }
         }
+
+
 
         return arrayListeCsv;
     }
