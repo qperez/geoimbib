@@ -1,5 +1,6 @@
 package geoimbib.Models.ModelsJPanelMainLeft;
 
+import geoimbib.Models.M_Serie;
 import geoimbib.Models.ModelsJPanelMainLeft.Threads.M_ThreadWarningNoPath;
 import geoimbib.Views.JPanels.V_JPanelMainLeft;
 
@@ -93,6 +94,33 @@ public class M_GeneralFunctions {
 
 
         return arrayListeCsv;
+    }
+
+    /**
+     * Methode qui génère la serie en fonction de la série sélectionnée dans le panelMainLeft de gauche
+     * @param serieSelected le nom du dossier contenant les carottes
+     */
+    public void generationSerie(String serieSelected){
+        M_Serie serie = null;
+        String nomSerie, temp [], donneeCarotte[];
+        int nbrCarottes = 0;
+
+        temp = serieSelected.split("_");
+        nomSerie = temp[1];
+
+
+        File directory = new File(Paths.get(v_jPanelMainLeft.getJtextfieldFolder().getText()).toString() + File.separator + serieSelected);
+        File[] files = directory.listFiles();
+        for(int i = 0 ; i < files.length ; i++){
+            System.out.println(files[i].toString());
+            if(files[i].toString().endsWith(".csv")) {
+                nbrCarottes++;
+            }
+        }
+
+        serie = new M_Serie(nomSerie, nbrCarottes);
+
+        System.out.println(serie.toString());
     }
 
 

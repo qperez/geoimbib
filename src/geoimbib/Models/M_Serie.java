@@ -142,4 +142,13 @@ public class M_Serie {
         }
         return sommeMesures/(listCarotte.size());
     }
+
+    @Override
+    public String toString() {
+        return "M_Serie{" +
+                "nom : '" + nom + '\'' +
+                ", nombreMesuresParCarottes : " + nombreMesuresParCarottes +
+                ", Carottes : " + listCarotte +
+                '}';
+    }
 }
