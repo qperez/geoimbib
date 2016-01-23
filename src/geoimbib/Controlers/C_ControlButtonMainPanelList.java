@@ -1,5 +1,6 @@
 package geoimbib.Controlers;
 
+import geoimbib.Models.M_Serie;
 import geoimbib.Views.JPanels.V_JPanelMainLeft;
 
 import javax.swing.event.ListSelectionEvent;
@@ -19,6 +20,9 @@ public class C_ControlButtonMainPanelList implements ListSelectionListener{
     }
 
     public void valueChanged(ListSelectionEvent e){
+        //éviter le lancement en double de l'event
+        if(e.getValueIsAdjusting())
+            return;
         if(this.v_jPanelMainLeft.getjList().getSelectedValue()!=null){
             this.v_jPanelMainLeft.displayChoiceCsv();
             this.v_jPanelMainLeft.getM_generalFunctions().generationSerie(this.v_jPanelMainLeft.getjList().getSelectedValue());

@@ -99,4 +99,11 @@ public class M_Mesure {
         String dateFormate = new SimpleDateFormat("hh:mm").format(dateHeure.getTime());
         return dateFormate;
     }
+
+    @Override
+    public String toString() {
+        return "M_Mesure{" +
+                "dateHeure : " + getDateMesure() +
+                '}';
+    }
 }

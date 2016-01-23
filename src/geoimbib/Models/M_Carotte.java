@@ -166,4 +166,14 @@ public class M_Carotte {
         }
         return sommeMesure / listMesures.size();
     }
+
+    @Override
+    public String toString() {
+        return "M_Carotte{" +
+                "nom : '" + nom + '\'' +
+                ", diametre : " + diametre +
+                ", longueur : " + longueur +
+                ", listMesures : " + listMesures.toString() +
+                '}';
+    }
 }

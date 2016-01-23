@@ -148,7 +148,7 @@ public class M_Serie {
         return "M_Serie{" +
                 "nom : '" + nom + '\'' +
                 ", nombreMesuresParCarottes : " + nombreMesuresParCarottes +
-                ", Carottes : " + listCarotte +
+                ", Carottes : " + listCarotte.toString() +
                 '}';
     }
 }

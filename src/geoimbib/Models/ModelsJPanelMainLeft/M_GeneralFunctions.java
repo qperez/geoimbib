@@ -1,5 +1,7 @@
 package geoimbib.Models.ModelsJPanelMainLeft;
 
+import geoimbib.Models.M_Carotte;
+import geoimbib.Models.M_Mesure;
 import geoimbib.Models.M_Serie;
 import geoimbib.Models.ModelsJPanelMainLeft.Threads.M_ThreadWarningNoPath;
 import geoimbib.Views.JPanels.V_JPanelMainLeft;
@@ -7,7 +9,9 @@ import geoimbib.Views.JPanels.V_JPanelMainLeft;
 import java.awt.*;
 import java.io.*;
 import java.nio.file.Paths;
-import java.util.Vector;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by ravier on 15/01/2016.
@@ -102,24 +106,96 @@ public class M_GeneralFunctions {
      */
     public void generationSerie(String serieSelected){
         M_Serie serie = null;
-        String nomSerie, temp [], donneeCarotte[];
-        int nbrCarottes = 0;
+        String nomSerie, temp [], mesuresCarotte[], datePremCarotte, nomCarotte, ligne;
+        Double diametre, surface, longueur, hauteurFange;
+        Calendar dateHeure = null;
+        M_Mesure mesure = null;
+        ArrayList<M_Mesure> listMesures;
+        M_Carotte carotte = null;
+        ArrayList<M_Carotte> listCarotte = new ArrayList<M_Carotte>();
+        int nbrMesuresCarottes = 0;
 
         temp = serieSelected.split("_");
         nomSerie = temp[1];
 
-
         File directory = new File(Paths.get(v_jPanelMainLeft.getJtextfieldFolder().getText()).toString() + File.separator + serieSelected);
         File[] files = directory.listFiles();
         for(int i = 0 ; i < files.length ; i++){
-            System.out.println(files[i].toString());
             if(files[i].toString().endsWith(".csv")) {
-                nbrCarottes++;
+                try{
+                    // on reference le fichier dans lequel il y a les données d'une carotte
+                    nomCarotte = files[i].getName();
+                    InputStream ips = new FileInputStream(files[i]);
+                    InputStreamReader ipsr = new InputStreamReader(ips);
+                    BufferedReader br = new BufferedReader(ipsr);
+                    //on gère d'abord la première ligne sensée contenir les intitulés des colonnes et le diametre/surface et longueur de la carotte
+                    if((ligne = br.readLine()) != null){
+                        temp = ligne.split(";");
+                        diametre = Double.parseDouble(temp[0]);
+                        surface = Double.parseDouble(temp[1]);
+                        longueur = Double.parseDouble(temp[2]);
+                    }
+                    else {
+                        System.err.println("une des carottes de la série ne contient aucune donnée");
+                        return;
+                    }
+                    listMesures = new ArrayList<M_Mesure>();
+                    nbrMesuresCarottes = 0;
+                    while((ligne = br.readLine()) != null) {
+                        try {
+                            temp = ligne.split(";");
+                            dateHeure = Calendar.getInstance();
+                            SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY HH:mm:ss", Locale.FRANCE);
+                            dateHeure.setTime(sdf.parse(temp[4] + " " + temp[5]));
+                            hauteurFange = Double.parseDouble(temp[7]);
+                            mesure = new M_Mesure(dateHeure, hauteurFange);
+                            listMesures.add(mesure);
+                            nbrMesuresCarottes++;
+                        } catch (ParseException e) {
+                            System.err.println("Problème de format de date");
+                            e.printStackTrace();
+                        }
+                    }
+                    carotte = new M_Carotte(nomCarotte, diametre, longueur, 0.0, listMesures);
+                    listCarotte.add(carotte);
+                    br.close();
+                    ipsr.close();
+                    ips.close();
+
+                } catch (NumberFormatException e) {
+                    System.err.println("Problème dans le fichier : un argument n'est pas du bon format");
+                    e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    System.err.println("Fichier introuvable");
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    System.err.println("Problème lors de la lecture du fichier");
+                    e.printStackTrace();
+                }
             }
         }
 
-        serie = new M_Serie(nomSerie, nbrCarottes);
+        try{
+        Iterator<M_Carotte> iter = listCarotte.iterator();
+        dateHeure = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY HH:mm:ss", Locale.FRANCE);
+        dateHeure.setTime(sdf.parse("01/01/2500 00:00:00"));
+        while(iter.hasNext()){
+            Iterator<M_Mesure> iter2 = iter.next().getListMesures().iterator();
+            while(iter2.hasNext()){
+                if(iter2.next().getDateHeure().before(dateHeure)){
+                    dateHeure = iter2.next().getDateHeure();
+                }
+            }
+        }
+        }catch (ParseException e) {
+            System.err.println("Problème de format de date");
+            e.printStackTrace();
+        }
 
+
+
+        serie = new M_Serie(nomSerie, nbrMesuresCarottes, listCarotte, dateHeure);
         System.out.println(serie.toString());
     }
 
