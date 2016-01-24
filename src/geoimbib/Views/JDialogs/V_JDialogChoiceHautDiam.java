@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class V_JDialogChoiceHautDiam extends JDialog {
 
+    private final JFrame parent;
     private C_ControlDialogSerie c_controlDialogSerie;
 
     private JTextField[] jTextFieldHaut_tab;
@@ -26,6 +27,8 @@ public class V_JDialogChoiceHautDiam extends JDialog {
 
     public V_JDialogChoiceHautDiam(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie) {
         super(parent, title, modal);
+
+        this.parent = parent;
 
         this.setSize(450, 500);
         this.setLocationRelativeTo(null);
@@ -80,7 +83,11 @@ public class V_JDialogChoiceHautDiam extends JDialog {
         jButtonCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                V_JDialogConfirmation v_jDialogConfirmation = new V_JDialogConfirmation(parent,
+                        "Confirmation",
+                        true,
+                        getThis()
+                );
             }
         });
 
@@ -119,5 +126,9 @@ public class V_JDialogChoiceHautDiam extends JDialog {
 
     public JTextField[] getjTextFieldDiam_tab() {
         return jTextFieldDiam_tab;
+    }
+
+    public JDialog getThis() {
+        return this;
     }
 }

@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class V_JDialogChoiceNameEchant extends JDialog {
 
+    private final JFrame parent;
     private C_ControlDialogSerie c_controlDialogSerie = null;
 
     private JPanel jPanelComposants = null;
@@ -24,10 +25,12 @@ public class V_JDialogChoiceNameEchant extends JDialog {
         private JButton jButtonClearJtextfields = null;
 
     private JTextField[] jTextFieldNom_tab = null;
+    private Object aThis;
 
     public V_JDialogChoiceNameEchant(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie) {
         super(parent, title, modal);
 
+        this.parent = parent;
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);
         this.setResizable(true);
@@ -72,7 +75,11 @@ public class V_JDialogChoiceNameEchant extends JDialog {
         jButtonCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                V_JDialogConfirmation v_jDialogConfirmation = new V_JDialogConfirmation(parent,
+                        "Confirmation",
+                        true,
+                        getThis()
+                );
             }
         });
 
@@ -110,5 +117,9 @@ public class V_JDialogChoiceNameEchant extends JDialog {
 
     public JTextField[] getjTextFieldNom_tab() {
         return jTextFieldNom_tab;
+    }
+
+    public JDialog getThis() {
+        return this;
     }
 }

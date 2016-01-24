@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class V_JDialogNouvelleSerie extends JDialog {
 
+    private final JFrame parent;
     //Jtextfield
     JTextField jTextFieldNomSerie = null;
     JTextField jTextFieldNombreEchantillons = null;
@@ -35,7 +36,7 @@ public class V_JDialogNouvelleSerie extends JDialog {
     public V_JDialogNouvelleSerie(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie /*,Model model*/){
         super(parent, title, modal);
 
-        //model initialisation
+        this.parent = parent;
 
         this.setSize(400, 200);
         this.setLocationRelativeTo(null);
@@ -73,7 +74,11 @@ public class V_JDialogNouvelleSerie extends JDialog {
             jButtonCancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    dispose();
+                    V_JDialogConfirmation v_jDialogConfirmation = new V_JDialogConfirmation(parent,
+                            "Confirmation",
+                            true,
+                            getThis()
+                    );
                 }
             });
             jButtonnext = new JButton("Suivant");
@@ -101,5 +106,7 @@ public class V_JDialogNouvelleSerie extends JDialog {
     }
 
 
-
+    public JDialog getThis() {
+        return this;
+    }
 }

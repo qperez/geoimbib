@@ -95,12 +95,17 @@ public class C_ControlDialogSerie implements ActionListener {
                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
             }
         }
+
     }
 
     public void resetVariables() {
         nameSerie = "Serie";
         nbEchant = 0;
         fastMesures = false;
+
+        tabNameEchant = null;
+        tabHautEchant= null;
+        tabDiamEchant = null;
 
         this.v_jDialogNouvelleSerie = null;
     }

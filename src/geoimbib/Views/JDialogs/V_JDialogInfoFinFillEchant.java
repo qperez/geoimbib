@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
  */
 public class V_JDialogInfoFinFillEchant extends JDialog {
 
+    private JFrame parent = null;
+
     private final C_ControlDialogSerie c_controlDialogSerie;
     private JPanel jPanelComposants;
     private JPanel jpanelButtons;
@@ -22,6 +24,8 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
 
     public V_JDialogInfoFinFillEchant(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie) {
         super(parent, title, modal);
+
+        this.parent = parent;
 
         this.setSize(500, 200);
         this.setLocationRelativeTo(null);
@@ -50,7 +54,11 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
         jButtonCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                V_JDialogConfirmation v_jDialogConfirmation = new V_JDialogConfirmation(parent,
+                        "Confirmation",
+                        true,
+                        getThis()
+                        );
             }
         });
 
@@ -65,4 +73,6 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
         this.getContentPane().add(jpanelButtons, BorderLayout.SOUTH);
         this.getContentPane().add(jPanelComposants, BorderLayout.CENTER);
     }
+
+    public JDialog getThis() {return this;}
 }
