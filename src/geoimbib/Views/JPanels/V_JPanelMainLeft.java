@@ -195,8 +195,6 @@ public class V_JPanelMainLeft extends JPanel{
         return m_generalFunctions;
     }
 
-
-
     public JList<String> getjList() {
         return jList;
     }
