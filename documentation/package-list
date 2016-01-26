@@ -1,5 +1,8 @@
 geoimbib
 geoimbib.Controlers
 geoimbib.Models
+geoimbib.Models.ModelsJPanelMainLeft
+geoimbib.Models.ModelsJPanelMainLeft.Threads
 geoimbib.Views
+geoimbib.Views.JDialogs
 geoimbib.Views.JPanels

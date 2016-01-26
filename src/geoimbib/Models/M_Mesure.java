@@ -13,6 +13,7 @@ import java.util.Calendar;
 public class M_Mesure {
     private Calendar dateHeure;
     private double hauteurFrangeHumide;
+    private double masse;
 
     /**
      * Constructeur M_Mesure.
@@ -98,6 +99,22 @@ public class M_Mesure {
     public String getHeureMesure() {
         String dateFormate = new SimpleDateFormat("hh:mm").format(dateHeure.getTime());
         return dateFormate;
+    }
+
+    /**
+     * Retourne la masse de la carotte lors de la mesure
+     * @return Double masse de la carotte lors de la mesure
+     */
+    public double getMasse() {
+        return masse;
+    }
+
+    /**
+     * Met &agrave; jour la masse de la carotte lors de la mesure
+     * @param masse masse de la carotte lors de la mesure
+     */
+    public void setMasse(double masse) {
+        this.masse = masse;
     }
 
     @Override

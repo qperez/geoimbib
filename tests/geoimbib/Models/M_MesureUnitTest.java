@@ -27,6 +27,5 @@ public class M_MesureUnitTest {
         M_Mesure mesure = new M_Mesure(dateCurrent, 12.3);
         assertEquals("L'heure de la mesure n'est pas égale à celle attendue",
                 "12:28", mesure.getHeureMesure());
-
     }
 }

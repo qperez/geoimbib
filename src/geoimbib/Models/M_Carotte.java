@@ -18,7 +18,6 @@ public class M_Carotte {
     private String nom;
     private double longueur;
     private double diametre;
-    private double masse;
     private ArrayList<M_Mesure> listMesures;
 
     /**
@@ -47,7 +46,6 @@ public class M_Carotte {
         this.nom = nom;
         this.diametre = diametre;
         this.longueur = longueur;
-        this.masse = masse;
         this.listMesures = listMesures;
     }
 
@@ -66,7 +64,6 @@ public class M_Carotte {
         this.nom = nom;
         this.diametre = diametre;
         this.longueur = longueur;
-        this.masse = masse;
         listMesures = new ArrayList<M_Mesure>();
     }
 
@@ -132,22 +129,6 @@ public class M_Carotte {
      */
     public void setDiametre(double diametre) {
         this.diametre = diametre;
-    }
-
-    /**
-     * Retourne la masse de la carotte
-     * @return masse de la carotte
-     */
-    public double getMasse() {
-        return masse;
-    }
-
-    /**
-     * Met &agrave; jour la masse de la carotte
-     * @param masse de la carotte
-     */
-    public void setMasse(double masse) {
-        this.masse = masse;
     }
 
     /**
