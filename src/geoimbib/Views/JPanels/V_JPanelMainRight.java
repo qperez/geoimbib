@@ -2,7 +2,9 @@ package geoimbib.Views.JPanels;
 
 import geoimbib.Controlers.C_ControlButtonMainPanelRight;
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Views.JDialogs.V_JDialogChoiceHautDiam;
 import geoimbib.Views.JDialogs.V_JDialogChoiceNameEchant;
+import geoimbib.Views.JDialogs.V_JDialogInfoFinFillEchant;
 import geoimbib.Views.JDialogs.V_JDialogNouvelleSerie;
 import geoimbib.Views.V_MainWindow;
 
@@ -149,6 +151,22 @@ public class V_JPanelMainRight extends JPanel {
                 c_controlDialogSerie);
     }
 
+    public void displayJDialogHautDiam() {
+        V_JDialogChoiceHautDiam v_JDialogChoiceHautDiam = new V_JDialogChoiceHautDiam(
+                this.v_mainWindow,
+                "Hauteur / Diamètres",
+                true,
+                c_controlDialogSerie);
+    }
+
+    public void displayInfoFinFillEchant() {
+        V_JDialogInfoFinFillEchant v_JDialogInfoFinFillEchant = new V_JDialogInfoFinFillEchant(
+                this.v_mainWindow,
+                "",
+                true,
+                c_controlDialogSerie);
+    }
+
     public void displayJDialogErrorinputNewSerie() {
         JOptionPane.showMessageDialog(this.getParent(),
                 "Veillez à remplir correctement les champs",
@@ -162,6 +180,5 @@ public class V_JPanelMainRight extends JPanel {
                 "Attention",
                 JOptionPane.WARNING_MESSAGE);
     }
-
 
 }

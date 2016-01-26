@@ -9,29 +9,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by ravier on 18/01/2016.
+ * Created by ravier on 24/01/2016.
  */
-public class V_JDialogChoiceNameEchant extends JDialog {
+public class V_JDialogChoiceHautDiam extends JDialog {
 
     private final JFrame parent;
-    private C_ControlDialogSerie c_controlDialogSerie = null;
+    private C_ControlDialogSerie c_controlDialogSerie;
 
-    private JPanel jPanelComposants = null;
+    private JTextField[] jTextFieldHaut_tab;
+    private JTextField[] jTextFieldDiam_tab;
 
+    private JPanel jPanelComposants;
+    private JPanel jpanelButtons;
+        private JButton jButtonCancel;
+        private JButton jButtonnext;
+        private JButton jButtonClearJtextfields;
 
-    private JPanel jpanelButtons = null;
-        private JButton jButtonnext = null;
-        private JButton jButtonCancel = null;
-        private JButton jButtonClearJtextfields = null;
-
-    private JTextField[] jTextFieldNom_tab = null;
-    private Object aThis;
-
-    public V_JDialogChoiceNameEchant(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie) {
+    public V_JDialogChoiceHautDiam(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie) {
         super(parent, title, modal);
 
         this.parent = parent;
-        this.setSize(500, 500);
+
+        this.setSize(450, 500);
         this.setLocationRelativeTo(null);
         this.setResizable(true);
 
@@ -44,9 +43,10 @@ public class V_JDialogChoiceNameEchant extends JDialog {
 
     private void initComposants() {
         final int nbEchant = c_controlDialogSerie.getNbEchant();
-        jTextFieldNom_tab = new JTextField[nbEchant];
+        jTextFieldHaut_tab = new JTextField[nbEchant];
+        jTextFieldDiam_tab = new JTextField[nbEchant];
 
-        jPanelComposants = new JPanel(new GridLayout(nbEchant, 2));
+        jPanelComposants = new JPanel(new GridLayout(nbEchant+1, 3));
 
         int paddingJPanel = 210;
         for (int i = 0; i<nbEchant; ++i) {
@@ -58,14 +58,22 @@ public class V_JDialogChoiceNameEchant extends JDialog {
         Border padding = BorderFactory.createEmptyBorder(paddingJPanel, 20, paddingJPanel,20);
         jPanelComposants.setBorder(padding);
 
+        jPanelComposants.add(new JLabel("Echantillon"));
+        jPanelComposants.add(new JLabel("Hauteur échantillon"));
+        jPanelComposants.add(new JLabel("Diamètre échantillon"));
+
         for (int i = 0; i<nbEchant; ++i){
-            jPanelComposants.add(new JLabel("Nom echantillon"+i));
-            jTextFieldNom_tab[i] = new JTextField("Echantillon"+i);
-            jPanelComposants.add(jTextFieldNom_tab[i]);
+            jPanelComposants.add(new JLabel(i+""));
+
+            jTextFieldHaut_tab[i] = new JTextField("0");
+            jPanelComposants.add(jTextFieldHaut_tab[i]);
+
+            jTextFieldDiam_tab[i] = new JTextField("0");
+            jPanelComposants.add(jTextFieldDiam_tab[i]);
         }
 
         JScrollPane listScroller = new JScrollPane(jPanelComposants);
-        listScroller.setPreferredSize(new Dimension(500, 500));
+        listScroller.setPreferredSize(new Dimension(450, 500));
 
 
 
@@ -83,7 +91,7 @@ public class V_JDialogChoiceNameEchant extends JDialog {
             }
         });
 
-        jButtonnext = new JButton("Suivant");
+        jButtonnext = new JButton("Suiv");
         jButtonnext.addActionListener(c_controlDialogSerie);
 
         jButtonClearJtextfields = new JButton("Vider les champs");
@@ -91,7 +99,8 @@ public class V_JDialogChoiceNameEchant extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i<nbEchant; ++i){
-                    jTextFieldNom_tab[i].setText("");
+                    jTextFieldHaut_tab[i].setText("");
+                    jTextFieldDiam_tab[i].setText("");
                 }
             }
         });
@@ -107,16 +116,16 @@ public class V_JDialogChoiceNameEchant extends JDialog {
         this.getContentPane().add(listScroller, BorderLayout.CENTER);
     }
 
-    /*
-    * Getters/Setters
-    * */
-
     public JButton getjButtonnext() {
         return jButtonnext;
     }
 
-    public JTextField[] getjTextFieldNom_tab() {
-        return jTextFieldNom_tab;
+    public JTextField[] getjTextFieldHaut_tab() {
+        return jTextFieldHaut_tab;
+    }
+
+    public JTextField[] getjTextFieldDiam_tab() {
+        return jTextFieldDiam_tab;
     }
 
     public JDialog getThis() {
