@@ -103,7 +103,8 @@ public class M_Mesure {
     @Override
     public String toString() {
         return "M_Mesure{" +
-                "dateHeure : " + getDateMesure() +
+                "hauteur : " + hauteurFrangeHumide +
+                " dateHeure : " + getDateMesure() + " " + getHeureMesure() +
                 '}';
     }
 }

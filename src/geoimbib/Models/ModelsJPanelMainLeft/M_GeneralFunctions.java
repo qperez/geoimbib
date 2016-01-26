@@ -145,8 +145,8 @@ public class M_GeneralFunctions {
                         try {
                             temp = ligne.split(";");
                             dateHeure = Calendar.getInstance();
-                            SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY HH:mm:ss", Locale.FRANCE);
-                            dateHeure.setTime(sdf.parse(temp[4] + " " + temp[5]));
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                            dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
                             hauteurFange = Double.parseDouble(temp[7]);
                             mesure = new M_Mesure(dateHeure, hauteurFange);
                             listMesures.add(mesure);
@@ -175,16 +175,21 @@ public class M_GeneralFunctions {
             }
         }
 
+        //Je récupère la date de la mesure la plus ancienne des .csv afin d'établir la date de la série (logiquement égale a la date de la première expérience)
         try{
-        Iterator<M_Carotte> iter = listCarotte.iterator();
-        dateHeure = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY HH:mm:ss", Locale.FRANCE);
-        dateHeure.setTime(sdf.parse("01/01/2500 00:00:00"));
-        while(iter.hasNext()){
+            dateHeure = Calendar.getInstance();
+            //pour stocker la date de la liste (sinon j'utilisais deux fois next() avec le if... et donc j'avançais de deux mesures à chaque fois)
+            Calendar tempCalendar = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            dateHeure.setTime(sdf.parse("01/01/2042 00:00"));
+
+            Iterator<M_Carotte> iter = listCarotte.iterator();
+            while(iter.hasNext()){
             Iterator<M_Mesure> iter2 = iter.next().getListMesures().iterator();
             while(iter2.hasNext()){
-                if(iter2.next().getDateHeure().before(dateHeure)){
-                    dateHeure = iter2.next().getDateHeure();
+                tempCalendar = iter2.next().getDateHeure();
+                if(tempCalendar.before(dateHeure)){
+                    dateHeure = tempCalendar;
                 }
             }
         }
