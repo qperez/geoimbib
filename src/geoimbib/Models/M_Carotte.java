@@ -39,10 +39,9 @@ public class M_Carotte {
      * @param nom Nom de la carotte
      * @param diametre Diametre de la carotte
      * @param longueur Longueur de la carotte
-     * @param masse Masse de la la carotte
      * @param listMesures liste des hauteurs mesurées
      */
-    public M_Carotte(String nom, double diametre, double longueur , double masse, ArrayList<M_Mesure> listMesures) {
+    public M_Carotte(String nom, double diametre, double longueur, ArrayList<M_Mesure> listMesures) {
         this.nom = nom;
         this.diametre = diametre;
         this.longueur = longueur;
@@ -58,9 +57,8 @@ public class M_Carotte {
      * @param nom Nom de la carotte
      * @param diametre Diametre de la carotte
      * @param longueur Longueur de la carotte
-     * @param masse Masse de la la carotte
      */
-    public M_Carotte(String nom, double diametre, double longueur ,double masse) {
+    public M_Carotte(String nom, double diametre, double longueur) {
         this.nom = nom;
         this.diametre = diametre;
         this.longueur = longueur;

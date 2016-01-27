@@ -23,7 +23,7 @@ public class M_SerieUnitTest {
         listMesureCarotte1.add(mesure2);
         listMesureCarotte1.add(mesure3);
 
-        M_Carotte carotte1 = new M_Carotte("carotte1", 5, 10, 150,listMesureCarotte1);
+        M_Carotte carotte1 = new M_Carotte("carotte1", 5, 10,listMesureCarotte1);
 
         mesure1 = new M_Mesure(Calendar.getInstance(), 3);
         mesure2 = new M_Mesure(Calendar.getInstance(), 5);
@@ -33,7 +33,7 @@ public class M_SerieUnitTest {
         listMesureCarotte2.add(mesure1);
         listMesureCarotte2.add(mesure2);
         listMesureCarotte2.add(mesure3);
-        M_Carotte carotte2 = new M_Carotte("carotte2", 4.5, 7, 210,listMesureCarotte2);
+        M_Carotte carotte2 = new M_Carotte("carotte2", 4.5, 7,listMesureCarotte2);
 
         ArrayList<M_Carotte> listCarotte = new ArrayList<M_Carotte>();
         listCarotte.add(carotte1);

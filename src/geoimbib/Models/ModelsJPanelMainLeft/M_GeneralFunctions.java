@@ -107,7 +107,7 @@ public class M_GeneralFunctions {
     public void generationSerie(String serieSelected){
         M_Serie serie = null;
         String nomSerie, temp [], mesuresCarotte[], datePremCarotte, nomCarotte, ligne;
-        Double diametre, surface, longueur, hauteurFange;
+        Double diametre, surface, longueur, hauteurFange, masse;
         Calendar dateHeure = null;
         M_Mesure mesure = null;
         ArrayList<M_Mesure> listMesures;
@@ -148,7 +148,8 @@ public class M_GeneralFunctions {
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
                             dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
                             hauteurFange = Double.parseDouble(temp[7]);
-                            mesure = new M_Mesure(dateHeure, hauteurFange);
+                            masse = Double.parseDouble(temp[6]);
+                            mesure = new M_Mesure(dateHeure, hauteurFange, masse);
                             listMesures.add(mesure);
                             nbrMesuresCarottes++;
                         } catch (ParseException e) {
@@ -156,7 +157,7 @@ public class M_GeneralFunctions {
                             e.printStackTrace();
                         }
                     }
-                    carotte = new M_Carotte(nomCarotte, diametre, longueur, 0.0, listMesures);
+                    carotte = new M_Carotte(nomCarotte, diametre, longueur, listMesures);
                     listCarotte.add(carotte);
                     br.close();
                     ipsr.close();

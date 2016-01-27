@@ -21,7 +21,7 @@ public class M_CarotteUnitTest {
      */
     @Test
     public void testCalculSurface() {
-        M_Carotte carotte = new M_Carotte("CarotteToTest", 3.2, 15.2, 398.4);
+        M_Carotte carotte = new M_Carotte("CarotteToTest", 3.2, 15.2);
         assertEquals(Math.PI * Math.pow(1.6, 2), carotte.calculSurface());
     }
 
@@ -36,7 +36,7 @@ public class M_CarotteUnitTest {
         listMesureCarotte1.add(mesure2);
         listMesureCarotte1.add(mesure3);
 
-        M_Carotte carotte = new M_Carotte("CarotteToTest", 5, 10, 150,listMesureCarotte1);
+        M_Carotte carotte = new M_Carotte("CarotteToTest", 5, 10,listMesureCarotte1);
         assertEquals("La moyenne des mesures de la carotte n'est pas celle attendue", 9.0, carotte.calulMoyenneMesure());
     }
 
