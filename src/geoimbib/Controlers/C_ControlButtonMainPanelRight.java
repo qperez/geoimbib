@@ -37,6 +37,8 @@ public class C_ControlButtonMainPanelRight implements ActionListener {
         if (e.getSource() == v_jPanelMainRight.getButton3()) {
             if (v_jPanelMainRight.getV_jPanelMainLeft().getJtextfieldFolder().getText().equals(""))
                 v_jPanelMainRight.displayWarnBoxPref();
+            else
+                v_jPanelMainRight.displayJDialogNewGraph();
         }
     }
 }
