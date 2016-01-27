@@ -198,4 +198,12 @@ public class V_JPanelMainLeft extends JPanel{
     public JList<String> getjList() {
         return jList;
     }
+
+    /**
+     * Getter de la jList d'échantillon
+     * @return la jlist d'échantillon du panneau gauche
+     */
+    public JList<String> getjListEchantillons() {
+        return jListEchantillons;
+    }
 }

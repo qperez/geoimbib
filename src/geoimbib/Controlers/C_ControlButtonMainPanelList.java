@@ -25,7 +25,6 @@ public class C_ControlButtonMainPanelList implements ListSelectionListener{
             return;
         if(this.v_jPanelMainLeft.getjList().getSelectedValue()!=null){
             this.v_jPanelMainLeft.displayChoiceCsv();
-            this.v_jPanelMainLeft.getM_generalFunctions().generationSerie(this.v_jPanelMainLeft.getjList().getSelectedValue());
         }
     }
 }

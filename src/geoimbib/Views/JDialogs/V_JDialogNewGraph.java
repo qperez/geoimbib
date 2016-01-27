@@ -2,6 +2,7 @@ package geoimbib.Views.JDialogs;
 
 import geoimbib.Controlers.C_ControlDialogGraph;
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Views.JPanels.V_JPanelMainLeft;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -18,8 +19,11 @@ public class V_JDialogNewGraph extends JDialog{
 
     //JPanels
     JPanel jPanelButton = null;
+    V_JPanelMainLeft v_jPanelMainLeft = null;
+
+    //JButton
     JButton jButtonSerie = null;
-    JButton jButtonCarotte = null;
+    JButton jButtonEchantillon = null;
 
     //Controler
     C_ControlDialogGraph c_controlDialogGraph = null;
@@ -31,10 +35,11 @@ public class V_JDialogNewGraph extends JDialog{
      * @param modal le modal de la fenetre
      * @param c_controlDialogGraph le controler affilié à cette fenêtre
      */
-    public V_JDialogNewGraph(JFrame parent, String title, boolean modal, C_ControlDialogGraph c_controlDialogGraph){
+    public V_JDialogNewGraph(JFrame parent, String title, boolean modal, C_ControlDialogGraph c_controlDialogGraph, V_JPanelMainLeft v_jPanelMainLeft){
         super(parent, title, modal);
 
         this.parent = parent;
+        this.v_jPanelMainLeft = v_jPanelMainLeft;
 
         this.setSize(400, 200);
         this.setLocationRelativeTo(null);
@@ -52,12 +57,14 @@ public class V_JDialogNewGraph extends JDialog{
 
         jPanelButton = new JPanel(new BorderLayout());
         Dimension d = new Dimension(150,30);
-        jButtonSerie = new JButton("Serie");
+        jButtonSerie = new JButton("Série");
+        jButtonSerie.addActionListener(c_controlDialogGraph);
         jButtonSerie.setPreferredSize(d);
-        jButtonCarotte = new JButton("Carotte");
-        jButtonCarotte.setPreferredSize(d);
+        jButtonEchantillon = new JButton("Échantillon");
+        jButtonEchantillon.addActionListener(c_controlDialogGraph);
+        jButtonEchantillon.setPreferredSize(d);
         jPanelButton.add(jButtonSerie, BorderLayout.WEST);
-        jPanelButton.add(jButtonCarotte, BorderLayout.EAST);
+        jPanelButton.add(jButtonEchantillon, BorderLayout.EAST);
         paddingJpanel = BorderFactory.createEmptyBorder(0,50,70,50);
         jPanelButton.setBorder(paddingJpanel);
 
@@ -65,6 +72,30 @@ public class V_JDialogNewGraph extends JDialog{
         this.getContentPane().add(jPanelButton, BorderLayout.SOUTH);
 
         this.setVisible(true);
+    }
+
+    /*
+    * Getters / Setters
+    * */
+
+    /**
+     * Getter du jButton Série
+     * @return le JButton série
+     */
+    public JButton getjButtonSerie(){return jButtonSerie;}
+
+    /**
+     * Getter du jButton Echantillon
+     * @return le JButton Echantillon
+     */
+    public JButton getjButtonEchantillon(){return jButtonEchantillon;}
+
+    /**
+     * Getter du JPanelLeft qui va permettre de récupérer les données des jlist
+     * @return JPanel Main Left de l'appli
+     */
+    public V_JPanelMainLeft getV_jPanelMainLeft() {
+        return v_jPanelMainLeft;
     }
 
     /**

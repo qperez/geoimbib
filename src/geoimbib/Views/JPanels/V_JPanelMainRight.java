@@ -168,6 +168,18 @@ public class V_JPanelMainRight extends JPanel {
                 c_controlDialogSerie);
     }
 
+    /**
+     * Methode de création de la jdialog du menu graphique
+     */
+    public void displayJDialogNewGraph(){
+        v_jDialogNewGraph = new V_JDialogNewGraph(
+                this.v_mainWindow,
+                "Nouveau Graphique",
+                true,
+                c_controlDialogGraph,
+                v_jPanelMainLeft);
+    }
+
     public void displayJDialogErrorinputNewSerie() {
         JOptionPane.showMessageDialog(this.getParent(),
                 "Veillez à remplir correctement les champs",
@@ -182,12 +194,14 @@ public class V_JPanelMainRight extends JPanel {
                 JOptionPane.WARNING_MESSAGE);
     }
 
-    public void displayJDialogNewGraph(){
-        v_jDialogNewGraph = new V_JDialogNewGraph(
-                this.v_mainWindow,
-                "Nouveau Graphique",
-                true,
-                c_controlDialogGraph);
+    /**
+     * Methode qui ouvre un jdialog si aucun objet n'est sélectionnée dans la liste et que l'on veut tout de même y accéder
+     */
+    public void displayWarnJList(){
+        JOptionPane.showMessageDialog(this.getParent(),
+                "Aucun objet de ce type sélectionné dans les listes",
+                "Attention",
+                JOptionPane.WARNING_MESSAGE);
     }
 
 }
