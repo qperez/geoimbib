@@ -233,19 +233,55 @@ public class M_GeneralFunctionsRight {
      * @param carotte la carotte à afficher
      * @return la dataset du graphique
      */
-    public XYDataset createDataset(M_Carotte carotte){
+    public XYDataset createDatasetMasse(M_Carotte carotte){
         XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series1 = new XYSeries("Object 1");
+        XYSeries serie = new XYSeries("Masse");
+        M_Mesure temp = null;
+        double t = 0;
 
-        Iterator iter = null;
+        Iterator<M_Mesure> iter = carotte.getListMesures().iterator();
+        while(iter.hasNext()){
+            temp = iter.next();
+            serie.add(t, temp.getMasse());
+            t++;
+        }
 
-        series1.add(1.0, 2.0);
-        series1.add(2.0, 3.0);
-        series1.add(3.0, 2.5);
-        series1.add(3.5, 2.8);
-        series1.add(4.2, 6.0);
+        /*serie.add(1.0, 2.0);
+        serie.add(2.0, 3.0);
+        serie.add(3.0, 2.5);
+        serie.add(3.5, 2.8);
+        serie.add(4.2, 6.0);*/
 
-        dataset.addSeries(series1);
+        dataset.addSeries(serie);
+
+        return dataset;
+    }
+
+    /**
+     * Methode de création des valeurs à afficher sur le graphique
+     * @param carotte la carotte à afficher
+     * @return la dataset du graphique
+     */
+    public XYDataset createDatasetHauteur(M_Carotte carotte){
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries serie = new XYSeries("Hauteur de la fange humide");
+        M_Mesure temp = null;
+        double t = 0;
+
+        Iterator<M_Mesure> iter = carotte.getListMesures().iterator();
+        while(iter.hasNext()){
+            temp = iter.next();
+            serie.add(t, temp.getHauteurFrangeHumide());
+            t++;
+        }
+
+        /*serie.add(1.0, 2.0);
+        serie.add(2.0, 3.0);
+        serie.add(3.0, 2.5);
+        serie.add(3.5, 2.8);
+        serie.add(4.2, 6.0);*/
+
+        dataset.addSeries(serie);
 
         return dataset;
     }
