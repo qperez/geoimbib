@@ -23,7 +23,7 @@ public class C_ControlDialogSerie implements ActionListener {
 
     //Variables d'informations du jdialog v_jDialogNouvelleSerie
     private String nameSerie = "Serie";
-    private int nbEchant;
+    private int nbEchant = 0;
     private boolean fastMesures;
     //Variables d'informations du jdialog v_jDialogChoiceNameEchant
     private String[] tabNameEchant = null;
@@ -40,6 +40,7 @@ public class C_ControlDialogSerie implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         //Récolte le nom + nombre de hauteurs de la série
         if (e.getSource() == v_jDialogNouvelleSerie.getjButtonnext()){
             try {
@@ -50,12 +51,14 @@ public class C_ControlDialogSerie implements ActionListener {
                 v_jDialogNouvelleSerie.dispose();
 
                 v_jPanelMainRight.displayJDialogChoiceNameCar();
+
             }catch (Exception exception) {
                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
+                System.out.println(exception.getMessage());
             }
         }
 
-        if (e.getSource() == v_jDialogChoiceNameEchant.getjButtonnext()){
+        else if (e.getSource() == v_jDialogChoiceNameEchant.getjButtonnext()){
             try{
                 tabNameEchant = new String[nbEchant];
                 for (int i = 0; i<nbEchant; ++i){
@@ -71,7 +74,7 @@ public class C_ControlDialogSerie implements ActionListener {
             }
         }
 
-        if (e.getSource() == v_JDialogChoiceHautDiam.getjButtonnext()) {
+        else if (e.getSource() == v_JDialogChoiceHautDiam.getjButtonnext()) {
             try{
                 tabDiamEchant = new double[nbEchant];
                 tabHautEchant = new double[nbEchant];
@@ -94,7 +97,7 @@ public class C_ControlDialogSerie implements ActionListener {
             }
         }
 
-        if (e.getSource() == v_JDialogInfoFinFillEchant.getJButtonNext()){
+        else if (e.getSource() == v_JDialogInfoFinFillEchant.getJButtonNext()){
             v_jPanelMainRight.loopAcquisitionMasse();
         }
 
