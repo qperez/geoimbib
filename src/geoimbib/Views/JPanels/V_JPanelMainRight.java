@@ -3,6 +3,8 @@ package geoimbib.Views.JPanels;
 import geoimbib.Controlers.C_ControlButtonMainPanelRight;
 import geoimbib.Controlers.C_ControlDialogGraph;
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Models.ModelsJPanelMainLeft.M_GeneralFunctions;
+import geoimbib.Models.ModelsJPanelMainRight.M_GeneralFunctionsRight;
 import geoimbib.Views.JDialogs.*;
 import geoimbib.Views.V_MainWindow;
 
@@ -17,6 +19,7 @@ public class V_JPanelMainRight extends JPanel {
 
     private V_MainWindow v_mainWindow;
     private V_JPanelMainLeft v_jPanelMainLeft;
+    private M_GeneralFunctionsRight m_generalFunctionsRight = null;
 
     //Controlers
     private C_ControlButtonMainPanelRight c_controlButtonMainPanelRight = null;
@@ -45,6 +48,7 @@ public class V_JPanelMainRight extends JPanel {
 
     public V_JPanelMainRight(V_MainWindow v_mainWindow, V_JPanelMainLeft v_jPanelMainLeft){
         this.v_mainWindow = v_mainWindow;
+        m_generalFunctionsRight = new M_GeneralFunctionsRight(v_jPanelMainLeft, this);
         this.c_controlButtonMainPanelRight = new C_ControlButtonMainPanelRight(this);
         this.v_jPanelMainLeft = v_jPanelMainLeft;
 
@@ -135,10 +139,21 @@ public class V_JPanelMainRight extends JPanel {
         return v_jPanelMainLeft;
     }
 
+    public M_GeneralFunctionsRight getM_generalFunctionsRight() {
+        return m_generalFunctionsRight;
+    }
+
+    /**
+     * Getter de l'attribut getV_mainWindow()
+     * @return v_mainWindow
+     */
+    public V_MainWindow getV_mainWindow() {
+        return v_mainWindow;
+    }
 
     /*
-    * JDialogs
-    * */
+        * JDialogs
+        * */
     public void displayJDialogNewSerie() {
         v_jDialogNouvelleSerie = new V_JDialogNouvelleSerie(
                 this.v_mainWindow,

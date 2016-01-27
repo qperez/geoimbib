@@ -1,5 +1,7 @@
 package geoimbib.Controlers;
 
+import geoimbib.Models.M_Carotte;
+import geoimbib.Models.M_Serie;
 import geoimbib.Views.JDialogs.*;
 import geoimbib.Views.JPanels.V_JPanelMainLeft;
 import geoimbib.Views.JPanels.V_JPanelMainRight;
@@ -32,19 +34,37 @@ public class C_ControlDialogGraph implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == v_jDialogNewGraph.getjButtonSerie()){
             if(v_jDialogNewGraph.getV_jPanelMainLeft().getjList().getSelectedValue()!=null){
-                v_jDialogNewGraph.getV_jPanelMainLeft().getM_generalFunctions().generationSerie(v_jDialogNewGraph.getV_jPanelMainLeft().getjList().getSelectedValue());
+                M_Serie serie = v_jPanelMainRight.getM_generalFunctionsRight().generationSerie(v_jDialogNewGraph.getV_jPanelMainLeft().getjList().getSelectedValue());
+                v_jDialogNewGraph.dispose();
+                new V_JDialogGraph(
+                        this.v_jPanelMainRight.getV_mainWindow(),
+                        "Graphique",
+                        true,
+                        serie,
+                        v_jPanelMainRight
+                );
             }
             else{
                 v_jPanelMainRight.displayWarnJList();
+                v_jDialogNewGraph.dispose();
             }
         }
 
         if(e.getSource() == v_jDialogNewGraph.getjButtonEchantillon()){
             if(v_jDialogNewGraph.getV_jPanelMainLeft().getjListEchantillons().getSelectedValue()!=null) {
-                v_jDialogNewGraph.getV_jPanelMainLeft().getM_generalFunctions().generationEchantillon(v_jDialogNewGraph.getV_jPanelMainLeft().getjList().getSelectedValue(), v_jDialogNewGraph.getV_jPanelMainLeft().getjListEchantillons().getSelectedValue());
+                M_Carotte carotte = v_jPanelMainRight.getM_generalFunctionsRight().generationEchantillon(v_jDialogNewGraph.getV_jPanelMainLeft().getjList().getSelectedValue(), v_jDialogNewGraph.getV_jPanelMainLeft().getjListEchantillons().getSelectedValue());
+                v_jDialogNewGraph.dispose();
+                new V_JDialogGraph(
+                        this.v_jPanelMainRight.getV_mainWindow(),
+                        "Graphique",
+                        true,
+                        carotte,
+                        v_jPanelMainRight
+                );
             }
             else{
                 v_jPanelMainRight.displayWarnJList();
+                v_jDialogNewGraph.dispose();
             }
         }
     }
