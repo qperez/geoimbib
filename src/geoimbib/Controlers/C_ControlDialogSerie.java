@@ -66,8 +66,6 @@ public class C_ControlDialogSerie implements ActionListener {
 
                 v_jPanelMainRight.displayJDialogHautDiam();
 
-                //Test d'affichage pour debug
-                //System.out.println(toString());
             }catch(Exception exception) {
                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
             }
@@ -96,6 +94,10 @@ public class C_ControlDialogSerie implements ActionListener {
             }
         }
 
+        if (e.getSource() == v_JDialogInfoFinFillEchant.getJButtonNext()){
+            v_jPanelMainRight.loopAcquisitionMasse();
+        }
+
     }
 
     public void resetVariables() {
@@ -106,7 +108,6 @@ public class C_ControlDialogSerie implements ActionListener {
         tabNameEchant = null;
         tabHautEchant= null;
         tabDiamEchant = null;
-
         this.v_jDialogNouvelleSerie = null;
     }
 
@@ -136,7 +137,7 @@ public class C_ControlDialogSerie implements ActionListener {
 
     //Fonction de test d'affichage
     @Override
-    public String toString(){
+    public String toString() {
         String affichage = "";
         affichage += "Nom de la série : "+nameSerie+"\n";
         affichage += "Nombre d'échantillons : "+nbEchant+"\n";

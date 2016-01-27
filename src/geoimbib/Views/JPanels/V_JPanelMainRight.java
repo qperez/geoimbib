@@ -1,9 +1,11 @@
 package geoimbib.Views.JPanels;
 
 import geoimbib.Controlers.C_ControlButtonMainPanelRight;
-import geoimbib.Controlers.C_ControlDialogGraph;
 import geoimbib.Controlers.C_ControlDialogSerie;
-import geoimbib.Views.JDialogs.*;
+import geoimbib.Views.JDialogs.V_JDialogChoiceHautDiam;
+import geoimbib.Views.JDialogs.V_JDialogChoiceNameEchant;
+import geoimbib.Views.JDialogs.V_JDialogInfoFinFillEchant;
+import geoimbib.Views.JDialogs.V_JDialogNouvelleSerie;
 import geoimbib.Views.V_MainWindow;
 
 import javax.swing.*;
@@ -21,7 +23,6 @@ public class V_JPanelMainRight extends JPanel {
     //Controlers
     private C_ControlButtonMainPanelRight c_controlButtonMainPanelRight = null;
     private C_ControlDialogSerie c_controlDialogSerie = null;
-    private C_ControlDialogGraph c_controlDialogGraph = null;
 
     //JPanel des boutons
     private JPanel jpanelButtons = null;
@@ -29,7 +30,6 @@ public class V_JPanelMainRight extends JPanel {
 
     //JDialogs
     private V_JDialogNouvelleSerie v_jDialogNouvelleSerie = null;
-    private V_JDialogNewGraph v_jDialogNewGraph = null;
 
     //Boutons
     JButton jbutton1 = null;
@@ -38,6 +38,9 @@ public class V_JPanelMainRight extends JPanel {
     JButton jbutton4 = null;
 
     JButton jbuttonLeave = null;
+
+    //bool si true -> on reboucle pour acquérir une nouvelle masse de la balance / sinon = mesure rapide (de base true)
+    private boolean cont = true;
 
 
     public V_JPanelMainRight(V_MainWindow v_mainWindow, V_JPanelMainLeft v_jPanelMainLeft){
@@ -48,7 +51,6 @@ public class V_JPanelMainRight extends JPanel {
         initView();
 
         this.c_controlDialogSerie = new C_ControlDialogSerie(this);
-        this.c_controlDialogGraph = new C_ControlDialogGraph(this);
 
         initControlers();
     }
@@ -168,18 +170,6 @@ public class V_JPanelMainRight extends JPanel {
                 c_controlDialogSerie);
     }
 
-    /**
-     * Methode de création de la jdialog du menu graphique
-     */
-    public void displayJDialogNewGraph(){
-        v_jDialogNewGraph = new V_JDialogNewGraph(
-                this.v_mainWindow,
-                "Nouveau Graphique",
-                true,
-                c_controlDialogGraph,
-                v_jPanelMainLeft);
-    }
-
     public void displayJDialogErrorinputNewSerie() {
         JOptionPane.showMessageDialog(this.getParent(),
                 "Veillez à remplir correctement les champs",
@@ -194,14 +184,9 @@ public class V_JPanelMainRight extends JPanel {
                 JOptionPane.WARNING_MESSAGE);
     }
 
-    /**
-     * Methode qui ouvre un jdialog si aucun objet n'est sélectionnée dans la liste et que l'on veut tout de même y accéder
-     */
-    public void displayWarnJList(){
-        JOptionPane.showMessageDialog(this.getParent(),
-                "Aucun objet de ce type sélectionné dans les listes",
-                "Attention",
-                JOptionPane.WARNING_MESSAGE);
-    }
+    public void loopAcquisitionMasse() {
+        while (cont) {
 
+        }
+    }
 }

@@ -66,6 +66,8 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
         jpanelButtons.add(jButtonRecap, BorderLayout.CENTER);
 
         jButtonnext = new JButton("Commencer l'acqusition balance");
+        jButtonnext.addActionListener(c_controlDialogSerie);
+
         jpanelButtons.add(jButtonnext, BorderLayout.EAST);
         Border paddingJpanelBottom = BorderFactory.createEmptyBorder(0,20,0,20);
         jpanelButtons.setBorder(paddingJpanelBottom);
@@ -75,4 +77,8 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
     }
 
     public JDialog getThis() {return this;}
+
+    public JButton getJButtonNext() {
+        return jButtonnext;
+    }
 }
