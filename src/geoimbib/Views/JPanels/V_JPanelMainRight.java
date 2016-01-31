@@ -3,6 +3,7 @@ package geoimbib.Views.JPanels;
 import geoimbib.Controlers.C_ControlButtonMainPanelRight;
 import geoimbib.Controlers.C_ControlDialogGraph;
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Models.M_createSet;
 import geoimbib.Models.ModelsJPanelMainLeft.M_GeneralFunctions;
 import geoimbib.Models.ModelsJPanelMainRight.M_GeneralFunctionsRight;
 import geoimbib.Views.JDialogs.*;
@@ -269,6 +270,15 @@ public class V_JPanelMainRight extends JPanel {
             }
             else
                 cont = false;
+
+            M_createSet m_createSet = new M_createSet(c_controlDialogSerie.getDonnees(),
+                    c_controlDialogSerie.getNomSerie(),
+                    c_controlDialogSerie.getNbEchant(),
+                    c_controlDialogSerie.getTabNomechant(),
+                    c_controlDialogSerie.getTabHautEchant(),
+                    c_controlDialogSerie.getTabDiamEchant(),
+                    c_controlDialogSerie.getCalendarSerie(),
+                    v_mainWindow.getJPanelMainLeft().getJtextfieldFolder().getText());
 
             displayValidateBox();
         }

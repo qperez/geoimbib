@@ -30,6 +30,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
     private String nameSerie = "Serie";
     private int nbEchant = 0;
     private boolean fastMesures;
+    private Calendar calendarnewserie = null;
 
     //Variables d'informations du jdialog v_jDialogChoiceNameEchant
     private String[] tabNameEchant = null;
@@ -54,6 +55,8 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         if (e.getSource() == v_jDialogNouvelleSerie.getjButtonnext()){
             try {
                 resetVariables();
+
+                calendarnewserie = Calendar.getInstance();
 
                 nameSerie += "_"+v_jDialogNouvelleSerie.getjTextFieldNomSerie().getText();
                 nbEchant = Integer.parseInt(v_jDialogNouvelleSerie.getjTextFieldNombreEchantillons().getText());
@@ -173,6 +176,8 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         tabHautEchant= null;
         tabDiamEchant = null;
 
+        calendarnewserie = null;
+
         arrayOfArrayMesure = null;
     }
 
@@ -288,5 +293,29 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         else if (e.getKeyCode() == 77) {
             v_jDialogMasse.setManuel();
         }
+    }
+
+    public ArrayList<ArrayList<M_Mesure>> getDonnees() {
+        return arrayOfArrayMesure;
+    }
+
+    public Calendar getCalendarSerie() {
+        return calendarnewserie;
+    }
+
+    public String getNomSerie() {
+        return nameSerie;
+    }
+
+    public String[] getTabNomechant() {
+        return tabNameEchant;
+    }
+
+    public double[] getTabHautEchant() {
+        return tabHautEchant;
+    }
+
+    public double[] getTabDiamEchant() {
+        return tabDiamEchant;
     }
 }
