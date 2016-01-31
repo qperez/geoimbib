@@ -1,7 +1,9 @@
 package geoimbib.Models;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * <b>Created by Quentin PEREZ on 12/01/16.</b>
@@ -99,6 +101,7 @@ public class M_Mesure {
         this.hauteurFrangeHumide = hauteurFrangeHumide;
     }
 
+
     /**
      * Retourne la date sous le format: "jj/mm/aaaa" de la mesure
      * @return String date de la mesure
@@ -115,6 +118,21 @@ public class M_Mesure {
     public String getHeureMesure() {
         String dateFormate = new SimpleDateFormat("hh:mm").format(dateHeure.getTime());
         return dateFormate;
+    }
+
+    /**
+     * Change l'heure sous le format: "hh:mm" de la mesure
+     */
+    public void setHeureMesure(String d, String newHeure) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        String dateInString = d+" "+newHeure;
+        Date date = null;
+        try {
+            date = sdf.parse(dateInString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        dateHeure.setTime(date);
     }
 
     /**

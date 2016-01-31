@@ -8,6 +8,9 @@ import geoimbib.Views.JPanels.V_JPanelMainRight;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+/*import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;*/
 
 import java.io.*;
 import java.nio.file.Paths;
@@ -246,11 +249,11 @@ public class M_GeneralFunctionsRight {
             t++;
         }
 
-        /*serie.add(1.0, 2.0);
+        serie.add(1.0, 2.0);
         serie.add(2.0, 3.0);
         serie.add(3.0, 2.5);
         serie.add(3.5, 2.8);
-        serie.add(4.2, 6.0);*/
+        serie.add(4.2, 6.0);
 
         dataset.addSeries(serie);
 

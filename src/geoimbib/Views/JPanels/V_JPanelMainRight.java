@@ -212,6 +212,13 @@ public class V_JPanelMainRight extends JPanel {
                 JOptionPane.WARNING_MESSAGE);
     }
 
+    public void displayValidateBox() {
+        JOptionPane.showMessageDialog(this.getParent(),
+                "Votre série a été crée correctement",
+                "Information",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
     /**
      * Methode qui ouvre un jdialog si aucun objet n'est sélectionnée dans la liste et que l'on veut tout de même y accéder
      */
@@ -222,9 +229,53 @@ public class V_JPanelMainRight extends JPanel {
                 JOptionPane.WARNING_MESSAGE);
     }
 
-    public void loopAcquisitionMasse() {
-        while (cont) {
 
+    public void loopAcquisitionMasse(int nbEchant, boolean mRapide, String[] nomEchant) {
+        cont = true;
+        while (cont) {
+            for (int i = 0; i<nbEchant; ++i ){
+                V_jDialogMasse v_jDialogMasse = new V_jDialogMasse(
+                        this.v_mainWindow,
+                        "Acquisition masse : " + nomEchant[i],
+                        true,
+                        c_controlDialogSerie,
+                        i
+                );
+
+                V_JDialogFrange v_jDialogFrange = new V_JDialogFrange(
+                        this.v_mainWindow,
+                        "Frange humide : "+ nomEchant[i],
+                        true,
+                        c_controlDialogSerie,
+                        i
+                );
+
+                V_JDialogHeure v_jDialogHeure = new V_JDialogHeure(
+                        this.v_mainWindow,
+                        "Heure",
+                        true,
+                        c_controlDialogSerie,
+                        i
+                );
+            }
+            System.out.println(c_controlDialogSerie.toString());
+            if (!mRapide) {
+                V_jDialogContinueGetMasseOrNot v_jDialogContinueGetMasseOrNot = new V_jDialogContinueGetMasseOrNot(
+                        this.v_mainWindow,
+                        "Continuer ?",
+                        true,
+                        this
+                );
+            }
+            else
+                cont = false;
+
+            displayValidateBox();
         }
+    }
+
+
+    public void setBooleanContinue(boolean cont) {
+        this.cont = cont;
     }
 }
