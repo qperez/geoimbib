@@ -1,11 +1,11 @@
 package geoimbib.Models;
 
 
-import java.io.File;
+import com.googlecode.jcsv.writer.CSVWriter;
+import com.googlecode.jcsv.writer.internal.CSVWriterBuilder;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -58,6 +58,8 @@ public class M_createSet {
             createFiles();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -65,9 +67,10 @@ public class M_createSet {
      * Methode de creation de fichiers csv
      * <p>
      * Methode de creation des fichiers csv qui contiendront les echantillons, 1 fichier = 1 echnatillon
+     * Utilisation de la librairie "jcsv" fait par google.
      * </p>
      */
-    private void createFiles() throws FileNotFoundException {
+    private void createFiles() throws IOException {
         //Création du dossier = série
         File file = new File(this.jtextfieldFolder+ File.separator + this.nomSerie);
         if (file.exists()) {
@@ -82,33 +85,22 @@ public class M_createSet {
 
         //Pour tous les échantillons : créer un fichier correspondant et le remplir avec les données
         M_Carotte m_carotte;
+        CSVWriter csvWriter;
+        Writer out;
         for (int i=0; i<m_serie.getListCarotte().size(); ++i){
-             m_carotte = m_serie.getListCarotte().get(i);
+            m_carotte = m_serie.getListCarotte().get(i);
 
-            File csvFile = new File(this.jtextfieldFolder+ File.separator + this.nomSerie+File.separator+m_carotte.getNom()+".csv");
-            if (!csvFile.exists())
-                throw new FileNotFoundException("Le fichier n'existe pas");
-            else{
-                PrintStream l_out = new PrintStream(new FileOutputStream("exemple.csv"));
-            }
+            //Création du fichier correspondant à la carotte et écriture dedans
+            out = new FileWriter(this.jtextfieldFolder+ File.separator + this.nomSerie+File.separator+m_carotte.getNom()+".csv");
+            csvWriter = new CSVWriterBuilder(out).entryConverter(new M_conceptionCSVConverter()).build();
+            csvWriter.write(m_carotte);
+            csvWriter.flush();
+
+            csvWriter = new CSVWriterBuilder(out).entryConverter(new M_conceptionCSVConverterListeMesure()).build();
+            csvWriter.writeAll(m_carotte.getListMesures());
+            csvWriter.flush();
+
         }
-        /*
-
-        *
-        * StringBuilder sb = new StringBuilder();
-            while (...)
-            {
-
-               sb.append(valeur1).append("\t");
-               sb.append(valeur2).append("\t");
-               ...
-               sb.append(valeurN).append("\n");
-
-               writer.write(sb.toString());   <--- tu peux faire suivre d'un flush() si besoin
-               sb.delete(0, sb.length());
-
-            }
-        * */
     }
 
     /**
