@@ -17,6 +17,8 @@ public class M_Mesure {
     private double hauteurFrangeHumide;
     private double masse;
 
+    private double temps;
+
     /**
      * Constructeur M_Mesure.
      * <p>
@@ -150,6 +152,18 @@ public class M_Mesure {
     public void setMasse(double masse) {
         this.masse = masse;
     }
+
+    /**
+     * Retourne le temps entre cette mesure et la mesure précédente
+     * @return Double temps entre deux mesures
+     */
+    public double getTemps() {return temps;}
+
+    /**
+     * Met &agrave; jour le temps entre cette mesure et la mesure precedente
+     * @param temps temps entre deux mesures
+     */
+    public void setTemps(double temps) {this.temps = temps;}
 
     @Override
     public String toString() {

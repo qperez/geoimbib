@@ -8,6 +8,7 @@ import java.io.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * <b>Created by ravier on 31/01/2016.</b>
@@ -117,6 +118,22 @@ public class M_createSet {
         M_Carotte m_carotte;
         for (int i = 0; i<arrayLists.size(); ++i){
             m_carotte = new M_Carotte(tabNameEchant[i], tabDiamEchant[i], tabHautEchant[i], arrayLists.get(i));
+
+            for (int y=0; y<m_carotte.getListMesures().size(); ++y){
+                if (y==0)
+                    m_carotte.getListMesures().get(y).setTemps(0);
+                else{
+                    Date h1 = m_carotte.getListMesures().get(y).getDateHeure().getTime();
+                    Date h2 = m_carotte.getListMesures().get(y-1).getDateHeure().getTime();
+                    double diff = (h1.getTime() - h2.getTime()) /(1000.0*60.0) /60.0;
+                    System.out.println("h1.getTime(): "+h1.getTime()
+                            + " h2.getTime():"+h2.getTime()
+                            + " (h1.getTime() - h2.getTime())/60 : "+ (h1.getTime() - h2.getTime())
+                            + " (h1.getTime() - h2.getTime())/(1000*60) : " +(h1.getTime() - h2.getTime())/(1000*60));
+                    m_carotte.getListMesures().get(y).setTemps(diff);
+                }
+            }
+
             arrayCarotte.add(m_carotte);
         }
 

@@ -271,17 +271,17 @@ public class V_JPanelMainRight extends JPanel {
             else
                 cont = false;
 
-            M_createSet m_createSet = new M_createSet(c_controlDialogSerie.getDonnees(),
-                    c_controlDialogSerie.getNomSerie(),
-                    c_controlDialogSerie.getNbEchant(),
-                    c_controlDialogSerie.getTabNomechant(),
-                    c_controlDialogSerie.getTabHautEchant(),
-                    c_controlDialogSerie.getTabDiamEchant(),
-                    c_controlDialogSerie.getCalendarSerie(),
-                    v_mainWindow.getJPanelMainLeft().getJtextfieldFolder().getText());
-
-            displayValidateBox();
         }
+        M_createSet m_createSet = new M_createSet(c_controlDialogSerie.getDonnees(),
+                c_controlDialogSerie.getNomSerie(),
+                c_controlDialogSerie.getNbEchant(),
+                c_controlDialogSerie.getTabNomechant(),
+                c_controlDialogSerie.getTabHautEchant(),
+                c_controlDialogSerie.getTabDiamEchant(),
+                c_controlDialogSerie.getCalendarSerie(),
+                v_mainWindow.getJPanelMainLeft().getJtextfieldFolder().getText());
+
+        displayValidateBox();
     }
 
 
