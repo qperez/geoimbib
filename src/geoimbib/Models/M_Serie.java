@@ -3,7 +3,6 @@ package geoimbib.Models;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * <b>Created by Quentin PEREZ on 11/01/16.</b>
@@ -148,7 +147,7 @@ public class M_Serie {
      * Retourne la date sous le format: "jj/mm/aaaa" de la mesure
      * @return String date de la mesure
      */
-    public String getDateMesure() {
+    public String getDateSerie() {
         String dateFormate = new SimpleDateFormat("dd/MM/yyyy").format(dateHeure.getTime());
         return dateFormate;
     }
@@ -157,7 +156,7 @@ public class M_Serie {
      * Retourne l'heure sous le format: "hh:mm" de la mesure
      * @return String heure de la mesure
      */
-    public String getHeureMesure() {
+    public String getHeureSerie() {
         String dateFormate = new SimpleDateFormat("hh:mm").format(dateHeure.getTime());
         return dateFormate;
     }
@@ -166,8 +165,8 @@ public class M_Serie {
     public String toString() {
         return "M_Serie{" +
                 "nom : '" + nom + '\'' +
-                ", date : " + getDateMesure() + '\'' +
-                ", heure : " + getHeureMesure() + '\'' +
+                ", date : " + getDateSerie() + '\'' +
+                ", heure : " + getHeureSerie() + '\'' +
                 ", nombreMesuresParCarottes : " + nombreMesuresParCarottes +
                 ", Carottes : " + listCarotte.toString() +
                 '}';

@@ -3,6 +3,7 @@ geoimbib.Controlers
 geoimbib.Models
 geoimbib.Models.ModelsJPanelMainLeft
 geoimbib.Models.ModelsJPanelMainLeft.Threads
+geoimbib.Models.ModelsJPanelMainRight
 geoimbib.Views
 geoimbib.Views.JDialogs
 geoimbib.Views.JPanels

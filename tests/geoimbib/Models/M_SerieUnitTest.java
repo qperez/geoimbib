@@ -11,6 +11,7 @@ import static junit.framework.TestCase.assertEquals;
  * Created by quentin on 18/01/16.
  */
 public class M_SerieUnitTest {
+
     @Test
     public void testCalculMoyenneSerie(){
 
@@ -42,5 +43,18 @@ public class M_SerieUnitTest {
         assertEquals("La moyenne ne correspond pas à celle attendue",7.5, serie.calculMoyenneSerie());
     }
 
+    /*@Test
+    public void testRacineCarreTempsSerie(){
+        Calendar calendarM1 = Calendar.getInstance();
+        Calendar calendarM2 = Calendar.getInstance();
+        Calendar calendarM3 = Calendar.getInstance();
 
+        calendarM1.set(2016,Calendar.JANUARY,15,12,24,12);
+        calendarM2.set(2016,Calendar.JANUARY,15,12,26,59);
+        calendarM2.set(2016,Calendar.JANUARY,15,12,28,00);
+
+        M_Mesure mesure1 = new M_Mesure(calendarM1, 12.1);
+        M_Mesure mesure2 = new M_Mesure(calendarM2, 4.4);
+        M_Mesure mesure3 = new M_Mesure(calendarM3, 2,1)
+    }*/
 }

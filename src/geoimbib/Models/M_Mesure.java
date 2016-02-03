@@ -16,7 +16,6 @@ public class M_Mesure {
     private Calendar dateHeure;
     private double hauteurFrangeHumide;
     private double masse;
-
     private double temps;
 
     /**
@@ -123,7 +122,7 @@ public class M_Mesure {
     }
 
     /**
-     * Change l'heure sous le format: "hh:mm" de la mesure
+     * Met &agrave; jour l'heure sous le format: "hh:mm" de la mesure
      */
     public void setHeureMesure(String d, String newHeure) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -165,6 +164,10 @@ public class M_Mesure {
      */
     public void setTemps(double temps) {this.temps = temps;}
 
+    /**
+     * M&eacute;thode permettant d'obtenir la chaine de caract&egrave;re d&eacute;crivant l'objet mesure
+     * @return String de l'objet M_Mesure
+     */
     @Override
     public String toString() {
         return "M_Mesure{" +
@@ -172,5 +175,13 @@ public class M_Mesure {
                 ", masse : " + masse +
                 ", dateHeure : " + getDateMesure() + " " + getHeureMesure() +
                 '}';
+    }
+
+    /**
+     * Retourne la racine carr&eacute; du temps entre 2 mesures
+     * @return la racine carré du temps
+     */
+    public double getRacineCarreTemps() {
+        return Math.sqrt(temps);
     }
 }
