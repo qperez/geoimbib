@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -223,7 +224,11 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
     public void setM_mesureHeure(int i, String newHeure){
         M_Mesure m_mesure = arrayOfArrayMesure.get(i).get(arrayOfArrayMesure.get(i).size()-1);
-        m_mesure.setHeureMesure(m_mesure.getDateMesure(), newHeure);
+        try {
+            m_mesure.setHeureMesure(m_mesure.getDateMesure(), newHeure);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     /*

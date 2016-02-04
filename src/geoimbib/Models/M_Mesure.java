@@ -124,15 +124,12 @@ public class M_Mesure {
     /**
      * Met &agrave; jour l'heure sous le format: "hh:mm" de la mesure
      */
-    public void setHeureMesure(String d, String newHeure) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    public void setHeureMesure(String d, String newHeure) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String dateInString = d+" "+newHeure;
         Date date = null;
-        try {
-            date = sdf.parse(dateInString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        sdf.setLenient(false);
+        date = sdf.parse(dateInString);
         dateHeure.setTime(date);
     }
 
@@ -166,7 +163,7 @@ public class M_Mesure {
 
     /**
      * M&eacute;thode permettant d'obtenir la chaine de caract&egrave;re d&eacute;crivant l'objet mesure
-     * @return String de l'objet M_Mesure
+     * @return String de l'objet M_Mesured
      */
     @Override
     public String toString() {
@@ -179,7 +176,7 @@ public class M_Mesure {
 
     /**
      * Retourne la racine carr&eacute; du temps entre 2 mesures
-     * @return la racine carré du temps
+     * @return la racine carr&eacute; du temps
      */
     public double getRacineCarreTemps() {
         return Math.sqrt(temps);
