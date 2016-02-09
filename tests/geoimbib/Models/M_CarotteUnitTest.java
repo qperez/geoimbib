@@ -37,7 +37,7 @@ public class M_CarotteUnitTest {
         listMesureCarotte1.add(mesure3);
 
         M_Carotte carotte = new M_Carotte("CarotteToTest", 5, 10,listMesureCarotte1);
-        assertEquals("La moyenne des mesures de la carotte n'est pas celle attendue", 9.0, carotte.calulMoyenneMesure());
+        assertEquals("La moyenne des mesures de hauteurs de la carotte n'est pas celle attendue", 9.0, carotte.calulMoyenneMesure());
     }
 
 }
