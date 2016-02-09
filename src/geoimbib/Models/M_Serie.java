@@ -138,7 +138,7 @@ public class M_Serie {
     public double calculMoyenneSerie() {
         double sommeMesures = 0;
         for(M_Carotte carotte : listCarotte){
-            sommeMesures += carotte.calulMoyenneMesure();
+            sommeMesures += carotte.calulMoyenneMesureHauteurs();
         }
         return sommeMesures/(listCarotte.size());
     }
