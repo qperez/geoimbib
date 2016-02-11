@@ -1,4 +1,4 @@
-<project name="Test">
+<project name="Geoimbib">
     <property name="main.build.dir" value="out"/>
     <property name="main.src.dir" value="src"/>
     <property name="test.build.dir" value="out"/>
@@ -27,7 +27,7 @@
 
     <target name="test-compile" depends="compile">
         <mkdir dir="${test.build.dir}"/>
-        <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
+        <javac source="1.8" srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
             <classpath refid="classpath.test"/>
         </javac>
     </target>
