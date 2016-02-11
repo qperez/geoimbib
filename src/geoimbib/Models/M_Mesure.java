@@ -117,9 +117,11 @@ public class M_Mesure {
      * @return String heure de la mesure
      */
     public String getHeureMesure() {
-        String dateFormate = new SimpleDateFormat("hh:mm").format(dateHeure.getTime());
+        String dateFormate = new SimpleDateFormat("HH:mm").format(dateHeure.getTime());
         return dateFormate;
     }
+
+
 
     /**
      * Met &agrave; jour l'heure sous le format: "hh:mm" de la mesure

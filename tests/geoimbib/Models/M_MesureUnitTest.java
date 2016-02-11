@@ -3,13 +3,9 @@ package geoimbib.Models;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.matchers.JUnitMatchers;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.junit.runners.BlockJUnit4ClassRunner;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static junit.framework.TestCase.assertEquals;
@@ -39,10 +35,10 @@ public class M_MesureUnitTest {
 
     @Test
     public void testGetHeureMesure(){
-        dateCurrent.set(2016,Calendar.JANUARY,15,12,28,30);
+        dateCurrent.set(2016,Calendar.JANUARY,15,13,28,30);
         M_Mesure mesure = new M_Mesure(dateCurrent, 12.3);
         assertEquals("L'heure de la mesure n'est pas égale à celle attendue",
-                "12:28", mesure.getHeureMesure());
+                "13:28", mesure.getHeureMesure());
     }
 
     @Test
@@ -110,4 +106,5 @@ public class M_MesureUnitTest {
         M_Mesure mesure = new M_Mesure(dateCurrent, 12.3);
         mesure.setHeureMesure("35/01/2016", "27:28");
     }
+
 }

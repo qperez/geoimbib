@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * <b>Created by ravier on 31/01/2016.</b>
  * <b>Classe permettant de transformer une s&eacute;rie en un dossier et plusieurs fichiers csv.</b>
-*/
+ */
 
 
 public class M_createSet {
@@ -142,6 +142,6 @@ public class M_createSet {
                 arrayCarotte.get(0).getListMesures().size(),
                 arrayCarotte,
                 this.calendarSerie
-                );
+        );
     }
 }

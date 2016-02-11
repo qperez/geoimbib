@@ -291,9 +291,6 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
             }
 
-
-
-
         }
         else if (e.getKeyCode() == 77) {
             v_jDialogMasse.setManuel();

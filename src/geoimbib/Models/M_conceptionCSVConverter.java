@@ -22,8 +22,8 @@ public class M_conceptionCSVConverter implements CSVEntryConverter<M_Carotte> {
     public String[] convertEntry(M_Carotte m) {
         String[] columns = new String[14];
 
-        columns[0] = String.valueOf(m.getDiametre()); ////diamètre
-        columns[1] = String.valueOf(Math.PI*m.getDiametre());//surface
+        columns[0] = String.valueOf(m.getDiametre()); //diamètre
+        columns[1] = String.valueOf(m.calculSurface());//surface
         columns[2] = String.valueOf(m.getLongueur());//longueur
         columns[3] = " ";
         columns[4] = "Date";
@@ -36,7 +36,6 @@ public class M_conceptionCSVConverter implements CSVEntryConverter<M_Carotte> {
         columns[11] = "dL(cm)";
         columns[12] = "(w2-ws)/s";
         columns[13] = "(w48-ws)/s";
-
 
         return columns;
     }
