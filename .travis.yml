@@ -7,5 +7,5 @@ addons:
 language: java
   ant
 jdk:
-  openjdk8
+  oraclejdk8
   openjdk7
