@@ -105,7 +105,7 @@ public class M_Carotte {
         return longueur;
     }
 
-     /**
+    /**
      * Met &agrave; jour la longueur de la carotte
      * @param  longueur de la carotte
      */
@@ -137,8 +137,11 @@ public class M_Carotte {
         return Math.pow(diametre/2,2) * Math.PI;
     }
 
-
-    public double calulMoyenneMesure() {
+    /**
+     * Calcule la moyenne des hauteurs de franges humides de la carotte
+     * @return la moyenne des hauteurs des franges humides
+     */
+    public double calulMoyenneMesureHauteurs() {
         double sommeMesure = 0;
         for (M_Mesure mesure : listMesures){
             sommeMesure += mesure.getHauteurFrangeHumide();
@@ -146,6 +149,10 @@ public class M_Carotte {
         return sommeMesure / listMesures.size();
     }
 
+    /***
+     * Méthode toString de la Carotte
+     * @return String décrivant la Carotte
+     */
     @Override
     public String toString() {
         return "M_Carotte{" +
@@ -154,5 +161,29 @@ public class M_Carotte {
                 ", longueur : " + longueur +
                 ", listMesures : " + listMesures.toString() +
                 '}';
+    }
+
+    /**
+     * Calcule et retourne la liste des deltas entre les mesures de masse de la carotte
+     * @return ArrayList de double de delta de masse
+     */
+    public ArrayList<Double> calulDeltaMasseMesures() {
+        ArrayList<Double> listDeltaMasseMesures = new ArrayList<>();
+        for(int i=0; i < listMesures.size()-1 ; i++){
+            listDeltaMasseMesures.add(listMesures.get(i+1).getMasse()-listMesures.get(i).getMasse());
+        }
+        return listDeltaMasseMesures;
+    }
+
+    /**
+     * Calcule et retourne la liste des deltas entre les mesures de hauteur de la carotte
+     * @return ArrayList de double de delta de hauteur
+     */
+    public ArrayList<Double> calulDeltaHauteurMesures() {
+        ArrayList<Double> listDeltaHauteurMesures = new ArrayList<>();
+        for(int i=0; i < listMesures.size()-1 ; i++){
+            listDeltaHauteurMesures.add(listMesures.get(i+1).getHauteurFrangeHumide()-listMesures.get(i).getHauteurFrangeHumide());
+        }
+        return listDeltaHauteurMesures;
     }
 }
