@@ -88,7 +88,7 @@ public class V_JDialogGraph extends JDialog {
      */
     public void createChartPanelSerie() {
 
-        String chartTitle = "Graphique";
+        /*String chartTitle = "Graphique";
         String xAxisLabel = "Racine carré du Temps";
         String yAxisLabel = "Varia W/S (g/cm²)";
 
@@ -102,7 +102,7 @@ public class V_JDialogGraph extends JDialog {
         //chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         //setContentPane(chartPanel);
 
-        this.getContentPane().add(chartPanel, BorderLayout.CENTER);
+        this.getContentPane().add(chartPanel, BorderLayout.CENTER);*/
     }
 
     /**
@@ -110,15 +110,15 @@ public class V_JDialogGraph extends JDialog {
      */
     public void createChartPanelCarotte() {
 
-        String chartTitle = "Graphique";
-        String xAxisLabel = "Temps (h)";
-        String yAxisLabel = "Masse";
+        String chartTitle = "Carotte";
+        String xAxisLabel = "RacineCarrée Temps (h)";
+        String yAxisLabel = "";
 
         JFreeChart chart = ChartFactory.createXYLineChart(chartTitle, xAxisLabel, yAxisLabel, dataset);
 
         XYPlot plot = chart.getXYPlot();
 
-        NumberAxis axis1 = new NumberAxis("Masse (g)");
+        NumberAxis axis1 = new NumberAxis("Variation Masse (g)");
         axis1.setFixedDimension(100);
         axis1.setAutoRangeIncludesZero(false);
         axis1.setLabelPaint(Color.black);
@@ -128,7 +128,7 @@ public class V_JDialogGraph extends JDialog {
         plot.setDataset(0, dataset);
         plot.mapDatasetToRangeAxis(0, 0);
 
-        NumberAxis axis2 = new NumberAxis("Hauteur Fange (cm)");
+        NumberAxis axis2 = new NumberAxis("Variation Hauteur Fange (cm)");
         axis2.setFixedDimension(0);
         axis2.setAutoRangeIncludesZero(true);
         plot.setRangeAxis(1, axis2);
@@ -139,7 +139,9 @@ public class V_JDialogGraph extends JDialog {
         XYLineAndShapeRenderer renderer1 = new XYLineAndShapeRenderer();
         XYLineAndShapeRenderer renderer2 = new XYLineAndShapeRenderer();
         renderer1.setSeriesPaint(0, Color.BLUE);
+        renderer1.setSeriesLinesVisible(0,false);
         renderer2.setSeriesPaint(0, Color.RED);
+        renderer2.setSeriesLinesVisible(0,false);
         plot.setRenderer(0, renderer1);
         plot.setRenderer(1, renderer2);
 

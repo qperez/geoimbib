@@ -71,6 +71,24 @@ public class M_Mesure {
     }
 
     /**
+     * Constructeur M_Mesure.
+     * <p>
+     * A la construction d'un objet M_Mesure, M_Mesure est initinitialis&eacute;
+     * avec les param&egrave;tres du constructeur.
+     * </p>
+     * @param dateHeure Date et heure de la mesure
+     * @param hauteurFrangeHumide Hauteur de la frange humide
+     * @param masse masse de l'échantillon
+     * @param temps durée de la mesure
+     */
+    public M_Mesure(Calendar dateHeure, double hauteurFrangeHumide, double masse, double temps) {
+        this.dateHeure = dateHeure;
+        this.hauteurFrangeHumide = hauteurFrangeHumide;
+        this.masse = masse;
+        this.temps = temps;
+    }
+
+    /**
      * Retourne l'objet Calendar qui stocke la date et l'heure de la mesure
      * @return date et heure de la mesure
      */

@@ -44,7 +44,7 @@ public class M_GeneralFunctionsRight {
         ArrayList<M_Mesure> listMesures;
         ArrayList<M_Carotte> listCarotte = new ArrayList<M_Carotte>();
         String nomSerie, temp [], mesuresCarotte[], datePremCarotte, nomCarotte, ligne;
-        Double diametre, surface, longueur, hauteurFange, masse;
+        Double diametre, surface, longueur, hauteurFange, masse, temps;
         Calendar dateHeure = null;
         int nbrMesuresCarottes = 0;
 
@@ -81,7 +81,8 @@ public class M_GeneralFunctionsRight {
                             dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
                             hauteurFange = Double.parseDouble(temp[7]);
                             masse = Double.parseDouble(temp[6]);
-                            mesure = new M_Mesure(dateHeure, hauteurFange, masse);
+                            temps = Double.parseDouble(temp[8]);
+                            mesure = new M_Mesure(dateHeure, hauteurFange, masse, temps);
                             listMesures.add(mesure);
                             nbrMesuresCarottes++;
                         } catch (ParseException e) {
@@ -146,7 +147,7 @@ public class M_GeneralFunctionsRight {
         M_Mesure mesure = null;
         ArrayList<M_Mesure> listMesures;
         String temp [], mesuresCarotte[], nomCarotte, ligne;
-        Double diametre, surface, longueur, hauteurFange, masse;
+        Double diametre, surface, longueur, hauteurFange, masse, temps;
         Calendar dateHeure = null;
 
         File file = new File(Paths.get(v_jPanelMainLeft.getJtextfieldFolder().getText()).toString() + File.separator + serieSelected + File.separator + echantillonSelected);
@@ -160,7 +161,6 @@ public class M_GeneralFunctionsRight {
             if ((ligne = br.readLine()) != null) {
                 temp = ligne.split(";");
                 diametre = Double.parseDouble(temp[0]);
-                surface = Double.parseDouble(temp[1]);
                 longueur = Double.parseDouble(temp[2]);
             } else {
                 System.err.println("L'échantillon ne contient aucune donnée");
@@ -175,7 +175,8 @@ public class M_GeneralFunctionsRight {
                     dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
                     hauteurFange = Double.parseDouble(temp[7]);
                     masse = Double.parseDouble(temp[6]);
-                    mesure = new M_Mesure(dateHeure, hauteurFange, masse);
+                    temps = Double.parseDouble(temp[8]);
+                    mesure = new M_Mesure(dateHeure, hauteurFange, masse, temps);
                     listMesures.add(mesure);
                 } catch (ParseException e) {
                     System.err.println("Problème de format de date");
@@ -240,13 +241,11 @@ public class M_GeneralFunctionsRight {
         XYSeriesCollection dataset = new XYSeriesCollection();
         XYSeries serie = new XYSeries("Masse");
         M_Mesure temp = null;
-        double t = 0;
 
         Iterator<M_Mesure> iter = carotte.getListMesures().iterator();
         while(iter.hasNext()){
             temp = iter.next();
-            serie.add(t, temp.getMasse());
-            t++;
+            serie.add(temp.getRacineCarreTemps(), temp.getMasse());
         }
 
         serie.add(1.0, 2.0);
@@ -269,13 +268,11 @@ public class M_GeneralFunctionsRight {
         XYSeriesCollection dataset = new XYSeriesCollection();
         XYSeries serie = new XYSeries("Hauteur de la fange humide");
         M_Mesure temp = null;
-        double t = 0;
 
         Iterator<M_Mesure> iter = carotte.getListMesures().iterator();
         while(iter.hasNext()){
             temp = iter.next();
-            serie.add(t, temp.getHauteurFrangeHumide());
-            t++;
+            serie.add(temp.getRacineCarreTemps(), temp.getHauteurFrangeHumide());
         }
 
         /*serie.add(1.0, 2.0);
