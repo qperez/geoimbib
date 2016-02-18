@@ -145,6 +145,7 @@ public class M_GeneralFunctionsRight {
     public M_Carotte generationEchantillon(String serieSelected, String echantillonSelected){
         M_Carotte carotte = null;
         M_Mesure mesure = null;
+        double hauteurMax = 0;
         ArrayList<M_Mesure> listMesures;
         String temp [], mesuresCarotte[], nomCarotte, ligne;
         Double diametre, surface, longueur, hauteurFange, masse, temps;
@@ -173,7 +174,12 @@ public class M_GeneralFunctionsRight {
                     dateHeure = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
                     dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
-                    hauteurFange = Double.parseDouble(temp[7]);
+                    if(temp[7].equals(""))
+                        hauteurFange = hauteurMax;
+                    else {
+                        hauteurFange = Double.parseDouble(temp[7]);
+                        hauteurMax = hauteurFange;
+                    }
                     masse = Double.parseDouble(temp[6]);
                     temps = Double.parseDouble(temp[8]);
                     mesure = new M_Mesure(dateHeure, hauteurFange, masse, temps);
@@ -241,18 +247,15 @@ public class M_GeneralFunctionsRight {
         XYSeriesCollection dataset = new XYSeriesCollection();
         XYSeries serie = new XYSeries("Masse");
         M_Mesure temp = null;
+        ArrayList<Double> deltaMasseMesure = carotte.calulDeltaMasseMesures();
+        int i = 0;
 
         Iterator<M_Mesure> iter = carotte.getListMesures().iterator();
         while(iter.hasNext()){
             temp = iter.next();
-            serie.add(temp.getRacineCarreTemps(), temp.getMasse());
+            serie.add(temp.getRacineCarreTemps(), deltaMasseMesure.get(i));
+            i++;
         }
-
-        serie.add(1.0, 2.0);
-        serie.add(2.0, 3.0);
-        serie.add(3.0, 2.5);
-        serie.add(3.5, 2.8);
-        serie.add(4.2, 6.0);
 
         dataset.addSeries(serie);
 
@@ -268,18 +271,15 @@ public class M_GeneralFunctionsRight {
         XYSeriesCollection dataset = new XYSeriesCollection();
         XYSeries serie = new XYSeries("Hauteur de la fange humide");
         M_Mesure temp = null;
+        ArrayList<Double> deltaHauteurMesure = carotte.calulDeltaHauteurMesures();
+        int i = 0;
 
         Iterator<M_Mesure> iter = carotte.getListMesures().iterator();
         while(iter.hasNext()){
             temp = iter.next();
-            serie.add(temp.getRacineCarreTemps(), temp.getHauteurFrangeHumide());
+            serie.add(temp.getRacineCarreTemps(), deltaHauteurMesure.get(i));
+            i++;
         }
-
-        /*serie.add(1.0, 2.0);
-        serie.add(2.0, 3.0);
-        serie.add(3.0, 2.5);
-        serie.add(3.5, 2.8);
-        serie.add(4.2, 6.0);*/
 
         dataset.addSeries(serie);
 

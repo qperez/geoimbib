@@ -168,9 +168,12 @@ public class M_Carotte {
      * @return ArrayList de double de delta de masse
      */
     public ArrayList<Double> calulDeltaMasseMesures() {
+        double variaMasse = 0.0;
         ArrayList<Double> listDeltaMasseMesures = new ArrayList<>();
+        listDeltaMasseMesures.add(0.0);
         for(int i=0; i < listMesures.size()-1 ; i++){
-            listDeltaMasseMesures.add(listMesures.get(i+1).getMasse()-listMesures.get(i).getMasse());
+            variaMasse = variaMasse + listMesures.get(i+1).getMasse()-listMesures.get(i).getMasse();
+            listDeltaMasseMesures.add(variaMasse);
         }
         return listDeltaMasseMesures;
     }
@@ -179,10 +182,13 @@ public class M_Carotte {
      * Calcule et retourne la liste des deltas entre les mesures de hauteur de la carotte
      * @return ArrayList de double de delta de hauteur
      */
-    public ArrayList<Double> calulDeltaHauteurMesures() {
+    public ArrayList<Double> calulDeltaHauteurMesures(){
+        double variaHauteur = 0.0;
         ArrayList<Double> listDeltaHauteurMesures = new ArrayList<>();
+        listDeltaHauteurMesures.add(listMesures.get(0).getHauteurFrangeHumide());
         for(int i=0; i < listMesures.size()-1 ; i++){
-            listDeltaHauteurMesures.add(listMesures.get(i+1).getHauteurFrangeHumide()-listMesures.get(i).getHauteurFrangeHumide());
+            variaHauteur = variaHauteur + listMesures.get(i+1).getHauteurFrangeHumide()-listMesures.get(i).getHauteurFrangeHumide();
+            listDeltaHauteurMesures.add(variaHauteur);
         }
         return listDeltaHauteurMesures;
     }

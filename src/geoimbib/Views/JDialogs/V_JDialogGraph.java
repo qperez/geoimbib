@@ -28,15 +28,16 @@ import java.util.Iterator;
 public class V_JDialogGraph extends JDialog {
 
     private final JFrame parent;
+    private M_Carotte carotte;
 
-    XYDataset dataset = null;
-    XYDataset dataset2 = null;
+    private XYDataset dataset = null;
+    private XYDataset dataset2 = null;
 
     //JPanels
-    JPanel jPanelButton = null;
-    V_JPanelMainRight v_jPanelMainRight = null;
+    private JPanel jPanelButton = null;
+    private V_JPanelMainRight v_jPanelMainRight = null;
 
-    ValueMarker valuemarker1 = null;
+    private ValueMarker valuemarker1 = null;
 
     /**
      * Constructeur de graphique pour une série
@@ -65,9 +66,9 @@ public class V_JDialogGraph extends JDialog {
      * @param parent la jframe parente
      * @param title le titre du jdialog
      * @param modal le modal
-     * @param carotte la carotte à afficher en graphique
+     * @param c la carotte à afficher en graphique
      */
-    public V_JDialogGraph(JFrame parent, String title, boolean modal, M_Carotte carotte, V_JPanelMainRight v_jPanelMainRight){
+    public V_JDialogGraph(JFrame parent, String title, boolean modal, M_Carotte c, V_JPanelMainRight v_jPanelMainRight){
         super(parent, title, modal);
 
         this.parent = parent;
@@ -76,6 +77,7 @@ public class V_JDialogGraph extends JDialog {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
+        carotte = c;
         dataset = v_jPanelMainRight.getM_generalFunctionsRight().createDatasetMasse(carotte);
         dataset2 = v_jPanelMainRight.getM_generalFunctionsRight().createDatasetHauteur(carotte);
         createChartPanelCarotte();
@@ -110,7 +112,7 @@ public class V_JDialogGraph extends JDialog {
      */
     public void createChartPanelCarotte() {
 
-        String chartTitle = "Carotte";
+        String chartTitle = carotte.getNom();
         String xAxisLabel = "RacineCarrée Temps (h)";
         String yAxisLabel = "";
 
