@@ -1,10 +1,12 @@
 package geoimbib.Views.JDialogs;
 
+import geoimbib.Controlers.C_ControlMouseGraph;
 import geoimbib.Models.M_Carotte;
 import geoimbib.Models.M_Serie;
 import geoimbib.Views.JPanels.V_JPanelMainLeft;
 import geoimbib.Views.JPanels.V_JPanelMainRight;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartMouseListener;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.AxisLocation;
@@ -37,6 +39,11 @@ public class V_JDialogGraph extends JDialog {
     private JPanel jPanelButton = null;
     private V_JPanelMainRight v_jPanelMainRight = null;
 
+    private ChartPanel chartPanel = null;
+
+    //Controller
+    private C_ControlMouseGraph c_ControlButtonGraph = null;
+
     private ValueMarker valuemarker1 = null;
 
     /**
@@ -50,6 +57,7 @@ public class V_JDialogGraph extends JDialog {
         super(parent, title, modal);
 
         this.parent = parent;
+        this.c_ControlButtonGraph = new C_ControlMouseGraph(this);
 
         this.setSize(640, 480);
         this.setLocationRelativeTo(null);
@@ -72,6 +80,7 @@ public class V_JDialogGraph extends JDialog {
         super(parent, title, modal);
 
         this.parent = parent;
+        this.c_ControlButtonGraph = new C_ControlMouseGraph(this);
 
         this.setSize(640, 480);
         this.setLocationRelativeTo(null);
@@ -148,10 +157,17 @@ public class V_JDialogGraph extends JDialog {
         plot.setRenderer(1, renderer2);
 
 
-        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel = new ChartPanel(chart);
+
+        chartPanel.addChartMouseListener(c_ControlButtonGraph);
+
         //chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         //setContentPane(chartPanel);
 
         this.getContentPane().add(chartPanel, BorderLayout.CENTER);
+    }
+
+    public ChartPanel getChartPanel() {
+        return chartPanel;
     }
 }
