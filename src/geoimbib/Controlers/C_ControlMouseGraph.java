@@ -28,8 +28,8 @@ public class C_ControlMouseGraph implements ChartMouseListener {
         //on gère les threads
         Runnable run = new Runnable() {
             public void run(){
-                XYPlot xyPlot2 = v_jDialogGraph.getChartPanel().getChart().getXYPlot();
-                System.out.println("Abscisse : " + xyPlot2.getDomainCrosshairValue() + " / Ordonnée : " + xyPlot2.getRangeCrosshairValue());
+                XYPlot xyPlot = v_jDialogGraph.getChartPanel().getChart().getXYPlot();
+                v_jDialogGraph.displayCoordonee(xyPlot);
             }
         };
         SwingUtilities.invokeLater(run);

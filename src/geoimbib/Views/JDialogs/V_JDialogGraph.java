@@ -22,6 +22,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.Iterator;
 
 /**
@@ -167,7 +168,29 @@ public class V_JDialogGraph extends JDialog {
         this.getContentPane().add(chartPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Methode qui renvoit la valeur d'abscisse et d'ordonnée du point sur lequel la souris clique
+     * @param plot le point cliqué
+     */
+    public void displayCoordonee(XYPlot plot){
+        //Je limite le nombre de chiffre des coordonnées
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        df.setMinimumFractionDigits(2);
+        df.setDecimalSeparatorAlwaysShown(true);
+        String str1 = df.format(plot.getDomainCrosshairValue());
+        String str2 = df.format(plot.getRangeCrosshairValue());
+        double abscisse = Double.parseDouble(str1.replace(',','.'));
+        double ordonnee = Double.parseDouble(str2.replace(',','.'));
+
+        JOptionPane.showMessageDialog(this.getParent(),
+                "Abscisse : " + abscisse + " " + "\nOrdonnée : " + ordonnee,
+                "Point",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public ChartPanel getChartPanel() {
         return chartPanel;
     }
+
 }
