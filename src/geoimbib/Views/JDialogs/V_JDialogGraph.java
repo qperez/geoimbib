@@ -62,7 +62,7 @@ public class V_JDialogGraph extends JDialog {
 
         this.setSize(640, 480);
         this.setLocationRelativeTo(null);
-        this.setResizable(false);
+        this.setResizable(true);
 
         dataset = v_jPanelMainRight.getM_generalFunctionsRight().createDataset(serie);
         createChartPanelSerie();
@@ -85,7 +85,7 @@ public class V_JDialogGraph extends JDialog {
 
         this.setSize(640, 480);
         this.setLocationRelativeTo(null);
-        this.setResizable(false);
+        this.setResizable(true);
 
         carotte = c;
         dataset = v_jPanelMainRight.getM_generalFunctionsRight().createDatasetMasse(carotte);
@@ -185,7 +185,7 @@ public class V_JDialogGraph extends JDialog {
 
         JOptionPane.showMessageDialog(this.getParent(),
                 "Abscisse : " + abscisse + " " + "\nOrdonnée : " + ordonnee,
-                "Point",
+                "Valeur du point",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
