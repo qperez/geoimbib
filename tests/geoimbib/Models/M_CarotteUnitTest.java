@@ -53,6 +53,7 @@ public class M_CarotteUnitTest {
         M_Carotte carotte = new M_Carotte("CarotteToTest", 5, 10,listMesureCarotte);
 
         ArrayList<Double> listDeltaExpected = new ArrayList<>();
+        listDeltaExpected.add(0.0);
         listDeltaExpected.add(4.4);
         listDeltaExpected.add(3.5);
         listDeltaExpected.add(4.9);
@@ -81,6 +82,7 @@ public class M_CarotteUnitTest {
         M_Carotte carotte = new M_Carotte("CarotteToTest", 5, 10,listMesureCarotte);
 
         ArrayList<Double> listDeltaExpected = new ArrayList<>();
+        listDeltaExpected.add(0.0);
         listDeltaExpected.add(25.3);
         listDeltaExpected.add(30-25.3);
         listDeltaExpected.add(50.7-30);
