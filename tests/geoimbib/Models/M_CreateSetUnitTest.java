@@ -1,6 +1,6 @@
 package geoimbib.Models;
 
-import org.apache.commons.io.FileUtils;
+
 import org.junit.*;
 import sun.security.krb5.internal.PAData;
 
@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import static junit.framework.Assert.assertTrue;
-import static org.assertj.core.api.Assertions.assertThat;
+
 
 /**
  * Created by quentin on 09/02/16.
  */
 public class M_CreateSetUnitTest {
 
-    private static String PATH_GEOIMBIB = "."+ File.separator +"Res"+ File.separator;
+    /*private static String PATH_GEOIMBIB = "."+ File.separator +"Res"+ File.separator;
     private static String NAME_SERIE = "SerieToTest";
 
     @AfterClass
@@ -80,5 +80,5 @@ public class M_CreateSetUnitTest {
         assertTrue("Le fichier echantillon_2.csv n'a pas été créé",expectedFileEchantillon2.exists());
 
         assertThat(actualFileEchantillon1).hasSameContentAs(expectedFileEchantillon1);
-    }
+    }*/
 }

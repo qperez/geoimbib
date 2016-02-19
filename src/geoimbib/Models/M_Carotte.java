@@ -26,8 +26,11 @@ public class M_Carotte {
      * Constructeur vide
      * </p>
      */
-    private M_Carotte(){
-
+    public M_Carotte(){
+        listMesures = new ArrayList<>();
+        nom = "";
+        longueur = 0;
+        diametre = 0;
     }
 
     /**

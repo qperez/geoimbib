@@ -21,6 +21,8 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
     private JButton jButtonnext;
     private JButton jButtonCancel;
     private JButton jButtonRecap;
+    //Jcheckbox
+    private JCheckBox jCheckBoxSpeedMesure = null;
 
     public V_JDialogInfoFinFillEchant(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie) {
         super(parent, title, modal);
@@ -39,9 +41,12 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
     }
 
     private void initComposants() {
-        jPanelComposants = new JPanel(new GridLayout(2,1));
+        jPanelComposants = new JPanel(new GridLayout(3,1));
         jPanelComposants.add(new JLabel("<html>La saisie des informations concernant les <br> échantillons de la série en cours est terminée.</html>"));
         jPanelComposants.add(new JLabel("Que faire maintenant ?"));
+
+        jCheckBoxSpeedMesure = new JCheckBox("Activer la mesure rapide");
+        jPanelComposants.add(jCheckBoxSpeedMesure);
 
         Border paddingJpanelCompos = BorderFactory.createEmptyBorder(0,40,0,40);
         jPanelComposants.setBorder(paddingJpanelCompos);
@@ -80,5 +85,9 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
 
     public JButton getJButtonNext() {
         return jButtonnext;
+    }
+
+    public boolean getStateJCheckBoxFastMesure() {
+        return jCheckBoxSpeedMesure.isSelected();
     }
 }

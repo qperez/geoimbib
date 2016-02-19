@@ -6,8 +6,6 @@ import com.googlecode.jcsv.writer.internal.CSVWriterBuilder;
 
 import java.io.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -18,33 +16,12 @@ import java.util.Date;
 
 public class M_createSet {
 
-    private final String nomSerie;
-    private final int nbEchant;
-    private final String[] tabNameEchant;
-    private final double[] tabHautEchant;
-    private final double[] tabDiamEchant;
-    private final Calendar calendarSerie;
-    private final String jtextfieldFolder;
 
-    private ArrayList<ArrayList<M_Mesure>> arrayLists = null;
-
+    private final String jtextfolder;
     private M_Serie m_serie= null;
 
-    /**
-     * Constructeur M_createSet.
-     * <p>
-     * Constructeur qui initialise la variable arrayLists.
-     * </p>
-     * @param arrayLists double liste de M_Mesure qui contiennent les informations des s&eacute;ries.
-     * @param nomSerie nom de la s&eacute;rie
-     * @param nbEchant nombre de carottes
-     * @param tabNameEchant tableau des noms des carottes
-     * @param tabHautEchant tableau des hauteurs des carottes
-     * @param tabDiamEchant tableau des diametres des carottes
-     * @param calendarSerie permet de connaitre l'heure et la date de la creation de la serie
-     * @param jtextfieldFolder permet de connaitre le chemin absolu de la creation de la serie
-     */
-    public M_createSet(ArrayList<ArrayList<M_Mesure>> arrayLists, String nomSerie, int nbEchant, String[] tabNameEchant, double[] tabHautEchant, double[] tabDiamEchant, Calendar calendarSerie, String jtextfieldFolder) {
+
+    /*public M_createSet(ArrayList<ArrayList<M_Mesure>> arrayLists, String nomSerie, int nbEchant, String[] tabNameEchant, double[] tabHautEchant, double[] tabDiamEchant, Calendar calendarSerie, String jtextfieldFolder) {
         this.arrayLists = arrayLists;
         this.nomSerie = nomSerie;
         this.nbEchant = nbEchant;
@@ -62,18 +39,32 @@ public class M_createSet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }*/
+
+    public M_createSet(M_Serie m_serie, String jtextfolder) {
+        this.m_serie = m_serie;
+        this.jtextfolder = jtextfolder;
+
+        createSerie();
+        try {
+            createFiles();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Methode de creation de fichiers csv
      * <p>
-     * Methode de creation des fichiers csv qui contiendront les echantillons, 1 fichier = 1 echnatillon
+     * Methode de creation des fichiers csv qui contiendront les echantillons, 1 fichier = 1 echantillon
      * Utilisation de la librairie "jcsv" fait par google.
      * </p>
      */
     private void createFiles() throws IOException {
         //Création du dossier = série
-        File file = new File(this.jtextfieldFolder+ File.separator + this.nomSerie);
+        File file = new File(this.jtextfolder+ File.separator + this.m_serie.getNom());
         if (file.exists()) {
             System.out.println("Le dossier existe déjà : " + file.getAbsolutePath());
         } else {
@@ -92,7 +83,7 @@ public class M_createSet {
             m_carotte = m_serie.getListCarotte().get(i);
 
             //Création du fichier correspondant à la carotte et écriture dedans
-            out = new FileWriter(this.jtextfieldFolder+ File.separator + this.nomSerie+File.separator+m_carotte.getNom()+".csv");
+            out = new FileWriter(this.jtextfolder+ File.separator + this.m_serie.getNom()+File.separator+m_carotte.getNom()+".csv");
             csvWriter = new CSVWriterBuilder(out).entryConverter(new M_conceptionCSVConverter()).build();
             csvWriter.write(m_carotte);
             csvWriter.flush();
@@ -113,35 +104,28 @@ public class M_createSet {
     private void createSerie() {
 
 
-        ArrayList<M_Carotte> arrayCarotte = new ArrayList<>();
-
-        M_Carotte m_carotte;
-        for (int i = 0; i<arrayLists.size(); ++i){
-            m_carotte = new M_Carotte(tabNameEchant[i], tabDiamEchant[i], tabHautEchant[i], arrayLists.get(i));
-
-            for (int y=0; y<m_carotte.getListMesures().size(); ++y){
+        for (int i = 0; i<m_serie.getListCarotte().size(); ++i){
+            for (int y=0; y<m_serie.getListCarotte().get(i).getListMesures().size(); ++y){
                 if (y==0)
-                    m_carotte.getListMesures().get(y).setTemps(0);
+                    m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(0);
                 else{
-                    Date h1 = m_carotte.getListMesures().get(y).getDateHeure().getTime();
-                    Date h2 = m_carotte.getListMesures().get(y-1).getDateHeure().getTime();
+                    Date h1 = m_serie.getListCarotte().get(i).getListMesures().get(y).getDateHeure().getTime();
+                    Date h2 = m_serie.getListCarotte().get(i).getListMesures().get(y-1).getDateHeure().getTime();
                     double diff = (h1.getTime() - h2.getTime()) /(1000.0*60.0) /60.0;
                     System.out.println("h1.getTime(): "+h1.getTime()
                             + " h2.getTime():"+h2.getTime()
                             + " (h1.getTime() - h2.getTime())/60 : "+ (h1.getTime() - h2.getTime())
                             + " (h1.getTime() - h2.getTime())/(1000*60) : " +(h1.getTime() - h2.getTime())/(1000*60));
-                    m_carotte.getListMesures().get(y).setTemps(diff);
+                    m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(diff);
                 }
             }
-
-            arrayCarotte.add(m_carotte);
         }
 
-        m_serie = new M_Serie(
+        /*m_serie = new M_Serie(
                 this.nomSerie,
                 arrayCarotte.get(0).getListMesures().size(),
                 arrayCarotte,
                 this.calendarSerie
-        );
+        );*/
     }
 }

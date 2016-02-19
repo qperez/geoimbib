@@ -24,7 +24,10 @@ public class M_Mesure {
      * Constructeur vide
      * </p>
      */
-    public M_Mesure(){}
+    public M_Mesure(){
+
+    }
+
 
     /**
      * Constructeur M_Mesure.
@@ -32,13 +35,14 @@ public class M_Mesure {
      * A la construction d'un objet M_Mesure, M_Mesure est initinitialis&eacute;
      * avec les param&egrave;tres du constructeur.
      * </p>
-     * @param hauteurFrangeHumide Hauteur de la frange humide
+     * @param masse Hauteur de la frange humide
      */
-    public M_Mesure(double hauteurFrangeHumide){
-        this.hauteurFrangeHumide = hauteurFrangeHumide;
+    public M_Mesure(double masse){
+        this.masse = masse;
         dateHeure = Calendar.getInstance();
 
     }
+
 
     /**
      * Constructeur M_Mesure.

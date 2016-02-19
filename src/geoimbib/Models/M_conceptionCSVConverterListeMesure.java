@@ -20,8 +20,8 @@ public class M_conceptionCSVConverterListeMesure implements CSVEntryConverter<M_
      */
     @Override
     public String[] convertEntry(M_Mesure m_mesures) {
-        System.out.println("Temps : "+m_mesures.getTemps());
-        String[] columns = new String[14];
+        //System.out.println("Temps : "+m_mesures.getTemps());
+        String[] columns = new String[12];
         columns[0] = " ";
         columns[1] = " ";
         columns[2] = " ";
@@ -34,8 +34,6 @@ public class M_conceptionCSVConverterListeMesure implements CSVEntryConverter<M_
         columns[9] = String.valueOf(Math.sqrt(m_mesures.getTemps()));
         columns[10] = "g/cm²";
         columns[11] = "dL(cm)";
-        columns[12] = "(w2-ws)/s";
-        columns[13] = "(w48-ws)/s";
 
         return columns;
     }

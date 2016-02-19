@@ -3,6 +3,7 @@ package geoimbib.Views.JPanels;
 import geoimbib.Controlers.C_ControlButtonMainPanelRight;
 import geoimbib.Controlers.C_ControlDialogGraph;
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Models.M_Carotte;
 import geoimbib.Models.M_createSet;
 import geoimbib.Models.ModelsJPanelMainLeft.M_GeneralFunctions;
 import geoimbib.Models.ModelsJPanelMainRight.M_GeneralFunctionsRight;
@@ -12,6 +13,7 @@ import geoimbib.Views.V_MainWindow;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by ravier on 10/01/2016.
@@ -231,13 +233,22 @@ public class V_JPanelMainRight extends JPanel {
     }
 
 
-    public void loopAcquisitionMasse(int nbEchant, boolean mRapide, String[] nomEchant) {
+    public void loopAcquisitionMasse(int nbEchant, boolean mRapide, ArrayList<M_Carotte> listCarottes) {
         cont = true;
+
         while (cont) {
+            V_JDialogHeure v_jDialogHeure = new V_JDialogHeure(
+                    this.v_mainWindow,
+                    "Heure",
+                    true,
+                    c_controlDialogSerie
+            );
+
+
             for (int i = 0; i<nbEchant; ++i ){
                 V_jDialogMasse v_jDialogMasse = new V_jDialogMasse(
                         this.v_mainWindow,
-                        "Acquisition masse : " + nomEchant[i],
+                        "Acquisition masse : " + listCarottes.get(i).getNom(),
                         true,
                         c_controlDialogSerie,
                         i
@@ -245,22 +256,15 @@ public class V_JPanelMainRight extends JPanel {
 
                 V_JDialogFrange v_jDialogFrange = new V_JDialogFrange(
                         this.v_mainWindow,
-                        "Frange humide : "+ nomEchant[i],
-                        true,
-                        c_controlDialogSerie,
-                        i
-                );
-
-                V_JDialogHeure v_jDialogHeure = new V_JDialogHeure(
-                        this.v_mainWindow,
-                        "Heure",
+                        "Frange humide : "+ listCarottes.get(i).getNom(),
                         true,
                         c_controlDialogSerie,
                         i
                 );
             }
-            System.out.println(c_controlDialogSerie.toString());
-            if (!mRapide) {
+            c_controlDialogSerie.loopAssignHourArrayMesure();
+
+            if (mRapide) {
                 V_jDialogContinueGetMasseOrNot v_jDialogContinueGetMasseOrNot = new V_jDialogContinueGetMasseOrNot(
                         this.v_mainWindow,
                         "Continuer ?",
@@ -272,16 +276,16 @@ public class V_JPanelMainRight extends JPanel {
                 cont = false;
 
         }
-        M_createSet m_createSet = new M_createSet(c_controlDialogSerie.getDonnees(),
-                c_controlDialogSerie.getNomSerie(),
-                c_controlDialogSerie.getNbEchant(),
-                c_controlDialogSerie.getTabNomechant(),
-                c_controlDialogSerie.getTabHautEchant(),
-                c_controlDialogSerie.getTabDiamEchant(),
-                c_controlDialogSerie.getCalendarSerie(),
-                v_mainWindow.getJPanelMainLeft().getJtextfieldFolder().getText());
+        try{
+            M_createSet m_createSet = new M_createSet(c_controlDialogSerie.getM_serie(),
+                    v_mainWindow.getJPanelMainLeft().getJtextfieldFolder().getText());
+            displayValidateBox();
+        }catch(Exception e){
+            System.out.println("problème création");
+        }
 
-        displayValidateBox();
+
+
     }
 
 

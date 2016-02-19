@@ -30,6 +30,7 @@ public class M_Serie {
      */
     public M_Serie(){
         dateHeure = Calendar.getInstance();
+        listCarotte = new ArrayList<>();
     }
 
     /**

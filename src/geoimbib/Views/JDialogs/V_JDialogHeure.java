@@ -6,6 +6,7 @@ import geoimbib.Views.V_MainWindow;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by ravier on 31/01/2016.
@@ -14,11 +15,11 @@ public class V_JDialogHeure extends JDialog {
 
 
     private final C_ControlDialogSerie c_controlDialogSerie;
-    private final int idCar;
+    //private final int idCar;
     private JTextField jtextfieldHeure;
     private JButton jbuttonOk;
 
-    public V_JDialogHeure(V_MainWindow v_mainWindow, String s, boolean b, C_ControlDialogSerie c_controlDialogSerie, int i){
+    public V_JDialogHeure(V_MainWindow v_mainWindow, String s, boolean b, C_ControlDialogSerie c_controlDialogSerie){
         super(v_mainWindow, s, b);
 
         this.setSize(150, 150);
@@ -28,7 +29,7 @@ public class V_JDialogHeure extends JDialog {
         this.c_controlDialogSerie = c_controlDialogSerie;
         this.c_controlDialogSerie.setV_jDialogNouvelleSerie(this);
 
-        this.idCar = i;
+        //this.idCar = i;
 
         initComposants();
 
@@ -36,11 +37,12 @@ public class V_JDialogHeure extends JDialog {
     }
 
     private void initComposants() {
+
         JPanel jpcomposants = new JPanel(new BorderLayout());
         Border paddingjpcomposants = BorderFactory.createEmptyBorder(10,10,10,10);
         jpcomposants.setBorder(paddingjpcomposants);
 
-        jtextfieldHeure = new JTextField(c_controlDialogSerie.getHeureM_mesure(idCar));
+        jtextfieldHeure = new JTextField( new SimpleDateFormat("HH:mm").format(c_controlDialogSerie.getCalendarSerie().getTime()));
 
         jpcomposants.add(jtextfieldHeure, BorderLayout.CENTER);
 
@@ -57,9 +59,9 @@ public class V_JDialogHeure extends JDialog {
         this.getContentPane().add(jPanelButtons, BorderLayout.SOUTH);
     }
 
-    public int getIdEchant() {
+    /*public int getIdEchant() {
         return idCar;
-    }
+    }*/
 
     public JButton getButtonOk() {
         return jbuttonOk;

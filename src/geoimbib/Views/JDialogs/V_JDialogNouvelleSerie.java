@@ -18,8 +18,6 @@ public class V_JDialogNouvelleSerie extends JDialog {
     JTextField jTextFieldNomSerie = null;
     JTextField jTextFieldNombreEchantillons = null;
 
-    //Jcheckbox
-    JCheckBox jCheckBoxSpeedMesure = null;
 
     //JPanels
     JPanel jpanelButtons = null;
@@ -50,10 +48,10 @@ public class V_JDialogNouvelleSerie extends JDialog {
     }
 
     private void initComposants() {
-        JPanel jPanelJtextField = new JPanel(new GridLayout(3,2));
+        JPanel jPanelJtextField = new JPanel(new GridLayout(2,2));
         jTextFieldNomSerie = new JTextField();
         jTextFieldNombreEchantillons = new JTextField();
-        jCheckBoxSpeedMesure = new JCheckBox("Activer la mesure rapide");
+
 
         //La série doi obligatoirement commencer par "Serie"
         jPanelJtextField.add(new JLabel("Nom de la série :"));
@@ -62,7 +60,7 @@ public class V_JDialogNouvelleSerie extends JDialog {
         jPanelJtextField.add(new JLabel("Nombre d'échantillons :"));
         jPanelJtextField.add(jTextFieldNombreEchantillons);
 
-        jPanelJtextField.add(jCheckBoxSpeedMesure);
+
 
 
         Border padding = BorderFactory.createEmptyBorder(25,10,25,10);
@@ -100,10 +98,6 @@ public class V_JDialogNouvelleSerie extends JDialog {
     public JTextField getjTextFieldNomSerie(){return jTextFieldNomSerie;}
 
     public JTextField getjTextFieldNombreEchantillons() { return jTextFieldNombreEchantillons;}
-
-    public boolean getStateJCheckBoxFastMesure() {
-        return jCheckBoxSpeedMesure.isSelected();
-    }
 
 
     public JDialog getThis() {

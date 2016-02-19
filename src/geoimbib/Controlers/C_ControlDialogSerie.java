@@ -1,6 +1,8 @@
 package geoimbib.Controlers;
 
+import geoimbib.Models.M_Carotte;
 import geoimbib.Models.M_Mesure;
+import geoimbib.Models.M_Serie;
 import geoimbib.Views.JDialogs.*;
 import geoimbib.Views.JPanels.V_JPanelMainRight;
 
@@ -31,15 +33,20 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
     private String nameSerie = "Serie";
     private int nbEchant = 0;
     private boolean fastMesures;
+
     private Calendar calendarnewserie = null;
 
-    //Variables d'informations du jdialog v_jDialogChoiceNameEchant
-    private String[] tabNameEchant = null;
-    private double[] tabHautEchant = null;
-    private double[] tabDiamEchant = null;
+
 
     private ArrayList<ArrayList<M_Mesure>> arrayOfArrayMesure = null;
 
+
+
+
+    //remaniement des données
+    private M_Serie m_serie;
+    private String tmpHour;
+    private boolean firstMesure = true;
 
 
     public C_ControlDialogSerie(V_JPanelMainRight v_jPanelMainRight) {
@@ -59,9 +66,17 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
                 calendarnewserie = Calendar.getInstance();
 
-                nameSerie += "_"+v_jDialogNouvelleSerie.getjTextFieldNomSerie().getText();
                 nbEchant = Integer.parseInt(v_jDialogNouvelleSerie.getjTextFieldNombreEchantillons().getText());
-                fastMesures = v_jDialogNouvelleSerie.getStateJCheckBoxFastMesure();
+
+                m_serie = new M_Serie();
+
+                m_serie.setNom(nameSerie += "_"+v_jDialogNouvelleSerie.getjTextFieldNomSerie().getText());
+
+                ArrayList<M_Carotte> listCarottes = new ArrayList<>();
+                for (int i = 0; i<nbEchant; ++i)
+                    listCarottes.add(new M_Carotte());
+
+                m_serie.setListCarotte(listCarottes);
 
                 v_jDialogNouvelleSerie.dispose();
 
@@ -74,9 +89,9 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
         else if (e.getSource() == v_jDialogChoiceNameEchant.getjButtonnext()){
             try{
-                tabNameEchant = new String[nbEchant];
                 for (int i = 0; i<nbEchant; ++i){
-                    tabNameEchant[i] = v_jDialogChoiceNameEchant.getjTextFieldNom_tab()[i].getText();
+                   m_serie.getListCarotte().get(i).setNom(v_jDialogChoiceNameEchant.getjTextFieldNom_tab()[i].getText());
+
                 }
 
                 v_jDialogChoiceNameEchant.dispose();
@@ -88,16 +103,16 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
             }
         }
 
+
+
+
+
+
         else if (e.getSource() == v_JDialogChoiceHautDiam.getjButtonnext()) {
             try{
-                tabDiamEchant = new double[nbEchant];
-                tabHautEchant = new double[nbEchant];
-
                 for (int i = 0; i<nbEchant; ++i){
-                    tabNameEchant[i] = v_jDialogChoiceNameEchant.getjTextFieldNom_tab()[i].getText();
-
-                    tabHautEchant[i] = Double.parseDouble(v_JDialogChoiceHautDiam.getjTextFieldHaut_tab()[i].getText());
-                    tabDiamEchant[i] = Double.parseDouble(v_JDialogChoiceHautDiam.getjTextFieldDiam_tab()[i].getText());
+                    m_serie.getListCarotte().get(i).setDiametre(Double.parseDouble(v_JDialogChoiceHautDiam.getjTextFieldDiam_tab()[i].getText()));
+                    m_serie.getListCarotte().get(i).setLongueur(Double.parseDouble(v_JDialogChoiceHautDiam.getjTextFieldHaut_tab()[i].getText()));
                 }
 
                 v_JDialogChoiceHautDiam.dispose();
@@ -109,16 +124,37 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
             }
         }
 
+
+
+
+
         else if (e.getSource() == v_JDialogInfoFinFillEchant.getJButtonNext()){
-            v_jPanelMainRight.loopAcquisitionMasse(getNbEchant(), fastMesures, tabNameEchant);
+            fastMesures = v_JDialogInfoFinFillEchant.getStateJCheckBoxFastMesure();
+
+            v_jPanelMainRight.loopAcquisitionMasse(getNbEchant(), fastMesures, m_serie.getListCarotte());
             v_JDialogInfoFinFillEchant.dispose();
         }
+
+
+
+
+/****************************************************
+ * DEBUT DE LOOPACQUISITION
+ */
+        else if (e.getSource()==v_JDialogHeure.getButtonOk()){
+            try{
+                tmpHour = v_JDialogHeure.getJTextfield();
+                v_JDialogHeure.dispose();
+            }catch(Exception e2){
+                v_jPanelMainRight.displayJDialogErrorinputNewSerie();
+            }
+        }
+
         else if (e.getSource() == v_jDialogMasse.getJButtonOkManuel()){
             try {
-                if (arrayOfArrayMesure==null){
-                    arrayOfArrayMesure = new ArrayList<>();
+                if (firstMesure){
                     for (int i= 0; i<nbEchant; ++i)
-                        arrayOfArrayMesure.add(new ArrayList<M_Mesure>());
+                        m_serie.getListCarotte().get(i).setListMesures(new ArrayList<M_Mesure>());
                 }
 
                 //récup idechantillon
@@ -128,54 +164,59 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
                 double valMasse = Double.parseDouble(v_jDialogMasse.getJtextfieldValMan());
 
                 //création de la mesure et on ajoute que la masse pour le moment
-                M_Mesure m_mesure = new M_Mesure();
-                m_mesure.setMasse(valMasse);
-
-                //importation de la date
-                Calendar calendar = Calendar.getInstance();
-                m_mesure.setDateHeure(calendar);
+                M_Mesure m_mesure = new M_Mesure(valMasse);
 
                 //on ajoute la mesure à arraylist de l'idcar
-                arrayOfArrayMesure.get(id).add(m_mesure);
+                m_serie.getListCarotte().get(id).getListMesures().add(m_mesure);
+
 
                 v_jDialogMasse.dispose();
             }catch (Exception exc){
+                System.out.println(exc);
                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
             }
         }
+
+
+
+
+
         else if (e.getSource() == v_JDialogFrange.getbuttonOk()){
             try{
                 int id = v_JDialogFrange.getIdEchant();
-                arrayOfArrayMesure.get(id).get(arrayOfArrayMesure.get(id).size()-1).setHauteurFrangeHumide(Double.parseDouble(v_JDialogFrange.getFrangeHu()));
+                m_serie.getListCarotte().get(id).getListMesures().get(m_serie.getListCarotte().get(id).getListMesures().size()-1).setHauteurFrangeHumide(Double.parseDouble(v_JDialogFrange.getFrangeHu()));
 
                 v_JDialogFrange.dispose();
             }catch (Exception e1){
-                v_jPanelMainRight.displayJDialogErrorinputNewSerie();
-            }
-        }
-
-        else if (e.getSource()==v_JDialogHeure.getButtonOk()){
-            try{
-                int id = v_JDialogHeure.getIdEchant();
-                setM_mesureHeure(id, v_JDialogHeure.getJTextfield());
-
-
-                v_JDialogHeure.dispose();
-            }catch(Exception e2){
+                System.out.println(e1);
                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
             }
         }
 
     }
 
+
+    public void loopAssignHourArrayMesure(){
+        try {
+            int index;
+            String date = "";
+            for (int i = 0; i<m_serie.getListCarotte().size(); ++i){
+                index = m_serie.getListCarotte().get(i).getListMesures().size()-1;
+                date = m_serie.getListCarotte().get(i).getListMesures().get(index).getDateMesure();
+                m_serie.getListCarotte().get(i).getListMesures().get(index).setHeureMesure(date, tmpHour);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void resetVariables() {
         nameSerie = "Serie";
         nbEchant = 0;
         fastMesures = false;
+        firstMesure = true;
 
-        tabNameEchant = null;
-        tabHautEchant= null;
-        tabDiamEchant = null;
 
         calendarnewserie = null;
 
@@ -222,14 +263,6 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         return arrayOfArrayMesure.get(idCar).get(arrayOfArrayMesure.get(idCar).size()-1).getHeureMesure();
     }
 
-    public void setM_mesureHeure(int i, String newHeure){
-        M_Mesure m_mesure = arrayOfArrayMesure.get(i).get(arrayOfArrayMesure.get(i).size()-1);
-        try {
-            m_mesure.setHeureMesure(m_mesure.getDateMesure(), newHeure);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
 
     /*
     * Fonction de test d'affichage
@@ -242,7 +275,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         affichage += "Mesure rapide : "+fastMesures+"\n";
         affichage += "Nom des échantillons : \n";
         for (int i = 0; i<nbEchant; ++i) {
-            affichage += "     "+i+" : "+tabNameEchant[i]+ "    Haut : "+tabHautEchant[i]+"     Diam : "+tabDiamEchant[i]+"\n";
+            affichage += "     "+i+" : "+m_serie.getListCarotte().get(i).getNom()+ "    Haut : "+m_serie.getListCarotte().get(i).getLongueur()+"     Diam : "+m_serie.getListCarotte().get(i).getDiametre()+"\n";
             for (int y = 0; y<arrayOfArrayMesure.get(i).size();++y)
                 affichage +="      masse : "+arrayOfArrayMesure.get(i).get(y).getMasse()+"      HFH : "+ arrayOfArrayMesure.get(i).get(y).getHauteurFrangeHumide()+ "       Date/Heure : " +arrayOfArrayMesure.get(i).get(y).getDateMesure()+" - "+arrayOfArrayMesure.get(i).get(y).getHeureMesure()+"\n";
         }
@@ -273,18 +306,13 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
                 int id = v_jDialogMasse.getIdCar();
 
                 //Récup de la masse
-                double valMasse = Double.parseDouble(v_jDialogMasse.getJLabelBalance());
+                double valMasse = Double.parseDouble(v_jDialogMasse.getJtextfieldValMan());
 
                 //création de la mesure et on ajoute que la masse pour le moment
-                M_Mesure m_mesure = new M_Mesure();
-                m_mesure.setMasse(valMasse);
-
-                //importation de la date
-                Calendar calendar = Calendar.getInstance();
-                m_mesure.setDateHeure(calendar);
+                M_Mesure m_mesure = new M_Mesure(valMasse);
 
                 //on ajoute la mesure à arraylist de l'idcar
-                arrayOfArrayMesure.get(id).add(m_mesure);
+                m_serie.getListCarotte().get(id).getListMesures().add(m_mesure);
 
                 v_jDialogMasse.dispose();
             }catch(Exception exception){
@@ -309,15 +337,6 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         return nameSerie;
     }
 
-    public String[] getTabNomechant() {
-        return tabNameEchant;
-    }
 
-    public double[] getTabHautEchant() {
-        return tabHautEchant;
-    }
-
-    public double[] getTabDiamEchant() {
-        return tabDiamEchant;
-    }
+    public M_Serie getM_serie(){return m_serie;}
 }
