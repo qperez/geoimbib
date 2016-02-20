@@ -38,8 +38,6 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
 
 
-    private ArrayList<ArrayList<M_Mesure>> arrayOfArrayMesure = null;
-
 
 
 
@@ -155,6 +153,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
                 if (firstMesure){
                     for (int i= 0; i<nbEchant; ++i)
                         m_serie.getListCarotte().get(i).setListMesures(new ArrayList<M_Mesure>());
+                    firstMesure = false;
                 }
 
                 //récup idechantillon
@@ -184,8 +183,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         else if (e.getSource() == v_JDialogFrange.getbuttonOk()){
             try{
                 int id = v_JDialogFrange.getIdEchant();
-                m_serie.getListCarotte().get(id).getListMesures().get(m_serie.getListCarotte().get(id).getListMesures().size()-1).setHauteurFrangeHumide(Double.parseDouble(v_JDialogFrange.getFrangeHu()));
-
+                m_serie.getListCarotte().get(id).getListMesures().get(m_serie.getListCarotte().get(id).getListMesures().size()-1).setHauteurFrangeHumide(Double.parseDouble(v_JDialogFrange.getFrangeHu().replace(",", ".")));
                 v_JDialogFrange.dispose();
             }catch (Exception e1){
                 System.out.println(e1);
@@ -220,7 +218,6 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
         calendarnewserie = null;
 
-        arrayOfArrayMesure = null;
     }
 
     /*
@@ -259,9 +256,6 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
     public int getNbEchant() {return nbEchant;}
 
-    public String getHeureM_mesure(int idCar) {
-        return arrayOfArrayMesure.get(idCar).get(arrayOfArrayMesure.get(idCar).size()-1).getHeureMesure();
-    }
 
 
     /*
@@ -276,8 +270,8 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         affichage += "Nom des échantillons : \n";
         for (int i = 0; i<nbEchant; ++i) {
             affichage += "     "+i+" : "+m_serie.getListCarotte().get(i).getNom()+ "    Haut : "+m_serie.getListCarotte().get(i).getLongueur()+"     Diam : "+m_serie.getListCarotte().get(i).getDiametre()+"\n";
-            for (int y = 0; y<arrayOfArrayMesure.get(i).size();++y)
-                affichage +="      masse : "+arrayOfArrayMesure.get(i).get(y).getMasse()+"      HFH : "+ arrayOfArrayMesure.get(i).get(y).getHauteurFrangeHumide()+ "       Date/Heure : " +arrayOfArrayMesure.get(i).get(y).getDateMesure()+" - "+arrayOfArrayMesure.get(i).get(y).getHeureMesure()+"\n";
+            for (int y = 0; y<m_serie.getListCarotte().get(i).getListMesures().size();++y)
+                affichage +="      masse : "+m_serie.getListCarotte().get(i).getListMesures().get(y).getMasse()+"      HFH : "+ m_serie.getListCarotte().get(i).getListMesures().get(y).getHauteurFrangeHumide()+ "       Date/Heure : " +m_serie.getListCarotte().get(i).getListMesures().get(y).getDateMesure()+" - "+m_serie.getListCarotte().get(i).getListMesures().get(y).getHeureMesure()+"\n";
         }
 
         return affichage;
@@ -296,10 +290,10 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == 32){
-            if (arrayOfArrayMesure==null){
-                arrayOfArrayMesure = new ArrayList<>();
+            if (firstMesure){
                 for (int i= 0; i<nbEchant; ++i)
-                    arrayOfArrayMesure.add(new ArrayList<M_Mesure>());
+                    m_serie.getListCarotte().get(i).setListMesures(new ArrayList<M_Mesure>());
+                firstMesure = false;
             }
             try{
                 //récup idechantillon
@@ -325,9 +319,6 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         }
     }
 
-    public ArrayList<ArrayList<M_Mesure>> getDonnees() {
-        return arrayOfArrayMesure;
-    }
 
     public Calendar getCalendarSerie() {
         return calendarnewserie;

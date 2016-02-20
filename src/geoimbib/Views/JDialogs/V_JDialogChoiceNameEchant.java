@@ -25,7 +25,6 @@ public class V_JDialogChoiceNameEchant extends JDialog {
         private JButton jButtonClearJtextfields = null;
 
     private JTextField[] jTextFieldNom_tab = null;
-    private Object aThis;
 
     public V_JDialogChoiceNameEchant(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie) {
         super(parent, title, modal);
