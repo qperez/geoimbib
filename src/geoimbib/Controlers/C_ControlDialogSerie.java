@@ -324,10 +324,5 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         return calendarnewserie;
     }
 
-    public String getNomSerie() {
-        return nameSerie;
-    }
-
-
     public M_Serie getM_serie(){return m_serie;}
 }

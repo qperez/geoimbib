@@ -5,7 +5,6 @@ import geoimbib.Controlers.C_ControlDialogGraph;
 import geoimbib.Controlers.C_ControlDialogSerie;
 import geoimbib.Models.M_Carotte;
 import geoimbib.Models.M_createSet;
-import geoimbib.Models.ModelsJPanelMainLeft.M_GeneralFunctions;
 import geoimbib.Models.ModelsJPanelMainRight.M_GeneralFunctionsRight;
 import geoimbib.Views.JDialogs.*;
 import geoimbib.Views.V_MainWindow;
@@ -35,6 +34,7 @@ public class V_JPanelMainRight extends JPanel {
 
     //JDialogs
     private V_JDialogNouvelleSerie v_jDialogNouvelleSerie = null;
+    private V_JDialogTouch v_jDialogTouch;
     private V_JDialogNewGraph v_jDialogNewGraph = null;
 
     //Boutons
@@ -42,11 +42,13 @@ public class V_JPanelMainRight extends JPanel {
     JButton jbutton2 = null;
     JButton jbutton3 = null;
     JButton jbutton4 = null;
+    JButton jbutton5 = null;
 
     JButton jbuttonLeave = null;
 
     //bool si true -> on reboucle pour acquérir une nouvelle masse de la balance / sinon = mesure rapide (de base true)
     private boolean cont = true;
+
 
 
     public V_JPanelMainRight(V_MainWindow v_mainWindow, V_JPanelMainLeft v_jPanelMainLeft){
@@ -70,6 +72,7 @@ public class V_JPanelMainRight extends JPanel {
         jbutton2.addActionListener(c_controlButtonMainPanelRight);
         jbutton3.addActionListener(c_controlButtonMainPanelRight);
         jbutton4.addActionListener(c_controlButtonMainPanelRight);
+        jbutton5.addActionListener(c_controlButtonMainPanelRight);
     }
 
     public void initView(){
@@ -91,6 +94,8 @@ public class V_JPanelMainRight extends JPanel {
         jpanelButtons.add(jbutton3);
         jbutton4 = new JButton("Supprimer");
         jpanelButtons.add(jbutton4);
+        jbutton5 = new JButton("Modifier une série");
+        jpanelButtons.add(jbutton5);
 
 
 
@@ -136,6 +141,9 @@ public class V_JPanelMainRight extends JPanel {
     }
     public JButton getButton4() {
         return jbutton4;
+    }
+    public JButton getButton5() {
+        return jbutton5;
     }
 
     public V_JPanelMainLeft getV_jPanelMainLeft() {
@@ -198,6 +206,14 @@ public class V_JPanelMainRight extends JPanel {
                 "Nouveau Graphique",
                 true,
                 c_controlDialogGraph,
+                v_jPanelMainLeft);
+    }
+
+    public void displayTouchSet() {
+        v_jDialogTouch = new V_JDialogTouch(
+                this.v_mainWindow,
+                "Modifier série",
+                true,
                 v_jPanelMainLeft);
     }
 
