@@ -41,6 +41,7 @@ public class M_GeneralFunctionsRight {
         M_Serie serie = null;
         M_Carotte carotte = null;
         M_Mesure mesure = null;
+        double hauteurMax = 0;
         ArrayList<M_Mesure> listMesures;
         ArrayList<M_Carotte> listCarotte = new ArrayList<M_Carotte>();
         String nomSerie, temp [], mesuresCarotte[], datePremCarotte, nomCarotte, ligne;
@@ -79,7 +80,12 @@ public class M_GeneralFunctionsRight {
                             dateHeure = Calendar.getInstance();
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
                             dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
-                            hauteurFange = Double.parseDouble(temp[7]);
+                            if(temp[7].equals(""))
+                                hauteurFange = hauteurMax;
+                            else {
+                                hauteurFange = Double.parseDouble(temp[7]);
+                                hauteurMax = hauteurFange;
+                            }
                             masse = Double.parseDouble(temp[6]);
                             temps = Double.parseDouble(temp[8]);
                             mesure = new M_Mesure(dateHeure, hauteurFange, masse, temps);
@@ -133,7 +139,7 @@ public class M_GeneralFunctionsRight {
         }
 
         serie = new M_Serie(nomSerie, nbrMesuresCarottes, listCarotte, dateHeure);
-        System.out.println(serie.toString());
+
         return serie;
     }
 
@@ -205,7 +211,6 @@ public class M_GeneralFunctionsRight {
             e.printStackTrace();
         }
 
-        System.out.println(carotte.toString());
         return carotte;
 
     }
@@ -215,25 +220,28 @@ public class M_GeneralFunctionsRight {
      * @param serie la série à afficher
      * @return la dataset du graphique
      */
-    public XYDataset createDataset(M_Serie serie){
+    public XYDataset createDataset(M_Serie serie) {
+
         XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series1 = new XYSeries("Object 1");
-        XYSeries series2 = new XYSeries("Object 2");
+        int i;
+        M_Carotte carTemp = null;
+        M_Mesure mesTemp = null;
 
-        series1.add(1.0, 2.0);
-        series1.add(2.0, 3.0);
-        series1.add(3.0, 2.5);
-        series1.add(3.5, 2.8);
-        series1.add(4.2, 6.0);
-
-        series2.add(2.0, 1.0);
-        series2.add(2.5, 2.4);
-        series2.add(3.2, 1.2);
-        series2.add(3.9, 2.8);
-        series2.add(4.6, 3.0);
-
-        dataset.addSeries(series1);
-        dataset.addSeries(series2);
+        Iterator<M_Carotte> iter = serie.getListCarotte().iterator();
+        while (iter.hasNext()) {
+            i = 0;
+            carTemp = iter.next();
+            Iterator<M_Mesure> iter2 = carTemp.getListMesures().iterator();
+            XYSeries xYSerie = new XYSeries(carTemp.getNom());
+            ArrayList<Double> deltaMasseMesure = carTemp.calulDeltaMasseMesures();
+            while (iter2.hasNext()) {
+                mesTemp = iter2.next();
+                xYSerie.add(mesTemp.getRacineCarreTemps(), deltaMasseMesure.get(i));
+                i++;
+            }
+            //on ajoute les valeurs de la serie au dataset
+            dataset.addSeries(xYSerie);
+        }
 
         return dataset;
     }

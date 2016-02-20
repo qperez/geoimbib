@@ -32,6 +32,7 @@ public class V_JDialogGraph extends JDialog {
 
     private final JFrame parent;
     private M_Carotte carotte;
+    private M_Serie serie;
 
     private XYDataset dataset = null;
     private XYDataset dataset2 = null;
@@ -52,9 +53,9 @@ public class V_JDialogGraph extends JDialog {
      * @param parent la jframe parente
      * @param title le titre du jdialog
      * @param modal le modal
-     * @param serie la série à afficher en graphique
+     * @param s la série à afficher en graphique
      */
-    public V_JDialogGraph(JFrame parent, String title, boolean modal, M_Serie serie, V_JPanelMainRight v_jPanelMainRight){
+    public V_JDialogGraph(JFrame parent, String title, boolean modal, M_Serie s, V_JPanelMainRight v_jPanelMainRight){
         super(parent, title, modal);
 
         this.parent = parent;
@@ -64,7 +65,10 @@ public class V_JDialogGraph extends JDialog {
         this.setLocationRelativeTo(null);
         this.setResizable(true);
 
-        dataset = v_jPanelMainRight.getM_generalFunctionsRight().createDataset(serie);
+        this.serie = s;
+
+        dataset = v_jPanelMainRight.getM_generalFunctionsRight().createDataset(this.serie);
+
         createChartPanelSerie();
 
         this.setVisible(true);
@@ -87,9 +91,9 @@ public class V_JDialogGraph extends JDialog {
         this.setLocationRelativeTo(null);
         this.setResizable(true);
 
-        carotte = c;
-        dataset = v_jPanelMainRight.getM_generalFunctionsRight().createDatasetMasse(carotte);
-        dataset2 = v_jPanelMainRight.getM_generalFunctionsRight().createDatasetHauteur(carotte);
+        this.carotte = c;
+        dataset = v_jPanelMainRight.getM_generalFunctionsRight().createDatasetMasse(this.carotte);
+        dataset2 = v_jPanelMainRight.getM_generalFunctionsRight().createDatasetHauteur(this.carotte);
         createChartPanelCarotte();
 
         this.setVisible(true);
@@ -100,21 +104,25 @@ public class V_JDialogGraph extends JDialog {
      */
     public void createChartPanelSerie() {
 
-        /*String chartTitle = "Graphique";
-        String xAxisLabel = "Racine carré du Temps";
-        String yAxisLabel = "Varia W/S (g/cm²)";
+        String chartTitle = serie.getNom();
+        String xAxisLabel = "Racine carrée du Temps (h)";
+        String yAxisLabel = "Variation de masse (g)";
 
         JFreeChart chart = ChartFactory.createXYLineChart(chartTitle, xAxisLabel, yAxisLabel, dataset);
 
         XYPlot plot = chart.getXYPlot();
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        //on enlève le traçage des lignes des series
+        for(int i=0;i<serie.getListCarotte().size();i++)
+            renderer.setSeriesLinesVisible(i,false);
+
         plot.setRenderer(renderer);
 
         ChartPanel chartPanel = new ChartPanel(chart);
-        //chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        //setContentPane(chartPanel);
 
-        this.getContentPane().add(chartPanel, BorderLayout.CENTER);*/
+        //chartPanel.addChartMouseListener(c_ControlButtonGraph);
+
+        this.getContentPane().add(chartPanel, BorderLayout.CENTER);
     }
 
     /**
@@ -123,7 +131,7 @@ public class V_JDialogGraph extends JDialog {
     public void createChartPanelCarotte() {
 
         String chartTitle = carotte.getNom();
-        String xAxisLabel = "RacineCarrée Temps (h)";
+        String xAxisLabel = "Racine carrée du Temps (h)";
         String yAxisLabel = "";
 
         JFreeChart chart = ChartFactory.createXYLineChart(chartTitle, xAxisLabel, yAxisLabel, dataset);
@@ -161,9 +169,6 @@ public class V_JDialogGraph extends JDialog {
         chartPanel = new ChartPanel(chart);
 
         chartPanel.addChartMouseListener(c_ControlButtonGraph);
-
-        //chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        //setContentPane(chartPanel);
 
         this.getContentPane().add(chartPanel, BorderLayout.CENTER);
     }
