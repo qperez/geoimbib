@@ -8,16 +8,16 @@ package geoimbib;
  * See LICENSE.txt for licensing information.
  */
 
+
+import org.usb4java.BufferUtils;
+import org.usb4java.DeviceHandle;
 import org.usb4java.LibUsb;
+import org.usb4java.LibUsbException;
 
-        import java.nio.ByteBuffer;
-        import java.nio.ByteOrder;
-        import java.nio.IntBuffer;
-
-        import org.usb4java.BufferUtils;
-        import org.usb4java.DeviceHandle;
-        import org.usb4java.LibUsb;
-        import org.usb4java.LibUsbException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
+import java.nio.channels.Pipe;
 
 /**
  * Demonstrates how to do synchronous bulk transfers. This demo sends some
@@ -44,10 +44,10 @@ public class SyncBulkTransfer
             0x44, 0x42, 0x20, 0x44, 0x65, 0x6D, 0x6F, 0x00 };
 
     /** The vendor ID of the Samsung Galaxy Nexus. */
-    private static final short VENDOR_ID = 0x04e8;
+    private static final short VENDOR_ID = 0x03eb;
 
     /** The vendor ID of the Samsung Galaxy Nexus. */
-    private static final short PRODUCT_ID = 0x6860;
+    private static final short PRODUCT_ID = 0x2044;
 
     /** The ADB interface number of the Samsung Galaxy Nexus. */
     private static final byte INTERFACE = 1;
@@ -104,7 +104,15 @@ public class SyncBulkTransfer
             throw new LibUsbException("Unable to read data", result);
         }
         System.out.println(transferred.get() + " bytes read from device");
+        //int stringLength = data.getInt();
+
         return buffer;
+    }
+
+    public static String byteBufferToString(ByteBuffer buffer){
+        byte[] bytes = new byte[buffer.remaining()];
+        buffer.get(bytes);
+        return new String(bytes);
     }
 
     /**
@@ -133,8 +141,19 @@ public class SyncBulkTransfer
             System.exit(1);
         }
 
+        //Detach kernelk driver
+        result = LibUsb.detachKernelDriver(handle, 1);
+        if (result != LibUsb.SUCCESS &&
+                result != LibUsb.ERROR_NOT_SUPPORTED &&
+                result != LibUsb.ERROR_NOT_FOUND)
+        {
+            throw new LibUsbException("Unable to detach kernel driver",
+                    result);
+        }
+
         // Claim the ADB interface
         result = LibUsb.claimInterface(handle, INTERFACE);
+
         if (result != LibUsb.SUCCESS)
         {
             throw new LibUsbException("Unable to claim interface", result);
@@ -147,18 +166,19 @@ public class SyncBulkTransfer
         // Receive the header of the ADB answer (Most likely an AUTH message)
         ByteBuffer header = read(handle, 24);
         header.position(12);
-        int dataSize = header.asIntBuffer().get();
+        int dataSize = header.asIntBuffer().get();*/
 
         // Receive the body of the ADB answer
         @SuppressWarnings("unused")
-        ByteBuffer data = read(handle, dataSize);
+        ByteBuffer data = read(handle, 10);
+        System.out.println(byteBufferToString(data));
 
         // Release the ADB interface
         result = LibUsb.releaseInterface(handle, INTERFACE);
         if (result != LibUsb.SUCCESS)
         {
             throw new LibUsbException("Unable to release interface", result);
-        }*/
+        }
 
         // Close the device
         LibUsb.close(handle);
