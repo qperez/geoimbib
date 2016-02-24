@@ -3,6 +3,7 @@ package geoimbib.Views.JPanels;
 import geoimbib.Controlers.C_ControlButtonMainPanelRight;
 import geoimbib.Controlers.C_ControlDialogGraph;
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Controlers.C_ControlDialogTouch;
 import geoimbib.Models.M_Carotte;
 import geoimbib.Models.M_createSet;
 import geoimbib.Models.ModelsJPanelMainRight.M_GeneralFunctionsRight;
@@ -12,6 +13,7 @@ import geoimbib.Views.V_MainWindow;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -19,11 +21,13 @@ import java.util.ArrayList;
  */
 public class V_JPanelMainRight extends JPanel {
 
+
     private V_MainWindow v_mainWindow;
     private V_JPanelMainLeft v_jPanelMainLeft;
     private M_GeneralFunctionsRight m_generalFunctionsRight = null;
 
     //Controlers
+    private C_ControlDialogTouch c_controlDialogTouch = null;
     private C_ControlButtonMainPanelRight c_controlButtonMainPanelRight = null;
     private C_ControlDialogSerie c_controlDialogSerie = null;
     private C_ControlDialogGraph c_controlDialogGraph = null;
@@ -59,6 +63,7 @@ public class V_JPanelMainRight extends JPanel {
 
         initView();
 
+        this.c_controlDialogTouch = new C_ControlDialogTouch(this);
         this.c_controlDialogSerie = new C_ControlDialogSerie(this);
         this.c_controlDialogGraph = new C_ControlDialogGraph(this);
 
@@ -189,12 +194,12 @@ public class V_JPanelMainRight extends JPanel {
                 c_controlDialogSerie);
     }
 
-    public void displayInfoFinFillEchant() {
+    public void displayInfoFinFillEchant(ActionListener aL) {
         V_JDialogInfoFinFillEchant v_JDialogInfoFinFillEchant = new V_JDialogInfoFinFillEchant(
                 this.v_mainWindow,
                 "",
                 true,
-                c_controlDialogSerie);
+                aL);
     }
 
     /**
@@ -214,7 +219,7 @@ public class V_JPanelMainRight extends JPanel {
                 this.v_mainWindow,
                 "Modifier série",
                 true,
-                v_jPanelMainLeft);
+                c_controlDialogTouch);
     }
 
     public void displayJDialogErrorinputNewSerie() {
@@ -248,25 +253,22 @@ public class V_JPanelMainRight extends JPanel {
                 JOptionPane.WARNING_MESSAGE);
     }
 
-
-    public void loopAcquisitionMasse(int nbEchant, boolean mRapide, ArrayList<M_Carotte> listCarottes) {
+    public void loopAcquisitionMasse(int nbEchant, boolean mRapide, ArrayList<M_Carotte> listCarottes, ActionListener aL) {
         cont = true;
-
         while (cont) {
             V_JDialogHeure v_jDialogHeure = new V_JDialogHeure(
                     this.v_mainWindow,
                     "Heure",
                     true,
-                    c_controlDialogSerie
+                    aL
             );
-
 
             for (int i = 0; i<nbEchant; ++i ){
                 V_jDialogMasse v_jDialogMasse = new V_jDialogMasse(
                         this.v_mainWindow,
                         "Acquisition masse : " + listCarottes.get(i).getNom(),
                         true,
-                        c_controlDialogSerie,
+                        aL,
                         i
                 );
 
@@ -274,11 +276,17 @@ public class V_JPanelMainRight extends JPanel {
                         this.v_mainWindow,
                         "Frange humide : "+ listCarottes.get(i).getNom(),
                         true,
-                        c_controlDialogSerie,
+                        aL,
                         i
                 );
             }
-            c_controlDialogSerie.loopAssignHourArrayMesure();
+            if (aL instanceof C_ControlDialogSerie) {
+                C_ControlDialogSerie ccds = (C_ControlDialogSerie)aL;
+                ccds.loopAssignHourArrayMesure();
+            }else{
+                C_ControlDialogTouch ccdt = (C_ControlDialogTouch) aL;
+                ccdt.loopAssignHourArrayMesure();
+            }
 
             if (mRapide) {
                 V_jDialogContinueGetMasseOrNot v_jDialogContinueGetMasseOrNot = new V_jDialogContinueGetMasseOrNot(
@@ -292,16 +300,25 @@ public class V_JPanelMainRight extends JPanel {
                 cont = false;
 
         }
-        try{
-            M_createSet m_createSet = new M_createSet(c_controlDialogSerie.getM_serie(),
-                    v_mainWindow.getJPanelMainLeft().getJtextfieldFolder().getText());
-            displayValidateBox();
-        }catch(Exception e){
-            System.out.println("problème création");
+        if (aL instanceof C_ControlDialogSerie){
+            try{
+                M_createSet m_createSet = new M_createSet(c_controlDialogSerie.getM_serie(),
+                        v_mainWindow.getJPanelMainLeft().getJtextfieldFolder().getText());
+                displayValidateBox();
+            }catch(Exception e){
+                System.out.println("problème création");
+            }
+        }else {
+            try{
+                M_createSet m_createSet = new M_createSet(c_controlDialogTouch.getArrayCarottes(),
+                        v_mainWindow.getJPanelMainLeft().getJtextfieldFolder().getText(),
+                        v_mainWindow.getJPanelMainLeft().getjList().getSelectedValue(),
+                        c_controlDialogTouch.getArrayNameUpdate());
+            }catch(Exception e){
+                System.out.println("problème modification");
+            }
         }
-
-
-
+        v_mainWindow.getJPanelMainLeft().updateJList();
     }
 
 

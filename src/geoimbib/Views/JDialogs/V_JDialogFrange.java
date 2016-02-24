@@ -1,6 +1,7 @@
 package geoimbib.Views.JDialogs;
 
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Controlers.C_ControlDialogTouch;
 import geoimbib.Views.V_MainWindow;
 
 import javax.swing.*;
@@ -18,8 +19,10 @@ import java.util.ArrayList;
  */
 public class V_JDialogFrange extends JDialog {
 
-    private final C_ControlDialogSerie c_controlDialogSerie;
+    private C_ControlDialogSerie c_controlDialogSerie;
     private final int idCar;
+    private final ActionListener aL;
+    private C_ControlDialogTouch c_controlDialogTouch;
     private JLabel jLabel;
     private ArrayList<JTextField> arrayJTextfields;
     private JButton jbuttonok;
@@ -27,15 +30,22 @@ public class V_JDialogFrange extends JDialog {
 
     private JTextField jTextfieldMoyenne;
 
-    public V_JDialogFrange(V_MainWindow v_mainWindow, String s, boolean b, C_ControlDialogSerie c_controlDialogSerie, int i){
+    public V_JDialogFrange(V_MainWindow v_mainWindow, String s, boolean b, ActionListener aL, int i){
         super(v_mainWindow, s, b);
 
         this.setSize(400, 300);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
-        this.c_controlDialogSerie = c_controlDialogSerie;
-        this.c_controlDialogSerie.setV_jDialogNouvelleSerie(this);
+
+        this.aL =aL;
+        if (aL instanceof C_ControlDialogSerie){
+            this.c_controlDialogSerie = (C_ControlDialogSerie)aL;
+            this.c_controlDialogSerie.setV_jDialogNouvelleSerie(this);
+        }else{
+            this.c_controlDialogTouch = (C_ControlDialogTouch) aL;
+            this.c_controlDialogTouch.setV_jDialogFrange(this);
+        }
         arrayJTextfields=new ArrayList<>();
 
         this.idCar = i;
@@ -109,7 +119,7 @@ public class V_JDialogFrange extends JDialog {
         Border paddingjbutton = BorderFactory.createEmptyBorder(0,20,20,20);
         jpanelButtons.setBorder(paddingjbutton);
 
-        jbuttonok.addActionListener(this.c_controlDialogSerie);
+        jbuttonok.addActionListener(aL);
 
         //Scroller
         JScrollPane listScroller = new JScrollPane(jpcomposants);

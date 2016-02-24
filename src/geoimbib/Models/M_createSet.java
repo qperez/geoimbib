@@ -6,6 +6,7 @@ import com.googlecode.jcsv.writer.internal.CSVWriterBuilder;
 
 import java.io.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -17,29 +18,9 @@ import java.util.Date;
 public class M_createSet {
 
 
-    private final String jtextfolder;
+    private String jtextfolder;
     private M_Serie m_serie= null;
 
-
-    /*public M_createSet(ArrayList<ArrayList<M_Mesure>> arrayLists, String nomSerie, int nbEchant, String[] tabNameEchant, double[] tabHautEchant, double[] tabDiamEchant, Calendar calendarSerie, String jtextfieldFolder) {
-        this.arrayLists = arrayLists;
-        this.nomSerie = nomSerie;
-        this.nbEchant = nbEchant;
-        this.tabNameEchant = tabNameEchant;
-        this.tabHautEchant = tabHautEchant;
-        this.tabDiamEchant = tabDiamEchant;
-        this.calendarSerie = calendarSerie;
-        this.jtextfieldFolder = jtextfieldFolder;
-
-        createSerie();
-        try {
-            createFiles();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     public M_createSet(M_Serie m_serie, String jtextfolder) {
         this.m_serie = m_serie;
@@ -52,6 +33,28 @@ public class M_createSet {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * M&eacute;thode de modification des s&eacute;rie, ajout de mesure(s)
+     */
+    public M_createSet(ArrayList<M_Carotte> arrayCarottes, String s, String text, ArrayList<String> arrayNameUpdate) {
+        try {
+            addMesureSet(s, text, arrayCarottes, arrayNameUpdate);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
+    private void addMesureSet(String path, String seriename, ArrayList<M_Carotte> arrayCarottes, ArrayList<String> arrayNameUpdate) throws IOException {
+        Writer out;
+        CSVWriter csvWriter;
+        for (int i =0; i<arrayCarottes.size(); ++i){
+            out = new FileWriter(path+ File.separator + seriename +File.separator +arrayNameUpdate.get(i), true);
+            csvWriter = new CSVWriterBuilder(out).entryConverter(new M_conceptionCSVConverterListeMesure()).build();
+            csvWriter.writeAll(arrayCarottes.get(i).getListMesures());
+            csvWriter.flush();
         }
     }
 
@@ -96,14 +99,12 @@ public class M_createSet {
     }
 
     /**
-     * Methode de creation de serie
+     * M&eacute;thode de creation de s&eacute;rie
      * <p>
-     * Methode qui regroupe toute les informations recoltes pendant le protocole et cree les series.
+     * M&eacute;thode qui regroupe toute les informations recoltes pendant le protocole et cr&eacute;e les series.
      * </p>
      */
     private void createSerie() {
-
-
         for (int i = 0; i<m_serie.getListCarotte().size(); ++i){
             for (int y=0; y<m_serie.getListCarotte().get(i).getListMesures().size(); ++y){
                 if (y==0)
@@ -120,12 +121,5 @@ public class M_createSet {
                 }
             }
         }
-
-        /*m_serie = new M_Serie(
-                this.nomSerie,
-                arrayCarotte.get(0).getListMesures().size(),
-                arrayCarotte,
-                this.calendarSerie
-        );*/
     }
 }

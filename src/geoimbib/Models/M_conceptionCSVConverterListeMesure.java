@@ -32,8 +32,8 @@ public class M_conceptionCSVConverterListeMesure implements CSVEntryConverter<M_
         columns[7] = String.valueOf(m_mesures.getHauteurFrangeHumide());
         columns[8] = String.valueOf(m_mesures.getTemps());
         columns[9] = String.valueOf(Math.sqrt(m_mesures.getTemps()));
-        columns[10] = "g/cm²";
-        columns[11] = "dL(cm)";
+        columns[10] = "g/cm²"; // masse/surface
+        columns[11] = "dL(cm)"; // variation hauteur frange humide
 
         return columns;
     }

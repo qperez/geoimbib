@@ -19,6 +19,9 @@ import java.util.Calendar;
  */
 public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
+
+
+    /*Variables de création de série*/
     private V_JPanelMainRight v_jPanelMainRight = null;
 
     private V_jDialogMasse v_jDialogMasse = null;
@@ -54,11 +57,16 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
 
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
+
+        /*
+        * Création de série
+        * */
         //Récolte le nom + nombre de hauteurs de la série
-        if (e.getSource() == v_jDialogNouvelleSerie.getjButtonnext()){
+         if (e.getSource() == v_jDialogNouvelleSerie.getjButtonnext()){
             try {
                 resetVariables();
 
@@ -116,7 +124,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
                 v_JDialogChoiceHautDiam.dispose();
 
 
-                v_jPanelMainRight.displayInfoFinFillEchant();
+                v_jPanelMainRight.displayInfoFinFillEchant(this);
             }catch(Exception exception) {
                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
             }
@@ -129,7 +137,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         else if (e.getSource() == v_JDialogInfoFinFillEchant.getJButtonNext()){
             fastMesures = v_JDialogInfoFinFillEchant.getStateJCheckBoxFastMesure();
 
-            v_jPanelMainRight.loopAcquisitionMasse(getNbEchant(), fastMesures, m_serie.getListCarotte());
+            v_jPanelMainRight.loopAcquisitionMasse(getNbEchant(), fastMesures, m_serie.getListCarotte(), this);
             v_JDialogInfoFinFillEchant.dispose();
         }
 

@@ -1,11 +1,13 @@
 package geoimbib.Views.JDialogs;
 
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Controlers.C_ControlDialogTouch;
 import geoimbib.Views.V_MainWindow;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 
 /**
@@ -14,22 +16,30 @@ import java.text.SimpleDateFormat;
 public class V_JDialogHeure extends JDialog {
 
 
-    private final C_ControlDialogSerie c_controlDialogSerie;
+    private C_ControlDialogSerie c_controlDialogSerie;
+    private C_ControlDialogTouch c_controlDialogTouch;
+    private ActionListener aL;
     //private final int idCar;
     private JTextField jtextfieldHeure;
     private JButton jbuttonOk;
 
-    public V_JDialogHeure(V_MainWindow v_mainWindow, String s, boolean b, C_ControlDialogSerie c_controlDialogSerie){
+    public V_JDialogHeure(V_MainWindow v_mainWindow, String s, boolean b, ActionListener aL){
         super(v_mainWindow, s, b);
 
         this.setSize(150, 150);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
-        this.c_controlDialogSerie = c_controlDialogSerie;
-        this.c_controlDialogSerie.setV_jDialogNouvelleSerie(this);
+        this.aL = aL;
 
-        //this.idCar = i;
+        if (aL instanceof C_ControlDialogSerie){
+            this.c_controlDialogSerie = (C_ControlDialogSerie)aL;
+            this.c_controlDialogSerie.setV_jDialogNouvelleSerie(this);
+        }else{
+            this.c_controlDialogTouch = (C_ControlDialogTouch) aL;
+            this.c_controlDialogTouch.setV_jDialogHour(this);
+        }
+
 
         initComposants();
 
@@ -42,7 +52,10 @@ public class V_JDialogHeure extends JDialog {
         Border paddingjpcomposants = BorderFactory.createEmptyBorder(10,10,10,10);
         jpcomposants.setBorder(paddingjpcomposants);
 
-        jtextfieldHeure = new JTextField( new SimpleDateFormat("HH:mm").format(c_controlDialogSerie.getCalendarSerie().getTime()));
+        if (aL instanceof C_ControlDialogSerie)
+            jtextfieldHeure = new JTextField( new SimpleDateFormat("HH:mm").format(c_controlDialogSerie.getCalendarSerie().getTime()));
+        else
+            jtextfieldHeure = new JTextField( new SimpleDateFormat("HH:mm").format(c_controlDialogTouch.getCalendarSerie().getTime()));
 
         jpcomposants.add(jtextfieldHeure, BorderLayout.CENTER);
 
@@ -53,7 +66,7 @@ public class V_JDialogHeure extends JDialog {
         Border paddingjpbutton = BorderFactory.createEmptyBorder(10,40,10,40);
         jPanelButtons.setBorder(paddingjpbutton);
 
-        jbuttonOk.addActionListener(this.c_controlDialogSerie);
+        jbuttonOk.addActionListener(aL);
 
         this.getContentPane().add(jpcomposants, BorderLayout.CENTER);
         this.getContentPane().add(jPanelButtons, BorderLayout.SOUTH);

@@ -165,8 +165,6 @@ public class V_JPanelMainLeft extends JPanel{
             File file = new File(chooser.getSelectedFile().getPath());                              //Créer un fichier qui sera notre dossier cible
             Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);                //Récupère le vecteur de séries du dossier
             jList.setListData(listNameSerie);                                                       //On actualise la JList avec le nouveau contenu
-
-
         }
     }
 
@@ -205,5 +203,17 @@ public class V_JPanelMainLeft extends JPanel{
      */
     public JList<String> getjListEchantillons() {
         return jListEchantillons;
+    }
+
+    public void getJDialogNoEchant() {
+        JOptionPane.showMessageDialog(this.getParent(),
+                    "Aucune série séléctionnée",
+                    "Attention",
+                    JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void updateJList() {
+        Vector<String> listNameSerie = m_generalFunctions.listNameFolder(new File(getJtextfieldFolder().getText()));                //Récupère le vecteur de séries du dossier
+        jList.setListData(listNameSerie);
     }
 }

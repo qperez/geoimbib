@@ -31,7 +31,7 @@ public class V_JDialogNouvelleSerie extends JDialog {
 
 
 
-    public V_JDialogNouvelleSerie(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie /*,Model model*/){
+    public V_JDialogNouvelleSerie(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie){
         super(parent, title, modal);
 
         this.parent = parent;

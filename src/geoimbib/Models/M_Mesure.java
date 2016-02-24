@@ -157,6 +157,8 @@ public class M_Mesure {
         dateHeure.setTime(date);
     }
 
+
+
     /**
      * Retourne la masse de la carotte lors de la mesure
      * @return Double masse de la carotte lors de la mesure

@@ -195,4 +195,16 @@ public class M_Carotte {
         }
         return listDeltaHauteurMesures;
     }
+
+    /**
+     * Calcul et retourne la liste des masse sur surface de la carotte pour toute les mesures
+     * @return ArrayList de double
+     */
+    public ArrayList<Double> getMasseSurSurface(){
+        ArrayList<Double> aD = new ArrayList<>();
+        for (int i=0; i<listMesures.size(); i++){
+            aD.add(listMesures.get(i).getMasse()/(Math.PI*((diametre/2)*(diametre/2))));
+        }
+        return aD;
+    }
 }

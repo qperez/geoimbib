@@ -1,6 +1,7 @@
 package geoimbib.Views.JDialogs;
 
 import geoimbib.Controlers.C_ControlDialogSerie;
+import geoimbib.Controlers.C_ControlDialogTouch;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,7 +17,9 @@ import java.awt.event.KeyEvent;
 public class V_jDialogMasse extends JDialog {
 
     private final JFrame parent;
-    private final C_ControlDialogSerie c_controlDialogSerie;
+    private ActionListener aL;
+    private C_ControlDialogSerie c_controlDialogSerie;
+    private C_ControlDialogTouch c_controlDialogTouch;
 
     private JLabel jlabelsaisieBalance;
     private JLabel jlabelintValeurBalance;
@@ -28,7 +31,7 @@ public class V_jDialogMasse extends JDialog {
 
     private int idCar;
 
-    public V_jDialogMasse(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie, int idCar) {
+    public V_jDialogMasse(JFrame parent, String title, boolean modal, ActionListener aL, int idCar) {
         super(parent, title, modal);
 
         this.parent = parent;
@@ -37,8 +40,15 @@ public class V_jDialogMasse extends JDialog {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
-        this.c_controlDialogSerie = c_controlDialogSerie;
-        this.c_controlDialogSerie.setV_jDialogNouvelleSerie(this);
+
+        this.aL =aL;
+        if (aL instanceof C_ControlDialogSerie){
+            this.c_controlDialogSerie = (C_ControlDialogSerie)aL;
+            this.c_controlDialogSerie.setV_jDialogNouvelleSerie(this);
+        }else{
+            this.c_controlDialogTouch = (C_ControlDialogTouch) aL;
+            this.c_controlDialogTouch.setV_jDialogMasse(this);
+        }
 
         this.idCar = idCar;
 
@@ -67,7 +77,7 @@ public class V_jDialogMasse extends JDialog {
         jtextfieldMasseManu.setVisible(false);
         jbuttonOk = new JButton("Ok");
         jbuttonOk.setVisible(false);
-        jbuttonOk.addActionListener(this.c_controlDialogSerie);
+        jbuttonOk.addActionListener(this.aL);
 
 
         jpcomposants.add(jtextfieldMasseManu);
@@ -100,7 +110,10 @@ public class V_jDialogMasse extends JDialog {
     }
 
     private void addControler() {
-        this.addKeyListener(this.c_controlDialogSerie);
+        if (aL instanceof C_ControlDialogSerie)
+            this.addKeyListener(this.c_controlDialogSerie);
+        else
+            this.addKeyListener(this.c_controlDialogTouch);
     }
 
     public void setManuel() {
