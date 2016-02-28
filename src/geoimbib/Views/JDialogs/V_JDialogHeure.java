@@ -53,9 +53,9 @@ public class V_JDialogHeure extends JDialog {
         jpcomposants.setBorder(paddingjpcomposants);
 
         if (aL instanceof C_ControlDialogSerie)
-            jtextfieldHeure = new JTextField( new SimpleDateFormat("HH:mm").format(c_controlDialogSerie.getCalendarSerie().getTime()));
+            jtextfieldHeure = new JTextField( new SimpleDateFormat("HH:mm").format(c_controlDialogSerie.getNewCalendarSerie().getTime()));
         else
-            jtextfieldHeure = new JTextField( new SimpleDateFormat("HH:mm").format(c_controlDialogTouch.getCalendarSerie().getTime()));
+            jtextfieldHeure = new JTextField( new SimpleDateFormat("HH:mm").format(c_controlDialogTouch.getNewCalendarSerie().getTime()));
 
         jpcomposants.add(jtextfieldHeure, BorderLayout.CENTER);
 

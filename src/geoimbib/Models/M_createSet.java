@@ -27,7 +27,7 @@ public class M_createSet {
         this.m_serie = m_serie;
         this.jtextfolder = jtextfolder;
 
-        assertTimeToMesure();
+        assertValueToMesure();
         try {
             createFiles();
         } catch (FileNotFoundException e) {
@@ -43,7 +43,7 @@ public class M_createSet {
     public M_createSet(ArrayList<M_Carotte> arrayCarottes, String s, String text, ArrayList<String> arrayNameUpdate) {
         try {
             this.arrayCarottes = arrayCarottes;
-            assertTimeToMesureModif(s, text, arrayNameUpdate);
+            assertValueToMesureModif(s, text, arrayNameUpdate);
             addMesureSet(s, text, this.arrayCarottes, arrayNameUpdate);
         }catch(Exception e){
             System.out.println(e);
@@ -62,6 +62,7 @@ public class M_createSet {
             csvWriter.flush();
         }
     }
+
 
     /**
      * Methode de creation de fichiers csv
@@ -109,7 +110,7 @@ public class M_createSet {
      * M&eacute;thode qui regroupe toute les informations recoltes pendant le protocole et cr&eacute;e les series.
      * </p>
      */
-    private void assertTimeToMesure() {
+    private void assertValueToMesure() {
         for (int i = 0; i<m_serie.getListCarotte().size(); ++i){
             for (int y=0; y<m_serie.getListCarotte().get(i).getListMesures().size(); ++y){
                 if (y==0)
@@ -118,9 +119,11 @@ public class M_createSet {
                     Date h1 = m_serie.getListCarotte().get(i).getListMesures().get(y).getDateHeure().getTime();
                     Date h2 = m_serie.getListCarotte().get(i).getListMesures().get(y-1).getDateHeure().getTime();
                     double diff = getDiffTimeTwoEchant(h1, h2);
-                    m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(diff);
+                    m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(diff+m_serie.getListCarotte().get(i).getListMesures().get(y-1).getTemps());
                 }
             }
+            m_serie.getListCarotte().get(i).assertVarMasseSurface();
+            m_serie.getListCarotte().get(i).assignCalulDeltaHauteurMesures();
         }
     }
 
@@ -130,27 +133,29 @@ public class M_createSet {
      * @param seriename
      * @param arrayNameUpdate
      */
-    private void assertTimeToMesureModif(String path, String seriename, ArrayList<String> arrayNameUpdate) {
+    private void assertValueToMesureModif(String path, String seriename, ArrayList<String> arrayNameUpdate) {
         Date first;
         Date second;
         for (int i = 0; i<arrayCarottes.size(); ++i){
             for (int y=0; y<arrayCarottes.get(i).getListMesures().size(); ++y){
 
-                arrayCarottes.get(i).getListMesures().get(y).setSurfaceCarotte(arrayCarottes.get(i).calculSurface());
-
                 if (y==0) {
-                    first = M_armoFile.getINSTANCE().getLastTimeEchant(path + File.separator + seriename + File.separator + arrayNameUpdate.get(i));
+                    first = M_armoFile.getINSTANCE().getLastDateEchant(path + File.separator + seriename + File.separator + arrayNameUpdate.get(i));
                     second = arrayCarottes.get(i).getListMesures().get(y).getDateHeure().getTime();
                     double diff = getDiffTimeTwoEchant(second, first);
-                    arrayCarottes.get(i).getListMesures().get(y).setTemps(diff);
+                    arrayCarottes.get(i).getListMesures().get(y).setTemps(diff+M_armoFile.getINSTANCE().getLastTimeEchant(path + File.separator + seriename + File.separator + arrayNameUpdate.get(i)));
                 }
                 else{
                     Date h1 = arrayCarottes.get(i).getListMesures().get(y).getDateHeure().getTime();
                     Date h2 = arrayCarottes.get(i).getListMesures().get(y-1).getDateHeure().getTime();
                     double diff = getDiffTimeTwoEchant(h1, h2);
-                    arrayCarottes.get(i).getListMesures().get(y).setTemps(diff);
+                    arrayCarottes.get(i).getListMesures().get(y).setTemps(diff+arrayCarottes.get(i).getListMesures().get(y-1).getTemps());
                 }
             }
+
+            arrayCarottes.get(i).assertVarMasseSurfaceModif(M_armoFile.getINSTANCE().getFirstMasseOfEchant(path + File.separator + seriename + File.separator + arrayNameUpdate.get(i)), path + File.separator + seriename + File.separator + arrayNameUpdate.get(i));
+            arrayCarottes.get(i).calulDeltaHauteurMesuresModif(M_armoFile.getINSTANCE().getLastDeltaMesureEchant(path + File.separator + seriename + File.separator + arrayNameUpdate.get(i)));
+
         }
     }
 
@@ -161,7 +166,6 @@ public class M_createSet {
      * @return
      */
     private double getDiffTimeTwoEchant(Date d1, Date d2){
-        System.out.println(d1);
         return (d1.getTime() - d2.getTime()) /(1000.0*60.0) /60.0;
     }
 }

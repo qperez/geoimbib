@@ -181,6 +181,21 @@ public class M_Carotte {
         return listDeltaMasseMesures;
     }
 
+
+    public void assignCalulDeltaHauteurMesures(){
+        double variaHauteur = 0.0;
+
+        listMesures.get(0).setDeltaFrangeHumide(listMesures.get(0).getHauteurFrangeHumide());
+        for(int i=0; i < listMesures.size()-1 ; i++){
+            variaHauteur = variaHauteur + listMesures.get(i+1).getHauteurFrangeHumide()-listMesures.get(i).getHauteurFrangeHumide();
+            listMesures.get(i).setDeltaFrangeHumide(variaHauteur);
+        }
+    }
+
+
+
+
+
     /**
      * Calcule et retourne la liste des deltas entre les mesures de hauteur de la carotte
      * @return ArrayList de double de delta de hauteur
@@ -199,7 +214,22 @@ public class M_Carotte {
 
 
     /**
-     * Calcul et retourne la liste des masse sur surface de la carotte pour toute les mesures
+     * Calcule et retourne la liste des deltas entre les mesures de hauteur de la carotte, prend en compte les anciennes mesures dans la s&eacute;rie
+     * @return ArrayList de double de delta de hauteur
+     */
+    public void calulDeltaHauteurMesuresModif(double lastVariaHauteur){
+        double variaHauteur = lastVariaHauteur;
+
+        for(int i=0; i < listMesures.size()-1; i++){
+            variaHauteur = variaHauteur + listMesures.get(i+1).getHauteurFrangeHumide()-listMesures.get(i).getHauteurFrangeHumide();
+            listMesures.get(i).setDeltaFrangeHumide(variaHauteur);
+        }
+
+    }
+
+
+    /**
+     * Calcule et retourne la liste des masse sur surface de la carotte pour toute les mesures
      * @return ArrayList de double
      */
     public ArrayList<Double> getMasseSurSurface(){
@@ -210,4 +240,28 @@ public class M_Carotte {
         return aD;
     }
 
+    /**
+     * Calcule et assigne la valeur de la formule (&delta;&Omega;/&sigma; (&gamma;/&chi;&mu;2)) &agrave; chaque mesure
+     */
+    public void assertVarMasseSurface() {
+        double form = 0;
+        for (int i = 0; i<listMesures.size(); i++){
+            form = (listMesures.get(i).getMasse()-listMesures.get(0).getMasse())/calculSurface();
+            listMesures.get(i).setVarMasseSurSurface(form);
+        }
+    }
+
+    /**
+     * Calcule et assigne la valeur de la formule (&delta;&Omega;/&sigma; (&gamma;/&chi;&mu;2)) &agrave; chaque mesure &agrave; partir de la modification de la s&eacute;rie
+     * @param firstMasseOfSet
+     * @param path
+     */
+    public void assertVarMasseSurfaceModif(double firstMasseOfSet, String path) {
+        double form = 0;
+        setDiametre(M_armoFile.getINSTANCE().getDiamCarotte(path));
+        for (int i = 0; i<listMesures.size(); i++){
+            form = (listMesures.get(i).getMasse()-firstMasseOfSet)/calculSurface();
+            listMesures.get(i).setVarMasseSurSurface(form);
+        }
+    }
 }

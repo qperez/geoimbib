@@ -35,7 +35,6 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
     private boolean firstMesure = true;
 
 
-
     public C_ControlDialogTouch(V_JPanelMainRight v_jPanelMainRight){
         this.v_jPanelMainRight = v_jPanelMainRight;
     }
@@ -82,7 +81,7 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
             v_JDialogInfoFinFillEchant.dispose();
         }
 
-        /****************************************************
+        /**
          * DEBUT DE LOOPACQUISITION
          */
         else if (e.getSource()==v_jDialogHour.getButtonOk()){
@@ -208,6 +207,9 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
         return arrayListName;
     }
 
+    /**
+     * M&eacute;thode d'assignation de l'heure pour chaque mesure
+     */
     public void loopAssignHourArrayMesure() {
         try {
             int index;
@@ -220,5 +222,13 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Retourne une nouvelle instance de l'object Calendar
+     * @return Calendar
+     */
+    public Calendar getNewCalendarSerie() {
+        return Calendar.getInstance();
     }
 }

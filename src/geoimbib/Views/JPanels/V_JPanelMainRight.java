@@ -93,14 +93,15 @@ public class V_JPanelMainRight extends JPanel {
 
         jbutton1 = new JButton("Nouvelle série");
         jpanelButtons.add(jbutton1);
+        jbutton5 = new JButton("Modifier une série");
+        jpanelButtons.add(jbutton5);
         jbutton2 = new JButton("Fusion de séries");
         jpanelButtons.add(jbutton2);
         jbutton3 = new JButton("Graphique");
         jpanelButtons.add(jbutton3);
         jbutton4 = new JButton("Supprimer");
-        jpanelButtons.add(jbutton4);
-        jbutton5 = new JButton("Modifier une série");
-        jpanelButtons.add(jbutton5);
+        //jpanelButtons.add(jbutton4);
+
 
 
 

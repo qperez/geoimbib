@@ -328,9 +328,13 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
     }
 
 
-    public Calendar getCalendarSerie() {
-        return calendarnewserie;
-    }
-
     public M_Serie getM_serie(){return m_serie;}
+
+    /**
+     * Retourne une nouvelle instance de l'object Calendar
+     * @return Calendar
+     */
+    public Calendar getNewCalendarSerie() {
+        return Calendar.getInstance();
+    }
 }
