@@ -18,7 +18,7 @@ public class M_Mesure {
     private double masse;
     private double temps;
     private double deltaFrangeHumide;
-    private double surfaceCarotte;
+    private double varMasseSurSurface;
 
     /**
      * Constructeur M_Mesure.
@@ -225,13 +225,13 @@ public class M_Mesure {
 
     /**
      * M&eacute;thode de modification de la surface de la carottes associ&eacute;e
-     * @param newS
+     * @param varMasseSurSurface
      */
-    public void setSurfaceCarotte(double newS) {this.surfaceCarotte = newS;}
+    public void setVarMasseSurSurface(double varMasseSurSurface) {this.varMasseSurSurface = varMasseSurSurface;}
 
     /**
      * M&eacute;thode d'acc&egrave;s &agrave; la surface de la carotte associ&eacute;e
      * @return surface de la carotte associ&eacute;e &agrave; la mesure.
      */
-    public double getSurfaceCarotte() { return surfaceCarotte;}
+    public double getVarMasseSurSurface() { return varMasseSurSurface;}
 }
