@@ -191,10 +191,12 @@ public class M_Carotte {
         listDeltaHauteurMesures.add(listMesures.get(0).getHauteurFrangeHumide());
         for(int i=0; i < listMesures.size()-1 ; i++){
             variaHauteur = variaHauteur + listMesures.get(i+1).getHauteurFrangeHumide()-listMesures.get(i).getHauteurFrangeHumide();
+            listMesures.get(i).setDeltaFrangeHumide(variaHauteur);
             listDeltaHauteurMesures.add(variaHauteur);
         }
         return listDeltaHauteurMesures;
     }
+
 
     /**
      * Calcul et retourne la liste des masse sur surface de la carotte pour toute les mesures
@@ -207,4 +209,5 @@ public class M_Carotte {
         }
         return aD;
     }
+
 }

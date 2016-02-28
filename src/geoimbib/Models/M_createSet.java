@@ -18,6 +18,7 @@ import java.util.Date;
 public class M_createSet {
 
 
+    private ArrayList<M_Carotte> arrayCarottes;
     private String jtextfolder;
     private M_Serie m_serie= null;
 
@@ -26,7 +27,7 @@ public class M_createSet {
         this.m_serie = m_serie;
         this.jtextfolder = jtextfolder;
 
-        createSerie();
+        assertTimeToMesure();
         try {
             createFiles();
         } catch (FileNotFoundException e) {
@@ -41,7 +42,9 @@ public class M_createSet {
      */
     public M_createSet(ArrayList<M_Carotte> arrayCarottes, String s, String text, ArrayList<String> arrayNameUpdate) {
         try {
-            addMesureSet(s, text, arrayCarottes, arrayNameUpdate);
+            this.arrayCarottes = arrayCarottes;
+            assertTimeToMesureModif(s, text, arrayNameUpdate);
+            addMesureSet(s, text, this.arrayCarottes, arrayNameUpdate);
         }catch(Exception e){
             System.out.println(e);
         }
@@ -50,7 +53,9 @@ public class M_createSet {
     private void addMesureSet(String path, String seriename, ArrayList<M_Carotte> arrayCarottes, ArrayList<String> arrayNameUpdate) throws IOException {
         Writer out;
         CSVWriter csvWriter;
+
         for (int i =0; i<arrayCarottes.size(); ++i){
+            //on insère les nouvelles mesures dans les échantillons
             out = new FileWriter(path+ File.separator + seriename +File.separator +arrayNameUpdate.get(i), true);
             csvWriter = new CSVWriterBuilder(out).entryConverter(new M_conceptionCSVConverterListeMesure()).build();
             csvWriter.writeAll(arrayCarottes.get(i).getListMesures());
@@ -104,7 +109,7 @@ public class M_createSet {
      * M&eacute;thode qui regroupe toute les informations recoltes pendant le protocole et cr&eacute;e les series.
      * </p>
      */
-    private void createSerie() {
+    private void assertTimeToMesure() {
         for (int i = 0; i<m_serie.getListCarotte().size(); ++i){
             for (int y=0; y<m_serie.getListCarotte().get(i).getListMesures().size(); ++y){
                 if (y==0)
@@ -112,14 +117,51 @@ public class M_createSet {
                 else{
                     Date h1 = m_serie.getListCarotte().get(i).getListMesures().get(y).getDateHeure().getTime();
                     Date h2 = m_serie.getListCarotte().get(i).getListMesures().get(y-1).getDateHeure().getTime();
-                    double diff = (h1.getTime() - h2.getTime()) /(1000.0*60.0) /60.0;
-                    System.out.println("h1.getTime(): "+h1.getTime()
-                            + " h2.getTime():"+h2.getTime()
-                            + " (h1.getTime() - h2.getTime())/60 : "+ (h1.getTime() - h2.getTime())
-                            + " (h1.getTime() - h2.getTime())/(1000*60) : " +(h1.getTime() - h2.getTime())/(1000*60));
+                    double diff = getDiffTimeTwoEchant(h1, h2);
                     m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(diff);
                 }
             }
         }
+    }
+
+    /**
+     * M&eacute;thode d'armonisation des temps entre les anciennes mesures et les nouvelles.
+     * @param path
+     * @param seriename
+     * @param arrayNameUpdate
+     */
+    private void assertTimeToMesureModif(String path, String seriename, ArrayList<String> arrayNameUpdate) {
+        Date first;
+        Date second;
+        for (int i = 0; i<arrayCarottes.size(); ++i){
+            for (int y=0; y<arrayCarottes.get(i).getListMesures().size(); ++y){
+
+                arrayCarottes.get(i).getListMesures().get(y).setSurfaceCarotte(arrayCarottes.get(i).calculSurface());
+
+                if (y==0) {
+                    first = M_armoFile.getINSTANCE().getLastTimeEchant(path + File.separator + seriename + File.separator + arrayNameUpdate.get(i));
+                    second = arrayCarottes.get(i).getListMesures().get(y).getDateHeure().getTime();
+                    double diff = getDiffTimeTwoEchant(second, first);
+                    arrayCarottes.get(i).getListMesures().get(y).setTemps(diff);
+                }
+                else{
+                    Date h1 = arrayCarottes.get(i).getListMesures().get(y).getDateHeure().getTime();
+                    Date h2 = arrayCarottes.get(i).getListMesures().get(y-1).getDateHeure().getTime();
+                    double diff = getDiffTimeTwoEchant(h1, h2);
+                    arrayCarottes.get(i).getListMesures().get(y).setTemps(diff);
+                }
+            }
+        }
+    }
+
+    /**
+     * Retourne la diff&eacute;rence de date (heure) entre deux dates.
+     * @param d1
+     * @param d2
+     * @return
+     */
+    private double getDiffTimeTwoEchant(Date d1, Date d2){
+        System.out.println(d1);
+        return (d1.getTime() - d2.getTime()) /(1000.0*60.0) /60.0;
     }
 }

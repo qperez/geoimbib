@@ -17,6 +17,8 @@ public class M_Mesure {
     private double hauteurFrangeHumide;
     private double masse;
     private double temps;
+    private double deltaFrangeHumide;
+    private double surfaceCarotte;
 
     /**
      * Constructeur M_Mesure.
@@ -56,6 +58,7 @@ public class M_Mesure {
     public M_Mesure(Calendar dateHeure, double hauteurFrangeHumide) {
         this.dateHeure = dateHeure;
         this.hauteurFrangeHumide = hauteurFrangeHumide;
+        this.deltaFrangeHumide =0;
     }
 
     /**
@@ -207,4 +210,28 @@ public class M_Mesure {
     public double getRacineCarreTemps() {
         return Math.sqrt(temps);
     }
+
+    public void setDeltaFrangeHumide(double deltaFrangeHumide) {
+        this.deltaFrangeHumide = deltaFrangeHumide;
+    }
+
+    /**
+     * Retourne delta de la frange humide.
+     * @return
+     */
+    public double getDeltaFrangeHumide() {
+        return deltaFrangeHumide;
+    }
+
+    /**
+     * M&eacute;thode de modification de la surface de la carottes associ&eacute;e
+     * @param newS
+     */
+    public void setSurfaceCarotte(double newS) {this.surfaceCarotte = newS;}
+
+    /**
+     * M&eacute;thode d'acc&egrave;s &agrave; la surface de la carotte associ&eacute;e
+     * @return surface de la carotte associ&eacute;e &agrave; la mesure.
+     */
+    public double getSurfaceCarotte() { return surfaceCarotte;}
 }
