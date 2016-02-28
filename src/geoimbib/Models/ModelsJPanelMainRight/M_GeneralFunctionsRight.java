@@ -77,20 +77,22 @@ public class M_GeneralFunctionsRight {
                     while ((ligne = br.readLine()) != null) {
                         try {
                             temp = ligne.split(";");
-                            dateHeure = Calendar.getInstance();
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-                            dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
-                            if(temp[7].equals(""))
-                                hauteurFange = hauteurMax;
-                            else {
-                                hauteurFange = Double.parseDouble(temp[7]);
-                                hauteurMax = hauteurFange;
+                            if(temp.length > 3) {
+                                dateHeure = Calendar.getInstance();
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                                dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
+                                if (temp[7].equals(""))
+                                    hauteurFange = hauteurMax;
+                                else {
+                                    hauteurFange = Double.parseDouble(temp[7]);
+                                    hauteurMax = hauteurFange;
+                                }
+                                masse = Double.parseDouble(temp[6]);
+                                temps = Double.parseDouble(temp[8]);
+                                mesure = new M_Mesure(dateHeure, hauteurFange, masse, temps);
+                                listMesures.add(mesure);
+                                nbrMesuresCarottes++;
                             }
-                            masse = Double.parseDouble(temp[6]);
-                            temps = Double.parseDouble(temp[8]);
-                            mesure = new M_Mesure(dateHeure, hauteurFange, masse, temps);
-                            listMesures.add(mesure);
-                            nbrMesuresCarottes++;
                         } catch (ParseException e) {
                             System.err.println("Problème de format de date");
                             e.printStackTrace();
@@ -177,19 +179,21 @@ public class M_GeneralFunctionsRight {
             while ((ligne = br.readLine()) != null) {
                 try {
                     temp = ligne.split(";");
-                    dateHeure = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-                    dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
-                    if(temp[7].equals(""))
-                        hauteurFange = hauteurMax;
-                    else {
-                        hauteurFange = Double.parseDouble(temp[7]);
-                        hauteurMax = hauteurFange;
+                    if(temp.length > 3) {
+                        dateHeure = Calendar.getInstance();
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                        dateHeure.setTime(sdf.parse(temp[4].concat(" " + temp[5])));
+                        if (temp[7].equals(""))
+                            hauteurFange = hauteurMax;
+                        else {
+                            hauteurFange = Double.parseDouble(temp[7]);
+                            hauteurMax = hauteurFange;
+                        }
+                        masse = Double.parseDouble(temp[6]);
+                        temps = Double.parseDouble(temp[8]);
+                        mesure = new M_Mesure(dateHeure, hauteurFange, masse, temps);
+                        listMesures.add(mesure);
                     }
-                    masse = Double.parseDouble(temp[6]);
-                    temps = Double.parseDouble(temp[8]);
-                    mesure = new M_Mesure(dateHeure, hauteurFange, masse, temps);
-                    listMesures.add(mesure);
                 } catch (ParseException e) {
                     System.err.println("Problème de format de date");
                     e.printStackTrace();
