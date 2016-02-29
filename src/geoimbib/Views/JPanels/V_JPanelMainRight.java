@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 /**
@@ -121,6 +122,14 @@ public class V_JPanelMainRight extends JPanel {
                 200,
                 50);
         this.add(jpanelLeave);
+
+        JPanel logo = new JPanel();
+        JLabel image = new JLabel(new ImageIcon("Res/CarotteRastaCouleurPetit.png"));
+        logo.add(image);
+        Point2D.Double p = new Point2D.Double(this.getWidth()/15,this.getHeight()/25);
+        logo.setBounds((int)p.getX(), (int)p.getY(), getWidth(), getHeight());
+        this.add(logo);
+
 
     }
 
