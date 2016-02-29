@@ -63,9 +63,11 @@ public class M_GeneralFunctions {
     }
 
 
-    /*
-    * Le nom du répertoire doi commencer par "Serie"
-    * */
+    /**
+     * Retourne la liste des s&eacute;ries
+     * @param file
+     * @return Vector<String>
+     */
     public Vector<String> listNameFolder(File file) {
         String [] listefichiers;
         Vector<String> arrayListeSeries = new Vector<String>();
@@ -81,12 +83,12 @@ public class M_GeneralFunctions {
     }
 
 
-    /*
-    * Un échantillon  = un fichier csv, on répertorie tous les fichiers csv du dossier
-    * */
+    /**
+     * R&eacute;cup&egrave;re la liste des fichiers csv (&eacute;chantillon) d'une s&eacute;rie
+     * @param fileSerie s&eacute;rie
+     * @return
+     */
     public Vector<String> listNameCsv(File fileSerie) {
-
-        System.out.println(fileSerie);
         String [] listefichiers2;
         Vector<String> arrayListeCsv = new Vector<String>();
         listefichiers2=fileSerie.list();
@@ -96,9 +98,6 @@ public class M_GeneralFunctions {
                 arrayListeCsv.add(listefichiers2[i].substring(0,listefichiers2[i].length()));
             }
         }
-
-
-
         return arrayListeCsv;
     }
 

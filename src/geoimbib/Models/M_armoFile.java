@@ -3,14 +3,13 @@ package geoimbib.Models;
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by ravier on 26/02/2016.
@@ -159,5 +158,72 @@ public class M_armoFile {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * Fusion de plusieurs séries
+     * @param listNomSerie
+     * @param path
+     * @param newNameSet
+     */
+    public void fusionSet(List<String> listNomSerie, String path, String newNameSet) throws IOException {
+        //Création du dossier = série
+        File destination = new File(path+ File.separator + newNameSet);
+        if (destination.exists()) {
+            System.out.println("Le dossier existe déjà : " + destination.getAbsolutePath());
+        } else {
+            destination.mkdir();
+        }
+        File sourceRepertory;
+        File sourceFile;
+        for (int i=0; i<listNomSerie.size(); i++){
+
+            sourceRepertory = new File(path+ File.separator + listNomSerie.get(i));
+            Vector<String> listeFichiersCSV = listNameCsv(sourceRepertory);
+
+            //déplacement pour tous les fichiers
+            for (int y=0; y < listeFichiersCSV.size(); ++y){
+                sourceFile = new File(sourceRepertory+File.separator+listeFichiersCSV.get(y));
+                destination = new File(path+File.separator+newNameSet+File.separator+listeFichiersCSV.get(y));
+                if (!deplacer(sourceFile,destination))
+                    throw new IOException("deplacement");
+            }
+            if (!sourceRepertory.delete())
+                throw new IOException();
+        }
+    }
+
+    /**
+     * Fonction de d&eacute;placement d'un fichier dans un autre r&eacute;pertoire
+     * @param source
+     * @param destination
+     * @return bool&eacute;en
+     */
+    public static boolean deplacer(File source,File destination) {
+        if( !destination.exists() ) {
+            boolean result = source.renameTo(destination);
+            return result;
+        } else {
+            System.out.println("déplacement pas ok");
+            return false;
+        }
+    }
+
+    /**
+     * R&eacute;cup&egrave;re la liste des fichiers csv (&eacute;chantillon) d'une s&eacute;rie
+     * @param fileSerie s&eacute;rie
+     * @return
+     */
+    public Vector<String> listNameCsv(File fileSerie) {
+        String [] listefichiers2;
+        Vector<String> arrayListeCsv = new Vector<String>();
+        listefichiers2=fileSerie.list();
+
+        for(int i=0;i<listefichiers2.length;i++){
+            if(listefichiers2[i].endsWith(".csv")){
+                arrayListeCsv.add(listefichiers2[i].substring(0,listefichiers2[i].length()));
+            }
+        }
+        return arrayListeCsv;
     }
 }

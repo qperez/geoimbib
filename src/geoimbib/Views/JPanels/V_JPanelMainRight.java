@@ -62,7 +62,7 @@ public class V_JPanelMainRight extends JPanel {
         this.v_jPanelMainLeft = v_jPanelMainLeft;
 
         initView();
-
+        this.c_controlButtonMainPanelRight.setVJPanelLeft(this.v_jPanelMainLeft);
         this.c_controlDialogTouch = new C_ControlDialogTouch(this);
         this.c_controlDialogSerie = new C_ControlDialogSerie(this);
         this.c_controlDialogGraph = new C_ControlDialogGraph(this);
@@ -325,5 +325,19 @@ public class V_JPanelMainRight extends JPanel {
 
     public void setBooleanContinue(boolean cont) {
         this.cont = cont;
+    }
+
+    public void displayWarnBoxSizeSelectedItemList() {
+        JOptionPane.showMessageDialog(this.getParent(),
+                "Vous devez séléctionner deux séries au minimum pour faire une fusion \n (Ctrl + clic) pour multiple séléction",
+                "Attention",
+                JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void displayErrorInput() {
+        JOptionPane.showMessageDialog(this.getParent(),
+                "Vous devez entrer un nom de série valide",
+                "Attention",
+                JOptionPane.WARNING_MESSAGE);
     }
 }
