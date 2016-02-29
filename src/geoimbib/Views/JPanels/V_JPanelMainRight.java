@@ -107,7 +107,7 @@ public class V_JPanelMainRight extends JPanel {
 
 
 
-        jpanelButtons.setBounds(getWidth()/2 - (int)jpanelButtons.getPreferredSize().getWidth()/2,
+        jpanelButtons.setBounds(getWidth()/2 - (int)jpanelButtons.getPreferredSize().getWidth()/2-30,
                 getHeight()/2 - (int)jpanelButtons.getPreferredSize().getHeight(),
                 200,
                 250);
@@ -117,7 +117,7 @@ public class V_JPanelMainRight extends JPanel {
         jpanelLeave.add(jbuttonLeave);
 
 
-        jpanelLeave.setBounds(getWidth()/2 - (int)jpanelLeave.getPreferredSize().getWidth(),
+        jpanelLeave.setBounds(getWidth()/2 - (int)jpanelLeave.getPreferredSize().getWidth()-30,
                 getHeight() - (int)jpanelLeave.getPreferredSize().getHeight()*4,
                 200,
                 50);
@@ -127,7 +127,7 @@ public class V_JPanelMainRight extends JPanel {
         JLabel image = new JLabel(new ImageIcon("Res/CarotteRastaCouleurPetit.png"));
         logo.add(image);
         Point2D.Double p = new Point2D.Double(this.getWidth()/15,this.getHeight()/25);
-        logo.setBounds((int)p.getX(), (int)p.getY(), getWidth(), getHeight());
+        logo.setBounds((int)p.getX()-35, (int)p.getY(), getWidth(), getHeight());
         this.add(logo);
 
 
