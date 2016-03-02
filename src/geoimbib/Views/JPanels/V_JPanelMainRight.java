@@ -289,7 +289,16 @@ public class V_JPanelMainRight extends JPanel {
                         aL,
                         i
                 );
+
+                V_JDialogRecap v_jDialogRecap = new V_JDialogRecap(
+                        this.v_mainWindow,
+                        "Mesures : " + listCarottes.get(i).getNom(),
+                        true,
+                        aL,
+                        listCarottes.get(i)
+                );
             }
+
             if (aL instanceof C_ControlDialogSerie) {
                 C_ControlDialogSerie ccds = (C_ControlDialogSerie)aL;
                 ccds.loopAssignHourArrayMesure();

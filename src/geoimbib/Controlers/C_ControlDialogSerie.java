@@ -31,6 +31,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
     private V_JDialogInfoFinFillEchant v_JDialogInfoFinFillEchant = null;
     private V_JDialogFrange v_JDialogFrange = null;
     private V_JDialogHeure v_JDialogHeure;
+    private V_JDialogRecap v_JDialogRecap = null;
 
     //Variables d'informations du jdialog v_jDialogNouvelleSerie
     private String nameSerie = "Serie";
@@ -199,6 +200,25 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
             }
         }
 
+         else if (e.getSource() == v_JDialogRecap.getButtonVal()){
+             try{
+                 v_JDialogRecap.dispose();
+             }catch (Exception e1){
+                 System.out.println(e1);
+                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
+             }
+         }
+
+         else if (e.getSource() == v_JDialogRecap.getButtonGraph()) {
+             new V_JDialogGraph(
+                     this.v_jPanelMainRight.getV_mainWindow(),
+                     "Graphique",
+                     true,
+                     v_JDialogRecap.getCarotte(),
+                     v_jPanelMainRight
+             );
+         }
+
     }
 
 
@@ -251,6 +271,10 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
     public void setV_jDialogNouvelleSerie(V_jDialogMasse v_jDialogNouvelleSerie) {
         this.v_jDialogMasse = v_jDialogNouvelleSerie;
+    }
+
+    public void setV_jDialogNouvelleSerie(V_JDialogRecap v_jDialogRecap) {
+        this.v_JDialogRecap = v_jDialogRecap;
     }
 
     public void setV_jDialogNouvelleSerie(V_JDialogFrange v_JDialogFrange) {

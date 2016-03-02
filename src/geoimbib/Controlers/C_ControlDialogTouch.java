@@ -24,6 +24,7 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
     private V_JDialogHeure v_jDialogHour;
     private V_jDialogMasse v_jDialogMasse;
     private V_JDialogFrange v_jDialogFrange;
+    private V_JDialogRecap v_JDialogRecap;
 
     private ArrayList<String> arrayListName;
     private int nbEchantToUpdate;
@@ -131,6 +132,25 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
                 v_jPanelMainRight.displayJDialogErrorinputNewSerie();
             }
         }
+
+        else if (e.getSource() == v_JDialogRecap.getButtonVal()){
+            try{
+                v_JDialogRecap.dispose();
+            }catch (Exception e1){
+                System.out.println(e1);
+                v_jPanelMainRight.displayJDialogErrorinputNewSerie();
+            }
+        }
+
+        else if (e.getSource() == v_JDialogRecap.getButtonGraph()) {
+            new V_JDialogGraph(
+                    this.v_jPanelMainRight.getV_mainWindow(),
+                    "Graphique",
+                    true,
+                    v_JDialogRecap.getCarotte(),
+                    v_jPanelMainRight
+            );
+        }
     }
 
     public void setV_jDialogTouch(V_JDialogTouch v_jDialogTouch){this.v_jDialogTouch=v_jDialogTouch;}
@@ -149,6 +169,10 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
 
     public void setV_jDialogMasse(V_jDialogMasse v_jDialogMasse) {
         this.v_jDialogMasse = v_jDialogMasse;
+    }
+
+    public void setV_jDialogNouvelleSerie(V_JDialogRecap v_jDialogRecap) {
+        this.v_JDialogRecap = v_jDialogRecap;
     }
 
     @Override

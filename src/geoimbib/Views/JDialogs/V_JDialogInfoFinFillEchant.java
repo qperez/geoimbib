@@ -80,7 +80,7 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
         jButtonRecap.setVisible(false);
         jpanelButtons.add(jButtonRecap, BorderLayout.CENTER);
 
-        jButtonnext = new JButton("Commencer l'acqusition balance");
+        jButtonnext = new JButton("Commencer l'acquisition balance");
         if (aL instanceof C_ControlDialogSerie)
             jButtonnext.addActionListener(c_controlDialogSerie);
         else
