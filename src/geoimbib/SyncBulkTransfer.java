@@ -32,31 +32,21 @@ import java.nio.channels.Pipe;
  */
 public class SyncBulkTransfer
 {
-    /** Bytes for a CONNECT ADB message header. */
-    private static final byte[] CONNECT_HEADER = new byte[] { 0x43, 0x4E, 0x58,
-            0x4E, 0x00, 0x00, 0x00, 0x01, 0x00, 0x10, 0x00, 0x00, 0x17, 0x00, 0x00,
-            0x00, 0x42, 0x06, 0x00, 0x00, (byte) 0xBC, (byte) 0xB1, (byte) 0xA7,
-            (byte) 0xB1 };
-
-    /** Bytes for a CONNECT ADB message body. */
-    private static final byte[] CONNECT_BODY = new byte[] { 0x68, 0x6F, 0x73,
-            0x74, 0x3A, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x3A, 0x41,
-            0x44, 0x42, 0x20, 0x44, 0x65, 0x6D, 0x6F, 0x00 };
-
-    /** The vendor ID of the Samsung Galaxy Nexus. */
+    /** The vendor ID of the OLIMEX. */
     private static final short VENDOR_ID = 0x03eb;
 
-    /** The vendor ID of the Samsung Galaxy Nexus. */
+    /** The vendor ID of the OLIMEX. */
     private static final short PRODUCT_ID = 0x2044;
 
-    /** The ADB interface number of the Samsung Galaxy Nexus. */
+    /** The ADB interface
+     *  number of the Samsung Galaxy Nexus. */
     private static final byte INTERFACE = 1;
 
     /** The ADB input endpoint of the Samsung Galaxy Nexus. */
     private static final byte IN_ENDPOINT = (byte) 0x83;
 
     /** The ADB output endpoint of the Samsung Galaxy Nexus. */
-    private static final byte OUT_ENDPOINT = 0x03;
+    private static final byte OUT_ENDPOINT = 0x00;
 
     /** The communication timeout in milliseconds. */
     private static final int TIMEOUT = 5000;
@@ -115,6 +105,10 @@ public class SyncBulkTransfer
         return new String(bytes);
     }
 
+    public static Double stringTotalMessageToDouble(String message){
+        return new Double(message.substring(0,7));
+    }
+
     /**
      * Main method.
      *
@@ -159,19 +153,12 @@ public class SyncBulkTransfer
             throw new LibUsbException("Unable to claim interface", result);
         }
 
-        // Send ADB CONNECT message
-       /* write(handle, CONNECT_HEADER);
-        write(handle, CONNECT_BODY);
-
-        // Receive the header of the ADB answer (Most likely an AUTH message)
-        ByteBuffer header = read(handle, 24);
-        header.position(12);
-        int dataSize = header.asIntBuffer().get();*/
-
-        // Receive the body of the ADB answer
         @SuppressWarnings("unused")
-        ByteBuffer data = read(handle, 10);
-        System.out.println(byteBufferToString(data));
+        //for(int i=0;i<10;i++){
+            ByteBuffer data = read(handle, 25);
+            System.out.println(byteBufferToString(data));
+        //}
+
 
         // Release the ADB interface
         result = LibUsb.releaseInterface(handle, INTERFACE);
@@ -185,5 +172,6 @@ public class SyncBulkTransfer
 
         // Deinitialize the libusb context
         LibUsb.exit(null);
+        System.out.println("Test messageToDouble" + stringTotalMessageToDouble("24.00071?3"));
     }
 }
