@@ -124,7 +124,7 @@ public class V_JPanelMainRight extends JPanel {
         this.add(jpanelLeave);
 
         JPanel logo = new JPanel();
-        JLabel image = new JLabel(new ImageIcon("Res/CarotteRastaCouleurPetit.png"));
+        JLabel image = new JLabel(new ImageIcon("Res/CarotteSurlignetransparentPetit.png"));
         logo.add(image);
         Point2D.Double p = new Point2D.Double(this.getWidth()/15,this.getHeight()/25);
         logo.setBounds((int)p.getX()-35, (int)p.getY(), getWidth(), getHeight());
