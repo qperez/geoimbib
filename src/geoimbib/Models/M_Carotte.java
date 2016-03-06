@@ -215,7 +215,6 @@ public class M_Carotte {
 
     /**
      * Calcule et retourne la liste des deltas entre les mesures de hauteur de la carotte, prend en compte les anciennes mesures dans la s&eacute;rie
-     * @return ArrayList de double de delta de hauteur
      */
     public void calulDeltaHauteurMesuresModif(double lastVariaHauteur){
         double variaHauteur = lastVariaHauteur;
