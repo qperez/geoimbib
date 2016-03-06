@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created by ravier on 15/01/2016.
+ * Class de fonctions diverses, telles que la r&eacute;cup&eacute;ration des noms des &eacute;chantillons, de la gestion de spr&eacute;f&eacute;rences.
  */
 public class M_GeneralFunctions {
 
@@ -26,6 +26,10 @@ public class M_GeneralFunctions {
         this.v_jPanelMainLeft = v_jPanelMainLeft;
     }
 
+    /**
+     * M&eacute;thode qui renvoie le chemin du dossier sauvegard&eacute; dans les pr&eacute;f&eacute;rences.
+     * @return path
+     */
     public String loadPathFolderSeries() {
         String path = "";
         String fichier = Paths.get("Res/Preferences/pref.txt").toString();
@@ -50,6 +54,10 @@ public class M_GeneralFunctions {
         return path;
     }
 
+    /**
+     * M&eacute;thode d'&eacute;criture du chemin dans le fichier des pr&eacute;f&eacute;rences
+     * @param pathToSave
+     */
     public void savePathPreferenceInFile(String pathToSave) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(Paths.get("Res/Preferences/pref.txt").toString())));

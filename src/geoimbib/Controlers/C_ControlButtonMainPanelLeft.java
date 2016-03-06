@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.Vector;
 
 /**
- * Created by ravier on 13/01/2016.
+ * Class contr&ocirc;leur du JPanel gauche qui impl&eacute;mente ActionListener
  */
 public class C_ControlButtonMainPanelLeft implements ActionListener {
 

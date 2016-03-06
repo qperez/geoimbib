@@ -3,7 +3,8 @@ package geoimbib.Models.ModelsJPanelMainLeft.Threads;
 import geoimbib.Views.JPanels.V_JPanelMainLeft;
 
 /**
- * Created by ravier on 15/01/2016.
+ * Classe &eacute;tendue de thread pour l'affichage du message d'erreur lorsqu'il n'y a pas de dossier s&eacute;l&eacute;ctionn&eacute;
+ * Permet de ne pas bloquer l'application.
  */
 public class M_ThreadWarningNoPath extends Thread {
     V_JPanelMainLeft v_jPanelMainLeft = null;

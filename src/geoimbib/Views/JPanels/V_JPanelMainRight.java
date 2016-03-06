@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 /**
  * Created by ravier on 10/01/2016.
+ * Classe &eacute;tendue de JPanel, JPanel droit de l'application
  */
 public class V_JPanelMainRight extends JPanel {
 
@@ -55,7 +56,11 @@ public class V_JPanelMainRight extends JPanel {
     private boolean cont = true;
 
 
-
+    /**
+     * Constructeur de la classe V_JPanelMainRight
+     * @param v_mainWindow
+     * @param v_jPanelMainLeft
+     */
     public V_JPanelMainRight(V_MainWindow v_mainWindow, V_JPanelMainLeft v_jPanelMainLeft){
         this.v_mainWindow = v_mainWindow;
         m_generalFunctionsRight = new M_GeneralFunctionsRight(v_jPanelMainLeft, this);

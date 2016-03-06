@@ -14,6 +14,7 @@ import java.util.Vector;
 
 /**
  * Created by ravier on 10/01/2016.
+ * Classe &eacute;tendue de JPanel, JPanel gauche de l'application
  */
 public class V_JPanelMainLeft extends JPanel{
     private M_GeneralFunctions m_generalFunctions = null;
@@ -33,6 +34,10 @@ public class V_JPanelMainLeft extends JPanel{
 
     JButton jButtonPathFolder = null;
 
+    /**
+     * Constructeur de la classe V_JPanelMainLeft
+     * @param v_mainWindow
+     */
     public V_JPanelMainLeft(V_MainWindow v_mainWindow){
         this.c_controlButtonMainPanelLeft = new C_ControlButtonMainPanelLeft(this);
         m_generalFunctions = new M_GeneralFunctions(this);

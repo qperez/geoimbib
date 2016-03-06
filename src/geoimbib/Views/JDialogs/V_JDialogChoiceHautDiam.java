@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by ravier on 24/01/2016.
+ * Classe &eacute;tendue de JDialog, choix des hauteurs et diam&egrave;tres des &eacute;chantillons
  */
 public class V_JDialogChoiceHautDiam extends JDialog {
 
@@ -25,6 +26,14 @@ public class V_JDialogChoiceHautDiam extends JDialog {
         private JButton jButtonnext;
         private JButton jButtonClearJtextfields;
 
+
+    /**
+     * Constructeur de la classe V_JDialogChoiceHautDiam
+     * @param parent
+     * @param title
+     * @param modal
+     * @param c_controlDialogSerie
+     */
     public V_JDialogChoiceHautDiam(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie) {
         super(parent, title, modal);
 

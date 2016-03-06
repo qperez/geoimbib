@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * Created by ravier on 12/01/2016.
+ * Contr&ocirc;leur du JPanel droit de l'application, impl&eacute;mente ActionListener
  */
 public class C_ControlButtonMainPanelRight implements ActionListener {
 

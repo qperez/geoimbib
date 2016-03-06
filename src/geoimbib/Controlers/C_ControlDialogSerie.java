@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Created by ravier on 18/01/2016.
+ * Contr&ocirc;leur principal de la cr&eacute;ation de s&eacute;rie et modification, impl&eacute;mente ActionListener et KeyListener
  */
 public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
@@ -55,7 +55,6 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
         this.v_jPanelMainRight = v_jPanelMainRight;
         resetVariables();
     }
-
 
 
 
@@ -222,6 +221,9 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
     }
 
 
+    /**
+     * Boucle d'assignation des heures
+     */
     public void loopAssignHourArrayMesure(){
         try {
             int index;
@@ -237,6 +239,9 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
     }
 
 
+    /**
+     * M&eacute;thode de r&eacute;initialisation des variables
+     */
     public void resetVariables() {
         nameSerie = "Serie";
         nbEchant = 0;
@@ -248,9 +253,6 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
     }
 
-    /*
-    * Getters Setters
-    * */
 
     public void setV_jDialogNouvelleSerie(V_JDialogNouvelleSerie v_jDialogNouvelleSerie) {
         resetVariables();
@@ -290,9 +292,9 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
 
 
-    /*
-    * Fonction de test d'affichage
-    * */
+    /**
+     * M&eacute;thode d'affichage
+     * */
     @Override
     public String toString() {
         String affichage = "";
@@ -319,6 +321,10 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
     }
 
+    /**
+     * M&eacute;thode d'&eacute;coute d'appuie sur la touhe espace et la touche m
+     * @param e
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == 32){

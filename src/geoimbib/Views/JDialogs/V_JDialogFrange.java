@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 /**
  * Created by ravier on 31/01/2016.
+ * Classe &eacute;tendue de JDialog, valeurs des franges humides des &eacute;chantillons
  */
 public class V_JDialogFrange extends JDialog {
 
@@ -30,6 +31,14 @@ public class V_JDialogFrange extends JDialog {
 
     private JTextField jTextfieldMoyenne;
 
+    /**
+     * Constructeur de la classe V_JDialogFrange
+     * @param v_mainWindow
+     * @param s
+     * @param b
+     * @param aL
+     * @param i
+     */
     public V_JDialogFrange(V_MainWindow v_mainWindow, String s, boolean b, ActionListener aL, int i){
         super(v_mainWindow, s, b);
 

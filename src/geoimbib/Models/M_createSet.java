@@ -50,6 +50,14 @@ public class M_createSet {
         }
     }
 
+    /**
+     * Ajoute les mesures dans les &eacute;chantillons (fichiers .csv)
+     * @param path
+     * @param seriename
+     * @param arrayCarottes
+     * @param arrayNameUpdate
+     * @throws IOException
+     */
     private void addMesureSet(String path, String seriename, ArrayList<M_Carotte> arrayCarottes, ArrayList<String> arrayNameUpdate) throws IOException {
         Writer out;
         CSVWriter csvWriter;

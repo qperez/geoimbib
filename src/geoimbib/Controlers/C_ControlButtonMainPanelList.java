@@ -1,12 +1,11 @@
 package geoimbib.Controlers;
 
-import geoimbib.Models.M_Serie;
+
 import geoimbib.Views.JPanels.V_JPanelMainLeft;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.io.File;
-import java.nio.file.Paths;
+
 
 /**
  * Created by Zachizac on 20/01/2016.

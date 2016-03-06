@@ -8,6 +8,7 @@ import javax.swing.*;
 
 /**
  * Created by ravier on 07/01/2016.
+ * JFrame principale de l'application
  */
 
 /*

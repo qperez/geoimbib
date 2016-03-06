@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by ravier on 18/01/2016.
+ * Classe &eacute;tendue de JDialog, choix des noms des &eacute;chantillons
  */
 public class V_JDialogChoiceNameEchant extends JDialog {
 
@@ -26,6 +27,14 @@ public class V_JDialogChoiceNameEchant extends JDialog {
 
     private JTextField[] jTextFieldNom_tab = null;
 
+
+    /**
+     * Constructeur de la classe V_JDialogChoiceNameEchant
+     * @param parent
+     * @param title
+     * @param modal
+     * @param c_controlDialogSerie
+     */
     public V_JDialogChoiceNameEchant(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie) {
         super(parent, title, modal);
 

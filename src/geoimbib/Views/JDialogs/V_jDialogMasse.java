@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 
 /**
  * Created by ravier on 24/01/2016.
+ * Classe &eacute;tendue de JDialog, r&eacute;cup&egrave;re la masse
  */
 public class V_jDialogMasse extends JDialog {
 
@@ -31,6 +32,15 @@ public class V_jDialogMasse extends JDialog {
 
     private int idCar;
 
+
+    /**
+     * Constructeur de la classe V_jDialogMasse
+     * @param parent
+     * @param title
+     * @param modal
+     * @param aL
+     * @param idCar
+     */
     public V_jDialogMasse(JFrame parent, String title, boolean modal, ActionListener aL, int idCar) {
         super(parent, title, modal);
 

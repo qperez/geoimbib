@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by ravier on 17/01/2016.
+ * Classe &eacute;tendue de JDialog, choix du nombre d'&eacute;chantillons et nom de la s&eacute;rie
  */
 public class V_JDialogNouvelleSerie extends JDialog {
 
@@ -28,9 +29,13 @@ public class V_JDialogNouvelleSerie extends JDialog {
     C_ControlDialogSerie c_controlDialogSerie = null;
 
 
-
-
-
+    /**
+     * Constructeur de la classe V_JDialogNouvelleSerie
+     * @param parent
+     * @param title
+     * @param modal
+     * @param c_controlDialogSerie
+     */
     public V_JDialogNouvelleSerie(JFrame parent, String title, boolean modal, C_ControlDialogSerie c_controlDialogSerie){
         super(parent, title, modal);
 
@@ -90,9 +95,7 @@ public class V_JDialogNouvelleSerie extends JDialog {
         this.getContentPane().add(jPanelJtextField, BorderLayout.CENTER);
     }
 
-    /*
-    * Getters / Setters
-    * */
+
     public JButton getjButtonnext(){return jButtonnext;}
 
     public JTextField getjTextFieldNomSerie(){return jTextFieldNomSerie;}

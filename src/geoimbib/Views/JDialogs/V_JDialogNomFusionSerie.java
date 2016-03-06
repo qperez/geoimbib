@@ -14,6 +14,7 @@ import java.util.*;
 
 /**
  * Created by ravier on 28/02/2016.
+ * Classe &eacute;tendue de JDialog, choix du nom de la nouvelle s&eacute;rie lors de la fusion)
  */
 public class V_JDialogNomFusionSerie extends JDialog {
 
@@ -23,6 +24,14 @@ public class V_JDialogNomFusionSerie extends JDialog {
 
     private V_MainWindow v_mainWindow = null;
 
+
+    /**
+     * Constructeur de la classe V_JDialogNomFusionSerie
+     * @param v_mainWindow
+     * @param s
+     * @param b
+     * @param listNomSerie
+     */
     public V_JDialogNomFusionSerie(V_MainWindow v_mainWindow, String s, boolean b, java.util.List<String> listNomSerie){
         super(v_mainWindow, s, b);
         this.listNomSerie = listNomSerie;

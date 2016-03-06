@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * Created by ravier on 31/01/2016.
+ * Classe &eacute;tendue de JDialog, confirmation ou modification de l'heure
  */
 public class V_JDialogHeure extends JDialog {
 
@@ -23,6 +24,13 @@ public class V_JDialogHeure extends JDialog {
     private JTextField jtextfieldHeure;
     private JButton jbuttonOk;
 
+    /**
+     * Constructeur de la classe V_JDialogHeure
+     * @param v_mainWindow
+     * @param s
+     * @param b
+     * @param aL
+     */
     public V_JDialogHeure(V_MainWindow v_mainWindow, String s, boolean b, ActionListener aL){
         super(v_mainWindow, s, b);
 

@@ -10,11 +10,20 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by ravier on 24/01/2016.
+ * Classe &eacute;tendue de JDialog, dialog de confirmation
  */
 public class V_JDialogConfirmation extends JDialog {
 
     private JDialog jDialogParent = null;
 
+
+    /**
+     * Constructeur de la classe V_JDialogConfirmation
+     * @param parent
+     * @param title
+     * @param modal
+     * @param jDialogParent
+     */
     public V_JDialogConfirmation(JFrame parent, String title, boolean modal, JDialog jDialogParent) {
         super(parent, title, modal);
 

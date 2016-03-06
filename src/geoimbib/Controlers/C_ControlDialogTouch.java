@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Created by ravier on 24/02/2016.
+ * Contr&ocirc;leur pour la modification d'une s&eacute;rie, impl&eacute;mente KeyListener et Action Listener
  */
 public class C_ControlDialogTouch implements ActionListener, KeyListener {
     private V_JPanelMainRight v_jPanelMainRight;

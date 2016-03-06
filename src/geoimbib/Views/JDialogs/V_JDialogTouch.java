@@ -31,6 +31,13 @@ public class V_JDialogTouch extends JDialog {
     private JButton jButtonClearJtextfields = null;
     private C_ControlDialogTouch c_controlDialogTouch;
 
+    /**
+     * Constructeur de la classe V_JDialogTouch
+     * @param v_mainWindow
+     * @param s
+     * @param b
+     * @param c_controlDialogTouch
+     */
     public V_JDialogTouch(V_MainWindow v_mainWindow, String s, boolean b, C_ControlDialogTouch c_controlDialogTouch){
         super(v_mainWindow, s, b);
 

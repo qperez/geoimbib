@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by ravier on 24/01/2016.
+ * Classe &eacute;tendue de JDialog, l'utilisateur choisie si il veut activer la mesure rapide ou non. Et transition avec l'acquisition des mesures
  */
 public class V_JDialogInfoFinFillEchant extends JDialog {
 
@@ -27,6 +28,14 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
     //Jcheckbox
     private JCheckBox jCheckBoxSpeedMesure = null;
 
+
+    /**
+     * Constructeur de la classe V_JDialogInfoFinFillEchant
+     * @param parent
+     * @param title
+     * @param modal
+     * @param aL
+     */
     public V_JDialogInfoFinFillEchant(JFrame parent, String title, boolean modal, ActionListener aL) {
         super(parent, title, modal);
 
