@@ -74,7 +74,7 @@ public class M_GeneralFunctions {
     /**
      * Retourne la liste des s&eacute;ries
      * @param file
-     * @return Vector<String>
+     * @return vecteur de string
      */
     public Vector<String> listNameFolder(File file) {
         String [] listefichiers;
