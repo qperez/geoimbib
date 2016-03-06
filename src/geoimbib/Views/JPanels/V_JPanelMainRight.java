@@ -52,7 +52,7 @@ public class V_JPanelMainRight extends JPanel {
 
     JButton jbuttonLeave = null;
 
-    //bool si true -> on reboucle pour acquérir une nouvelle masse de la balance / sinon = mesure rapide (de base true)
+    //bool si true -> on reboucle pour acqu&eacute;rir une nouvelle masse de la balance / sinon = mesure rapide (de base true)
     private boolean cont = true;
 
 
@@ -218,7 +218,7 @@ public class V_JPanelMainRight extends JPanel {
     }
 
     /**
-     * Methode de création de la jdialog du menu graphique
+     * Methode de cr&eacute;ation de la jdialog du menu graphique
      */
     public void displayJDialogNewGraph(){
         v_jDialogNewGraph = new V_JDialogNewGraph(
@@ -259,7 +259,7 @@ public class V_JPanelMainRight extends JPanel {
     }
 
     /**
-     * Methode qui ouvre un jdialog si aucun objet n'est sélectionnée dans la liste et que l'on veut tout de même y accéder
+     * Methode qui ouvre un jdialog si aucun objet n'est s&eacute;lectionn&eacute;e dans la liste et que l'on veut tout de m&ecirc;me y acc&eacute;der
      */
     public void displayWarnJList(){
         JOptionPane.showMessageDialog(this.getParent(),

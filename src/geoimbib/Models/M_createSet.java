@@ -92,14 +92,14 @@ public class M_createSet {
             }
         }
 
-        //Pour tous les échantillons : créer un fichier correspondant et le remplir avec les données
+        //Pour tous les &eacute;chantillons : cr&eacute;er un fichier correspondant et le remplir avec les donn&eacute;es
         M_Carotte m_carotte;
         CSVWriter csvWriter;
         Writer out;
         for (int i=0; i<m_serie.getListCarotte().size(); ++i){
             m_carotte = m_serie.getListCarotte().get(i);
 
-            //Création du fichier correspondant à la carotte et écriture dedans
+            //Cr&eacute;ation du fichier correspondant &agrave; la carotte et &eacute;criture dedans
             out = new FileWriter(this.jtextfolder+ File.separator + this.m_serie.getNom()+File.separator+m_carotte.getNom()+".csv");
             csvWriter = new CSVWriterBuilder(out).entryConverter(new M_conceptionCSVConverter()).build();
             csvWriter.write(m_carotte);

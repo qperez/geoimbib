@@ -43,7 +43,7 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         /*
-        * Modification de série
+        * Modification de s&eacute;rie
         * */
 
         if (e.getSource() == v_jDialogTouch.getButonNext()){
@@ -102,16 +102,16 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
                     firstMesure = false;
                 }
 
-                //récup idechantillon
+                //r&eacute;cup idechantillon
                 int id = v_jDialogMasse.getIdCar();
 
-                //Récup de la masse
+                //R&eacute;cup de la masse
                 double valMasse = Double.parseDouble(v_jDialogMasse.getJtextfieldValMan());
 
-                //création de la mesure et on ajoute que la masse pour le moment
+                //cr&eacute;ation de la mesure et on ajoute que la masse pour le moment
                 M_Mesure m_mesure = new M_Mesure(valMasse);
 
-                //on ajoute la mesure à arraylist de l'idcar
+                //on ajoute la mesure &agrave; arraylist de l'idcar
                 arrayListM_carotte.get(id).getListMesures().add(m_mesure);
 
 
@@ -195,16 +195,16 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
                     firstMesure = false;
                 }
             try {
-                //récup idechantillon
+                //r&eacute;cup idechantillon
                 int id = v_jDialogMasse.getIdCar();
 
-                //Récup de la masse
+                //R&eacute;cup de la masse
                 double valMasse = Double.parseDouble(v_jDialogMasse.getJtextfieldValMan());
 
-                //création de la mesure et on ajoute que la masse pour le moment
+                //cr&eacute;ation de la mesure et on ajoute que la masse pour le moment
                 M_Mesure m_mesure = new M_Mesure(valMasse);
 
-                //on ajoute la mesure à arraylist de l'idcar
+                //on ajoute la mesure &agrave; arraylist de l'idcar
                 arrayListM_carotte.get(id).getListMesures().add(m_mesure);
 
 

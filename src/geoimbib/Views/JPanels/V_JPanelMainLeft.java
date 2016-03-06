@@ -55,7 +55,7 @@ public class V_JPanelMainLeft extends JPanel{
 
 
         /*
-        * JTextfield changement de répertoire
+        * JTextfield changement de r&eacute;pertoire
         * */
             String pathLoaded = m_generalFunctions.loadPathFolderSeries();
 
@@ -95,7 +95,7 @@ public class V_JPanelMainLeft extends JPanel{
 
 
         /*
-        * JList 1 qui répertorie toute les expériences d'un répertoire
+        * JList 1 qui r&eacute;pertorie toute les exp&eacute;riences d'un r&eacute;pertoire
         * */
 
             //tableau de Strings pour exemple jlist
@@ -129,7 +129,7 @@ public class V_JPanelMainLeft extends JPanel{
                     250);
 
         /*
-        * JList 2 qui affiche tous les échantillons d'une expérience
+        * JList 2 qui affiche tous les &eacute;chantillons d'une exp&eacute;rience
         * */
 
             jListEchantillons = new JList<String>(); //data has type Object[]
@@ -150,8 +150,8 @@ public class V_JPanelMainLeft extends JPanel{
 
 
     /*
-    * Affiche le choice folder et met à jour le jtextfield en fonction du dossier sélectionné
-    * (Récupère les données dans la classe model "M_GeneralFunctions.java"
+    * Affiche le choice folder et met &agrave; jour le jtextfield en fonction du dossier s&eacute;lectionn&eacute;
+    * (R&eacute;cup&egrave;re les donn&eacute;es dans la classe model "M_GeneralFunctions.java"
     * */
     public void displayChoiceFolder() {
         JFileChooser chooser = new JFileChooser();
@@ -166,15 +166,15 @@ public class V_JPanelMainLeft extends JPanel{
         int returnVal = chooser.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             jtextfieldFolder.setText(chooser.getSelectedFile().getPath());
-            m_generalFunctions.savePathPreferenceInFile(chooser.getSelectedFile().getPath());      //on enregiste les préférences dans un fichier pour le récupérer
-            File file = new File(chooser.getSelectedFile().getPath());                              //Créer un fichier qui sera notre dossier cible
-            Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);                //Récupère le vecteur de séries du dossier
+            m_generalFunctions.savePathPreferenceInFile(chooser.getSelectedFile().getPath());      //on enregiste les pr&eacute;f&eacute;rences dans un fichier pour le r&eacute;cup&eacute;rer
+            File file = new File(chooser.getSelectedFile().getPath());                              //Cr&eacute;er un fichier qui sera notre dossier cible
+            Vector<String> listNameSerie = m_generalFunctions.listNameFolder(file);                //R&eacute;cup&egrave;re le vecteur de s&eacute;ries du dossier
             jList.setListData(listNameSerie);                                                       //On actualise la JList avec le nouveau contenu
         }
     }
 
     /*
-    * Affiche les csv de la série sélectionnée
+    * Affiche les csv de la s&eacute;rie s&eacute;lectionn&eacute;e
      */
     public void displayChoiceCsv(){
         File file2 = new File(Paths.get(jtextfieldFolder.getText()).toString() +File.separator+ Paths.get(jList.getSelectedValue()).toString());

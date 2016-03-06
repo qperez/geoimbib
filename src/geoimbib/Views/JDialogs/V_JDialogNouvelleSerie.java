@@ -58,7 +58,7 @@ public class V_JDialogNouvelleSerie extends JDialog {
         jTextFieldNombreEchantillons = new JTextField();
 
 
-        //La série doi obligatoirement commencer par "Serie"
+        //La s&eacute;rie doi obligatoirement commencer par "Serie"
         jPanelJtextField.add(new JLabel("Nom de la série :"));
         jPanelJtextField.add(jTextFieldNomSerie);
 

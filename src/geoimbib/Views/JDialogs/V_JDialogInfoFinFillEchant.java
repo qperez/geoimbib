@@ -25,7 +25,6 @@ public class V_JDialogInfoFinFillEchant extends JDialog {
     private JButton jButtonnext;
     private JButton jButtonCancel;
     private JButton jButtonRecap;
-    //Jcheckbox
     private JCheckBox jCheckBoxSpeedMesure = null;
 
 

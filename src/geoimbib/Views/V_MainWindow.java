@@ -11,7 +11,7 @@ import javax.swing.*;
  * JFrame principale de l'application
  */
 
-/*
+/**
 * V_MainWindow : Class étendue de JFrame : fenêtre principale de l'application
 * */
 
@@ -38,23 +38,23 @@ public class V_MainWindow extends JFrame {
         this.setVisible(true);
     }
 
-    /*
-    * Méthode d'initialisation des composants graphiques (1 jpanel principal puis 2 jpanels (partie gauche, partie droite)
-    * */
+    /**
+     * M&eacute;thode d'initialisation des composants graphiques (1 jpanel principal puis 2 jpanels (partie gauche, partie droite)
+     * */
     private void initView(V_MainWindow v_mainWindow) {
-        /*
+        /**
         * Initialisation du panel principal
         * */
         V_JPanelMain v_jPanelMain = new V_JPanelMain();
         this.setContentPane(v_jPanelMain);
 
-        /*
+        /**
         * Initialisation du panel de gauche
         * */
         v_jPanelMainLeft = new V_JPanelMainLeft(this);
         v_jPanelMain.add(v_jPanelMainLeft);
 
-        /*
+        /**
         * Initialisation du panel de droite
         * */
         v_jPanelMainRight = new V_JPanelMainRight(this, v_jPanelMainLeft);

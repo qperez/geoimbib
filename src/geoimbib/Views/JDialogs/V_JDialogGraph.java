@@ -112,7 +112,7 @@ public class V_JDialogGraph extends JDialog {
 
         XYPlot plot = chart.getXYPlot();
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-        //on enlève le traçage des lignes des series
+        //on enl&egrave;ve le tra&ccedil;age des lignes des series
         for(int i=0;i<serie.getListCarotte().size();i++)
             renderer.setSeriesLinesVisible(i,false);
 
@@ -178,7 +178,7 @@ public class V_JDialogGraph extends JDialog {
      * @param plot le point cliqué
      */
     public void displayCoordonee(XYPlot plot){
-        //Je limite le nombre de chiffre des coordonnées
+        //Je limite le nombre de chiffre des coordonn&eacute;es
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
         df.setMinimumFractionDigits(2);

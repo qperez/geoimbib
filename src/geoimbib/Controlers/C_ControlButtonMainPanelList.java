@@ -19,7 +19,7 @@ public class C_ControlButtonMainPanelList implements ListSelectionListener{
     }
 
     public void valueChanged(ListSelectionEvent e){
-        //éviter le lancement en double de l'event
+        //&eacute;viter le lancement en double de l'event
         if(e.getValueIsAdjusting())
             return;
         if(this.v_jPanelMainLeft.getjList().getSelectedValue()!=null){

@@ -80,9 +80,6 @@ public class V_JDialogHeure extends JDialog {
         this.getContentPane().add(jPanelButtons, BorderLayout.SOUTH);
     }
 
-    /*public int getIdEchant() {
-        return idCar;
-    }*/
 
     public JButton getButtonOk() {
         return jbuttonOk;

@@ -62,7 +62,7 @@ public class M_GeneralFunctionsRight {
                     InputStream ips = new FileInputStream(files[i]);
                     InputStreamReader ipsr = new InputStreamReader(ips);
                     BufferedReader br = new BufferedReader(ipsr);
-                    //on gère d'abord la première ligne sensée contenir les intitulés des colonnes et le diametre/surface et longueur de la carotte
+                    //on g&egrave;re d'abord la premi&egrave;re ligne sens&eacute;e contenir les intitul&eacute;s des colonnes et le diametre/surface et longueur de la carotte
                     if ((ligne = br.readLine()) != null) {
                         temp = ligne.split(";");
                         diametre = Double.parseDouble(temp[0]);
@@ -117,10 +117,10 @@ public class M_GeneralFunctionsRight {
             }
         }
 
-        //Je récupère la date de la mesure la plus ancienne des .csv afin d'établir la date de la série (logiquement égale a la date de la première expérience)
+        //Je r&eacute;cup&egrave;re la date de la mesure la plus ancienne des .csv afin d'&eacute;tablir la date de la s&eacute;rie (logiquement &eacute;gale a la date de la premi&egrave;re exp&eacute;rience)
         try{
             dateHeure = Calendar.getInstance();
-            //pour stocker la date de la liste (sinon j'utilisais deux fois next() avec le if... et donc j'avançais de deux mesures à chaque fois)
+            //pour stocker la date de la liste (sinon j'utilisais deux fois next() avec le if... et donc j'avan&ccedil;ais de deux mesures &agrave; chaque fois)
             Calendar tempCalendar = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             dateHeure.setTime(sdf.parse("01/01/2042 00:00"));
@@ -161,12 +161,12 @@ public class M_GeneralFunctionsRight {
 
         File file = new File(Paths.get(v_jPanelMainLeft.getJtextfieldFolder().getText()).toString() + File.separator + serieSelected + File.separator + echantillonSelected);
         try {
-            // on reference le fichier dans lequel il y a les données d'une carotte
+            // on reference le fichier dans lequel il y a les donn&eacute;es d'une carotte
             nomCarotte = file.getName();
             InputStream ips = new FileInputStream(file);
             InputStreamReader ipsr = new InputStreamReader(ips);
             BufferedReader br = new BufferedReader(ipsr);
-            //on gère d'abord la première ligne sensée contenir les intitulés des colonnes et le diametre/surface et longueur de la carotte
+            //on g&egrave;re d'abord la premi&egrave;re ligne sens&eacute;e contenir les intitul&eacute;s des colonnes et le diametre/surface et longueur de la carotte
             if ((ligne = br.readLine()) != null) {
                 temp = ligne.split(";");
                 diametre = Double.parseDouble(temp[0]);

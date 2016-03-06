@@ -25,7 +25,7 @@ public class C_ControlMouseGraph implements ChartMouseListener {
      * @param e
      */
     public void chartMouseClicked(ChartMouseEvent e){
-        //on gère les threads
+        //on g&egrave;re les threads
         Runnable run = new Runnable() {
             public void run(){
                 XYPlot xyPlot = v_jDialogGraph.getChartPanel().getChart().getXYPlot();

@@ -21,7 +21,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
 
 
-    /*Variables de création de série*/
+    /*Variables de cr&eacute;ation de s&eacute;rie*/
     private V_JPanelMainRight v_jPanelMainRight = null;
 
     private V_jDialogMasse v_jDialogMasse = null;
@@ -45,7 +45,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
 
 
-    //remaniement des données
+    //remaniement des donn&eacute;es
     private M_Serie m_serie;
     private String tmpHour;
     private boolean firstMesure = true;
@@ -63,9 +63,9 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
 
         /*
-        * Création de série
+        * Cr&eacute;ation de s&eacute;rie
         * */
-        //Récolte le nom + nombre de hauteurs de la série
+        //R&eacute;colte le nom + nombre de hauteurs de la s&eacute;rie
          if (e.getSource() == v_jDialogNouvelleSerie.getjButtonnext()){
             try {
                 resetVariables();
@@ -164,16 +164,16 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
                     firstMesure = false;
                 }
 
-                //récup idechantillon
+                //r&eacute;cup idechantillon
                 int id = v_jDialogMasse.getIdCar();
 
-                //Récup de la masse
+                //R&eacute;cup de la masse
                 double valMasse = Double.parseDouble(v_jDialogMasse.getJtextfieldValMan());
 
-                //création de la mesure et on ajoute que la masse pour le moment
+                //cr&eacute;ation de la mesure et on ajoute que la masse pour le moment
                 M_Mesure m_mesure = new M_Mesure(valMasse);
 
-                //on ajoute la mesure à arraylist de l'idcar
+                //on ajoute la mesure &agrave; arraylist de l'idcar
                 m_serie.getListCarotte().get(id).getListMesures().add(m_mesure);
 
 
@@ -334,16 +334,16 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
                 firstMesure = false;
             }
             try{
-                //récup idechantillon
+                //r&eacute;cup idechantillon
                 int id = v_jDialogMasse.getIdCar();
 
-                //Récup de la masse
+                //R&eacute;cup de la masse
                 double valMasse = Double.parseDouble(v_jDialogMasse.getJtextfieldValMan());
 
-                //création de la mesure et on ajoute que la masse pour le moment
+                //cr&eacute;ation de la mesure et on ajoute que la masse pour le moment
                 M_Mesure m_mesure = new M_Mesure(valMasse);
 
-                //on ajoute la mesure à arraylist de l'idcar
+                //on ajoute la mesure &agrave; arraylist de l'idcar
                 m_serie.getListCarotte().get(id).getListMesures().add(m_mesure);
 
                 v_jDialogMasse.dispose();
