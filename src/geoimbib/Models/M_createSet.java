@@ -3,7 +3,9 @@ package geoimbib.Models;
 
 import com.googlecode.jcsv.writer.CSVWriter;
 import com.googlecode.jcsv.writer.internal.CSVWriterBuilder;
+import geoimbib.Views.V_MainWindow;
 
+import javax.swing.*;
 import java.io.*;
 
 import java.util.ArrayList;
@@ -38,7 +40,11 @@ public class M_createSet {
     }
 
     /**
-     * M&eacute;thode de modification des s&eacute;rie, ajout de mesure(s)
+     * Constructeur
+     * @param arrayCarottes
+     * @param s
+     * @param text
+     * @param arrayNameUpdate
      */
     public M_createSet(ArrayList<M_Carotte> arrayCarottes, String s, String text, ArrayList<String> arrayNameUpdate) {
         try {

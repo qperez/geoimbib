@@ -330,6 +330,10 @@ public class V_JPanelMainRight extends JPanel {
                         v_mainWindow.getJPanelMainLeft().getJtextfieldFolder().getText());
                 displayValidateBox();
             }catch(Exception e){
+                JOptionPane.showMessageDialog(v_mainWindow,
+                        "Une erreur s'est produite lors de la création de la série",
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
                 System.out.println("problème création");
             }
         }else {
@@ -339,6 +343,10 @@ public class V_JPanelMainRight extends JPanel {
                         v_mainWindow.getJPanelMainLeft().getjList().getSelectedValue(),
                         c_controlDialogTouch.getArrayNameUpdate());
             }catch(Exception e){
+                JOptionPane.showMessageDialog(v_mainWindow,
+                        "Une erreur s'est produite lors de la modification de la série",
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
                 System.out.println("problème modification");
             }
         }
