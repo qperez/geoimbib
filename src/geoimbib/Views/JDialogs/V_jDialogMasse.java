@@ -31,6 +31,7 @@ public class V_jDialogMasse extends JDialog {
 
     private int idCar;
 
+    private V_jlabelDoubleValeurBalanceThread  threadJlabelValeurBalance;
 
     /**
      * Constructeur de la classe V_jDialogMasse
@@ -63,6 +64,8 @@ public class V_jDialogMasse extends JDialog {
 
         initComposants();
 
+        threadJlabelValeurBalance = new V_jlabelDoubleValeurBalanceThread(jlabelDoubleValeurBalance);
+        threadJlabelValeurBalance.start();
         this.setVisible(true);
     }
 
@@ -161,4 +164,7 @@ public class V_jDialogMasse extends JDialog {
         return jlabelDoubleValeurBalance;
     }
 
+    public V_jlabelDoubleValeurBalanceThread getThreadJlabelValeurBalance() {
+        return threadJlabelValeurBalance;
+    }
 }

@@ -354,18 +354,8 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
 
 
                 //R&eacute;cup de la masse
-                //Création de l'objet servant au transfert
-                //création du thread servatn au transfert
-                //Démarrage du Thread
-                //Attente de la fin thread
-                //Récupération de la valeur
-                IO_SyncBulkTransfer bulkTransfer = new IO_SyncBulkTransfer();
-                Thread threadTransfert = new Thread(bulkTransfer);
-                threadTransfert.start();
-                threadTransfert.join();
-                double valMasse = bulkTransfer.getMasse();
-                System.out.println("valMasse = " + valMasse);
-                System.out.println("après IO");
+                double valMasse = Double.parseDouble(v_jDialogMasse.getJlabelDoubleValeurBalance().getText());
+                v_jDialogMasse.getThreadJlabelValeurBalance().stopThread();
 
                 //cr&eacute;ation de la mesure et on ajoute que la masse pour le moment
                 M_Mesure m_mesure = new M_Mesure(valMasse);
