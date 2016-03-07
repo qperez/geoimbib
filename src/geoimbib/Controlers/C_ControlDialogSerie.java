@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Contr&ocirc;leur principal de la cr&eacute;ation de s&eacute;rie et modification, impl&eacute;mente ActionListener et KeyListener
@@ -233,6 +234,18 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
                 index = m_serie.getListCarotte().get(i).getListMesures().size()-1;
                 date = m_serie.getListCarotte().get(i).getListMesures().get(index).getDateMesure();
                 m_serie.getListCarotte().get(i).getListMesures().get(index).setHeureMesure(date, tmpHour);
+
+                for (int y=0; y<m_serie.getListCarotte().get(i).getListMesures().size(); ++y){
+                    if (y==0)
+                        m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(0);
+                    else{
+                        Date h1 = m_serie.getListCarotte().get(i).getListMesures().get(y).getDateHeure().getTime();
+                        Date h2 = m_serie.getListCarotte().get(i).getListMesures().get(y-1).getDateHeure().getTime();
+                        double diff = getDiffTimeTwoEchant(h1, h2);
+                        m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(diff+m_serie.getListCarotte().get(i).getListMesures().get(y-1).getTemps());
+                    }
+                }
+
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -380,5 +393,15 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
      */
     public Calendar getNewCalendarSerie() {
         return Calendar.getInstance();
+    }
+
+    /**
+     * Retourne la diff&eacute;rence de date (heure) entre deux dates.
+     * @param d1
+     * @param d2
+     * @return
+     */
+    private double getDiffTimeTwoEchant(Date d1, Date d2){
+        return (d1.getTime() - d2.getTime()) /(1000.0*60.0) /60.0;
     }
 }

@@ -126,16 +126,6 @@ public class M_createSet {
      */
     private void assertValueToMesure() {
         for (int i = 0; i<m_serie.getListCarotte().size(); ++i){
-            for (int y=0; y<m_serie.getListCarotte().get(i).getListMesures().size(); ++y){
-                if (y==0)
-                    m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(0);
-                else{
-                    Date h1 = m_serie.getListCarotte().get(i).getListMesures().get(y).getDateHeure().getTime();
-                    Date h2 = m_serie.getListCarotte().get(i).getListMesures().get(y-1).getDateHeure().getTime();
-                    double diff = getDiffTimeTwoEchant(h1, h2);
-                    m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(diff+m_serie.getListCarotte().get(i).getListMesures().get(y-1).getTemps());
-                }
-            }
             m_serie.getListCarotte().get(i).assertVarMasseSurface();
             m_serie.getListCarotte().get(i).assignCalulDeltaHauteurMesures();
         }
@@ -148,10 +138,10 @@ public class M_createSet {
      * @param arrayNameUpdate
      */
     private void assertValueToMesureModif(String path, String seriename, ArrayList<String> arrayNameUpdate) {
-        Date first;
-        Date second;
+        /*Date first;
+        Date second;*/
         for (int i = 0; i<arrayCarottes.size(); ++i){
-            for (int y=0; y<arrayCarottes.get(i).getListMesures().size(); ++y){
+           /* for (int y=0; y<arrayCarottes.get(i).getListMesures().size(); ++y){
 
                 if (y==0) {
                     first = M_armoFile.getINSTANCE().getLastDateEchant(path + File.separator + seriename + File.separator + arrayNameUpdate.get(i));
@@ -165,7 +155,7 @@ public class M_createSet {
                     double diff = getDiffTimeTwoEchant(h1, h2);
                     arrayCarottes.get(i).getListMesures().get(y).setTemps(diff+arrayCarottes.get(i).getListMesures().get(y-1).getTemps());
                 }
-            }
+            }*/
 
             arrayCarottes.get(i).assertVarMasseSurfaceModif(M_armoFile.getINSTANCE().getFirstMasseOfEchant(path + File.separator + seriename + File.separator + arrayNameUpdate.get(i)), path + File.separator + seriename + File.separator + arrayNameUpdate.get(i));
             arrayCarottes.get(i).calulDeltaHauteurMesuresModif(M_armoFile.getINSTANCE().getLastDeltaMesureEchant(path + File.separator + seriename + File.separator + arrayNameUpdate.get(i)));

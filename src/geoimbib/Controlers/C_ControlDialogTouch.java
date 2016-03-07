@@ -3,6 +3,7 @@ package geoimbib.Controlers;
 import geoimbib.Models.M_Carotte;
 import geoimbib.Models.M_Mesure;
 import geoimbib.Models.M_Serie;
+import geoimbib.Models.M_armoFile;
 import geoimbib.Views.JDialogs.*;
 import geoimbib.Views.JPanels.V_JPanelMainRight;
 
@@ -10,9 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Contr&ocirc;leur pour la modification d'une s&eacute;rie, impl&eacute;mente KeyListener et Action Listener
@@ -143,11 +146,20 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
         }
 
         else if (e.getSource() == v_JDialogRecap.getButtonGraph()) {
+            M_Carotte carotte1 = v_JDialogRecap.getCarotte(); //nouvelles mesures.
+
+            String path = v_JDialogRecap.getMainWindow().getJPanelMainLeft().getPathCurrentSet()+ File.separator + arrayListName.get(v_JDialogRecap.getIdCarotte());
+            M_Carotte carotte0 = M_armoFile.getINSTANCE().getCarotte(path);
+
+            for (int i = 0; i<carotte1.getListMesures().size(); ++i){
+                carotte0.getListMesures().add(carotte1.getListMesures().get(i));
+            }
+
             new V_JDialogGraph(
                     this.v_jPanelMainRight.getV_mainWindow(),
                     "Graphique",
                     true,
-                    v_JDialogRecap.getCarotte(),
+                    carotte0,
                     v_jPanelMainRight
             );
         }
@@ -239,10 +251,31 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
         try {
             int index;
             String date = "";
+            Date first;
+            Date second;
+            String path;
             for (int i = 0; i<arrayListM_carotte.size(); ++i){
                 index = arrayListM_carotte.get(i).getListMesures().size()-1;
                 date = arrayListM_carotte.get(i).getListMesures().get(index).getDateMesure();
                 arrayListM_carotte.get(i).getListMesures().get(index).setHeureMesure(date, tmpHour);
+
+                for (int y=0; y<arrayListM_carotte.get(i).getListMesures().size(); ++y){
+
+                    if (y==0) {
+                        path = v_jPanelMainRight.getV_mainWindow().getJPanelMainLeft().getPathCurrentSet()+ File.separator + arrayListName.get(i);
+
+                        first = M_armoFile.getINSTANCE().getLastDateEchant(path);
+                        second = arrayListM_carotte.get(i).getListMesures().get(y).getDateHeure().getTime();
+                        double diff = getDiffTimeTwoEchant(second, first);
+                        arrayListM_carotte.get(i).getListMesures().get(y).setTemps(diff+M_armoFile.getINSTANCE().getLastTimeEchant(path));
+                    }
+                    else{
+                        Date h1 = arrayListM_carotte.get(i).getListMesures().get(y).getDateHeure().getTime();
+                        Date h2 = arrayListM_carotte.get(i).getListMesures().get(y-1).getDateHeure().getTime();
+                        double diff = getDiffTimeTwoEchant(h1, h2);
+                        arrayListM_carotte.get(i).getListMesures().get(y).setTemps(diff+arrayListM_carotte.get(i).getListMesures().get(y-1).getTemps());
+                    }
+                }
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -255,5 +288,15 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
      */
     public Calendar getNewCalendarSerie() {
         return Calendar.getInstance();
+    }
+
+    /**
+     * Retourne la diff&eacute;rence de date (heure) entre deux dates.
+     * @param d1
+     * @param d2
+     * @return
+     */
+    private double getDiffTimeTwoEchant(Date d1, Date d2){
+        return (d1.getTime() - d2.getTime()) /(1000.0*60.0) /60.0;
     }
 }

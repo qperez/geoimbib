@@ -221,4 +221,8 @@ public class V_JPanelMainLeft extends JPanel{
         Vector<String> listNameSerie = m_generalFunctions.listNameFolder(new File(getJtextfieldFolder().getText()));                //Récupère le vecteur de séries du dossier
         jList.setListData(listNameSerie);
     }
+
+    public String getPathCurrentSet() {
+        return getJtextfieldFolder().getText() + File.separator + getjList().getSelectedValue();
+    }
 }

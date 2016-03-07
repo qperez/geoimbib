@@ -3,6 +3,7 @@ package geoimbib.Views.JDialogs;
 import geoimbib.Controlers.C_ControlDialogSerie;
 import geoimbib.Controlers.C_ControlDialogTouch;
 import geoimbib.Models.M_Carotte;
+import geoimbib.Views.JPanels.V_JPanelMainLeft;
 import geoimbib.Views.V_MainWindow;
 
 import javax.swing.*;
@@ -15,6 +16,8 @@ import java.awt.event.ActionListener;
  */
 public class V_JDialogRecap extends JDialog {
 
+    private V_MainWindow v_mainWindow;
+    private int idCarotte;
     private C_ControlDialogSerie c_controlDialogSerie;
     private M_Carotte carotte;
     private final ActionListener aL;
@@ -32,12 +35,15 @@ public class V_JDialogRecap extends JDialog {
      * @param aL l'action listener pour les boutons
      * @param c la carotte sur laquelle on travaille
      */
-    public V_JDialogRecap(V_MainWindow v_mainWindow, String s, boolean b, ActionListener aL, M_Carotte c) {
+    public V_JDialogRecap(V_MainWindow v_mainWindow, String s, boolean b, ActionListener aL, M_Carotte c, int idCarotte) {
         super(v_mainWindow, s, b);
 
         this.setSize(400, 300);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+
+        this.v_mainWindow = v_mainWindow;
+        this.idCarotte = idCarotte;
 
         this.carotte = c;
         this.aL = aL;
@@ -127,4 +133,8 @@ public class V_JDialogRecap extends JDialog {
     public M_Carotte getCarotte(){
         return carotte;
     }
+
+    public int getIdCarotte() { return this.idCarotte;}
+
+    public V_MainWindow getMainWindow() { return this.v_mainWindow;}
 }

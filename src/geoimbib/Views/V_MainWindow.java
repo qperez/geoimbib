@@ -67,4 +67,6 @@ public class V_MainWindow extends JFrame {
     public V_JPanelMainRight getJPanelMainRight() {
         return v_jPanelMainRight;
     }
+
+
 }

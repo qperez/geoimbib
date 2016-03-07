@@ -228,4 +228,42 @@ public class M_armoFile {
         }
         return arrayListeCsv;
     }
+
+    /**
+     * Méthode qui reconstruit une carotte à partir d'une chemin
+     * @param path
+     * @return M_Carotte
+     */
+    public M_Carotte getCarotte(String path) {
+        M_Carotte m_carotte = new M_Carotte();
+        Reader reader = null;
+        try {
+            reader = new FileReader(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        CSVReader csvMesures = CSVReaderBuilder.newDefaultReader(reader);
+        List<String[]> mesures = null;
+        try {
+            mesures = csvMesures.readAll();
+            M_Mesure m_mesure;
+            for (int i = 1; i<mesures.size(); ++i){
+                m_mesure = new M_Mesure();
+                m_mesure.setHauteurFrangeHumide(Double.parseDouble(mesures.get(i)[7]));
+                m_mesure.setHeureMesure(mesures.get(i)[4], mesures.get(i)[5]);
+                m_mesure.setMasse(Double.parseDouble(mesures.get(i)[6]));
+                m_mesure.setTemps(Double.parseDouble(mesures.get(i)[8]));
+                m_mesure.setVarMasseSurSurface(Double.parseDouble(mesures.get(i)[10]));
+
+                m_carotte.getListMesures().add(m_mesure);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return m_carotte;
+    }
 }

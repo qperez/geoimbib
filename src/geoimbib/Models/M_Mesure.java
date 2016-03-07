@@ -27,7 +27,7 @@ public class M_Mesure {
      * </p>
      */
     public M_Mesure(){
-
+        dateHeure = Calendar.getInstance();
     }
 
 

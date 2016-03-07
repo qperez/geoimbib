@@ -295,22 +295,31 @@ public class V_JPanelMainRight extends JPanel {
                         i
                 );
 
+                if (aL instanceof C_ControlDialogSerie) {
+                    C_ControlDialogSerie ccds = (C_ControlDialogSerie)aL;
+                    ccds.loopAssignHourArrayMesure();
+                }else{
+                    C_ControlDialogTouch ccdt = (C_ControlDialogTouch) aL;
+                    ccdt.loopAssignHourArrayMesure();
+                }
+
                 V_JDialogRecap v_jDialogRecap = new V_JDialogRecap(
                         this.v_mainWindow,
                         "Mesures : " + listCarottes.get(i).getNom(),
                         true,
                         aL,
-                        listCarottes.get(i)
+                        listCarottes.get(i),
+                        i
                 );
             }
 
-            if (aL instanceof C_ControlDialogSerie) {
+            /*if (aL instanceof C_ControlDialogSerie) {
                 C_ControlDialogSerie ccds = (C_ControlDialogSerie)aL;
                 ccds.loopAssignHourArrayMesure();
             }else{
                 C_ControlDialogTouch ccdt = (C_ControlDialogTouch) aL;
                 ccdt.loopAssignHourArrayMesure();
-            }
+            }*/
 
             if (mRapide) {
                 V_jDialogContinueGetMasseOrNot v_jDialogContinueGetMasseOrNot = new V_jDialogContinueGetMasseOrNot(
@@ -371,4 +380,5 @@ public class V_JPanelMainRight extends JPanel {
                 "Attention",
                 JOptionPane.WARNING_MESSAGE);
     }
+
 }
