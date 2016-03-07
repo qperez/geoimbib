@@ -1,5 +1,6 @@
 package geoimbib.Controlers;
 
+import geoimbib.IO.IO_SyncBulkTransfer;
 import geoimbib.Models.M_Carotte;
 import geoimbib.Models.M_Mesure;
 import geoimbib.Models.M_Serie;
@@ -327,6 +328,7 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
+
         if (e.getKeyCode() == 32){
             if (firstMesure){
                 for (int i= 0; i<nbEchant; ++i)
@@ -337,8 +339,20 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
                 //r&eacute;cup idechantillon
                 int id = v_jDialogMasse.getIdCar();
 
+
                 //R&eacute;cup de la masse
-                double valMasse = Double.parseDouble(v_jDialogMasse.getJtextfieldValMan());
+                //Création de l'objet servant au transfert
+                //création du thread servatn au transfert
+                //Démarrage du Thread
+                //Attente de la fin thread
+                //Récupération de la valeur
+                IO_SyncBulkTransfer bulkTransfer = new IO_SyncBulkTransfer();
+                Thread threadTransfert = new Thread(bulkTransfer);
+                threadTransfert.start();
+                threadTransfert.join();
+                double valMasse = bulkTransfer.getMasse();
+                System.out.println("valMasse = " + valMasse);
+                System.out.println("après IO");
 
                 //cr&eacute;ation de la mesure et on ajoute que la masse pour le moment
                 M_Mesure m_mesure = new M_Mesure(valMasse);

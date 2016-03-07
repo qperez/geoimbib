@@ -5,11 +5,9 @@ import geoimbib.Controlers.C_ControlDialogTouch;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.text.Keymap;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 /**
  * Created by ravier on 24/01/2016.
@@ -23,7 +21,8 @@ public class V_jDialogMasse extends JDialog {
     private C_ControlDialogTouch c_controlDialogTouch;
 
     private JLabel jlabelsaisieBalance;
-    private JLabel jlabelintValeurBalance;
+
+    private JLabel jlabelDoubleValeurBalance;
     private JTextField jtextfieldMasseManu;
 
     private JPanel jpanelButtons;
@@ -74,10 +73,10 @@ public class V_jDialogMasse extends JDialog {
 
 
 
-        jlabelintValeurBalance = new JLabel("0");
+        jlabelDoubleValeurBalance = new JLabel("0");
         jlabelsaisieBalance = new JLabel("\"Espace\" pour valider :");
         jpcomposants.add(jlabelsaisieBalance);
-        jpcomposants.add(jlabelintValeurBalance);
+        jpcomposants.add(jlabelDoubleValeurBalance);
 
         jpcomposants.add(new JLabel("\"m\" pour une saisie manuelle"));
         jpcomposants.add(new JLabel(""));
@@ -136,7 +135,7 @@ public class V_jDialogMasse extends JDialog {
         /*
         * On rend invisible les boutons pour la balance
         * */
-        jlabelintValeurBalance.setVisible(false);
+        jlabelDoubleValeurBalance.setVisible(false);
         jlabelsaisieBalance.setVisible(false);
 
         this.removeKeyListener(this.c_controlDialogSerie);
@@ -147,7 +146,7 @@ public class V_jDialogMasse extends JDialog {
     }
 
     public String getJLabelBalance(){
-        return jlabelintValeurBalance.getText();
+        return jlabelDoubleValeurBalance.getText();
     }
 
     public String getJtextfieldValMan() {
@@ -156,6 +155,10 @@ public class V_jDialogMasse extends JDialog {
 
     public int getIdCar(){
         return idCar;
+    }
+
+    public JLabel getJlabelDoubleValeurBalance() {
+        return jlabelDoubleValeurBalance;
     }
 
 }

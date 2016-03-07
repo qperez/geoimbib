@@ -199,7 +199,8 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
                 int id = v_jDialogMasse.getIdCar();
 
                 //R&eacute;cup de la masse
-                double valMasse = Double.parseDouble(v_jDialogMasse.getJtextfieldValMan());
+                //double valMasse = Double.parseDouble(v_jDialogMasse.getJtextfieldValMan());
+                double valMasse = 0;
 
                 //cr&eacute;ation de la mesure et on ajoute que la masse pour le moment
                 M_Mesure m_mesure = new M_Mesure(valMasse);
