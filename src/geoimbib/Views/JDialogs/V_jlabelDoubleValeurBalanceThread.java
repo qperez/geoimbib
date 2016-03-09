@@ -35,8 +35,6 @@ public class V_jlabelDoubleValeurBalanceThread extends Thread{
                     e.printStackTrace();
                 }
                 double valMasse = bulkTransfer.getMasse();
-                System.out.println("valMasse = " + valMasse);
-                System.out.println("après IO");
                 jlabelDoubleValeurBalance.setText(String.valueOf(valMasse));
                 this.sleep(100);
             }catch(InterruptedException e){
