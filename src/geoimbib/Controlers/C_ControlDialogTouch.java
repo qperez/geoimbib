@@ -270,8 +270,8 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
                         arrayListM_carotte.get(ii).getListMesures().get(y).setTemps(diff+M_armoFile.getINSTANCE().getLastTimeEchant(path));
                     }
                     else{
-                        Date h1 = arrayListM_carotte.get(i).getListMesures().get(y).getDateHeure().getTime();
-                        Date h2 = arrayListM_carotte.get(i).getListMesures().get(y-1).getDateHeure().getTime();
+                        Date h1 = arrayListM_carotte.get(ii).getListMesures().get(y).getDateHeure().getTime();
+                        Date h2 = arrayListM_carotte.get(ii).getListMesures().get(y-1).getDateHeure().getTime();
                         double diff = getDiffTimeTwoEchant(h1, h2);
                         arrayListM_carotte.get(ii).getListMesures().get(y).setTemps(diff+arrayListM_carotte.get(ii).getListMesures().get(y-1).getTemps());
                     }
