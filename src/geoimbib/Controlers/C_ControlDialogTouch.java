@@ -247,7 +247,7 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
     /**
      * M&eacute;thode d'assignation de l'heure pour chaque mesure
      */
-    public void loopAssignHourArrayMesure() {
+    public void loopAssignHourArrayMesure(int ii) {
         try {
             int index;
             String date = "";
@@ -255,25 +255,25 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
             Date second;
             String path;
             for (int i = 0; i<arrayListM_carotte.size(); ++i){
-                index = arrayListM_carotte.get(i).getListMesures().size()-1;
-                date = arrayListM_carotte.get(i).getListMesures().get(index).getDateMesure();
-                arrayListM_carotte.get(i).getListMesures().get(index).setHeureMesure(date, tmpHour);
+                index = arrayListM_carotte.get(ii).getListMesures().size()-1;
+                date = arrayListM_carotte.get(ii).getListMesures().get(index).getDateMesure();
+                arrayListM_carotte.get(ii).getListMesures().get(index).setHeureMesure(date, tmpHour);
 
                 for (int y=0; y<arrayListM_carotte.get(i).getListMesures().size(); ++y){
 
                     if (y==0) {
-                        path = v_jPanelMainRight.getV_mainWindow().getJPanelMainLeft().getPathCurrentSet()+ File.separator + arrayListName.get(i);
+                        path = v_jPanelMainRight.getV_mainWindow().getJPanelMainLeft().getPathCurrentSet()+ File.separator + arrayListName.get(ii);
 
                         first = M_armoFile.getINSTANCE().getLastDateEchant(path);
-                        second = arrayListM_carotte.get(i).getListMesures().get(y).getDateHeure().getTime();
+                        second = arrayListM_carotte.get(ii).getListMesures().get(y).getDateHeure().getTime();
                         double diff = getDiffTimeTwoEchant(second, first);
-                        arrayListM_carotte.get(i).getListMesures().get(y).setTemps(diff+M_armoFile.getINSTANCE().getLastTimeEchant(path));
+                        arrayListM_carotte.get(ii).getListMesures().get(y).setTemps(diff+M_armoFile.getINSTANCE().getLastTimeEchant(path));
                     }
                     else{
                         Date h1 = arrayListM_carotte.get(i).getListMesures().get(y).getDateHeure().getTime();
                         Date h2 = arrayListM_carotte.get(i).getListMesures().get(y-1).getDateHeure().getTime();
                         double diff = getDiffTimeTwoEchant(h1, h2);
-                        arrayListM_carotte.get(i).getListMesures().get(y).setTemps(diff+arrayListM_carotte.get(i).getListMesures().get(y-1).getTemps());
+                        arrayListM_carotte.get(ii).getListMesures().get(y).setTemps(diff+arrayListM_carotte.get(ii).getListMesures().get(y-1).getTemps());
                     }
                 }
             }

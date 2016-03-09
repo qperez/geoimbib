@@ -226,23 +226,24 @@ public class C_ControlDialogSerie implements ActionListener, KeyListener {
     /**
      * Boucle d'assignation des heures
      */
-    public void loopAssignHourArrayMesure(){
+    public void loopAssignHourArrayMesure(int ii){
         try {
             int index;
             String date = "";
             for (int i = 0; i<m_serie.getListCarotte().size(); ++i){
-                index = m_serie.getListCarotte().get(i).getListMesures().size()-1;
-                date = m_serie.getListCarotte().get(i).getListMesures().get(index).getDateMesure();
-                m_serie.getListCarotte().get(i).getListMesures().get(index).setHeureMesure(date, tmpHour);
+                System.out.println(m_serie.getListCarotte().get(ii));
+                index = m_serie.getListCarotte().get(ii).getListMesures().size()-1;
+                date = m_serie.getListCarotte().get(ii).getListMesures().get(index).getDateMesure();
+                m_serie.getListCarotte().get(ii).getListMesures().get(index).setHeureMesure(date, tmpHour);
 
-                for (int y=0; y<m_serie.getListCarotte().get(i).getListMesures().size(); ++y){
+                for (int y=0; y<m_serie.getListCarotte().get(ii).getListMesures().size(); ++y){
                     if (y==0)
-                        m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(0);
+                        m_serie.getListCarotte().get(ii).getListMesures().get(y).setTemps(0);
                     else{
-                        Date h1 = m_serie.getListCarotte().get(i).getListMesures().get(y).getDateHeure().getTime();
-                        Date h2 = m_serie.getListCarotte().get(i).getListMesures().get(y-1).getDateHeure().getTime();
+                        Date h1 = m_serie.getListCarotte().get(ii).getListMesures().get(y).getDateHeure().getTime();
+                        Date h2 = m_serie.getListCarotte().get(ii).getListMesures().get(y-1).getDateHeure().getTime();
                         double diff = getDiffTimeTwoEchant(h1, h2);
-                        m_serie.getListCarotte().get(i).getListMesures().get(y).setTemps(diff+m_serie.getListCarotte().get(i).getListMesures().get(y-1).getTemps());
+                        m_serie.getListCarotte().get(ii).getListMesures().get(y).setTemps(diff+m_serie.getListCarotte().get(ii).getListMesures().get(y-1).getTemps());
                     }
                 }
 

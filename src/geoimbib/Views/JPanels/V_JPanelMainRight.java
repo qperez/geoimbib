@@ -279,6 +279,7 @@ public class V_JPanelMainRight extends JPanel {
             );
 
             for (int i = 0; i<nbEchant; ++i ){
+                System.out.println("Masse "+i);
                 V_jDialogMasse v_jDialogMasse = new V_jDialogMasse(
                         this.v_mainWindow,
                         "Acquisition masse : " + listCarottes.get(i).getNom(),
@@ -287,6 +288,7 @@ public class V_JPanelMainRight extends JPanel {
                         i
                 );
 
+                System.out.println("Frange "+i);
                 V_JDialogFrange v_jDialogFrange = new V_JDialogFrange(
                         this.v_mainWindow,
                         "Frange humide : "+ listCarottes.get(i).getNom(),
@@ -297,10 +299,10 @@ public class V_JPanelMainRight extends JPanel {
 
                 if (aL instanceof C_ControlDialogSerie) {
                     C_ControlDialogSerie ccds = (C_ControlDialogSerie)aL;
-                    ccds.loopAssignHourArrayMesure();
+                    ccds.loopAssignHourArrayMesure(i);
                 }else{
                     C_ControlDialogTouch ccdt = (C_ControlDialogTouch) aL;
-                    ccdt.loopAssignHourArrayMesure();
+                    ccdt.loopAssignHourArrayMesure(i);
                 }
 
                 V_JDialogRecap v_jDialogRecap = new V_JDialogRecap(
