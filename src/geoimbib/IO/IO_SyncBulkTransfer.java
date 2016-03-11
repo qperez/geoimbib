@@ -134,49 +134,50 @@ public class IO_SyncBulkTransfer implements Runnable{
                 getProductId());
         if (handle == null)
         {
-            System.err.println("Test device not found.");
+            //System.err.println("Device not found.");
         }
+        else{
+            //Detach kernelk driver
+            result = LibUsb.detachKernelDriver(handle, 1);
+            if (result != LibUsb.SUCCESS &&
+                    result != LibUsb.ERROR_NOT_SUPPORTED &&
+                    result != LibUsb.ERROR_NOT_FOUND)
+            {
+                throw new LibUsbException("Unable to detach kernel driver",
+                        result);
+            }
 
-        //Detach kernelk driver
-        result = LibUsb.detachKernelDriver(handle, 1);
-        if (result != LibUsb.SUCCESS &&
-                result != LibUsb.ERROR_NOT_SUPPORTED &&
-                result != LibUsb.ERROR_NOT_FOUND)
-        {
-            throw new LibUsbException("Unable to detach kernel driver",
-                    result);
+            // Claim the ADB interface
+            result = LibUsb.claimInterface(handle, getINTERFACE());
+
+            if (result != LibUsb.SUCCESS)
+            {
+                throw new LibUsbException("Unable to claim interface", result);
+            }
+
+            ByteBuffer data = null;
+            String messageFromBalance = null;
+            //@SuppressWarnings("unused")
+            for(int i=0;i<3;i++){
+                data = read(handle, 25);
+                messageFromBalance = byteBufferToString(data);
+                System.out.println("Message de la balance = " + messageFromBalance);
+            }
+            masse = stringTotalMessageToDouble(messageFromBalance);
+
+            // Release the ADB interface
+            result = LibUsb.releaseInterface(handle, getINTERFACE());
+            if (result != LibUsb.SUCCESS)
+            {
+                throw new LibUsbException("Unable to release interface", result);
+            }
+
+            // Close the device
+            LibUsb.close(handle);
+
+            // Deinitialize the libusb context
+            LibUsb.exit(null);
+
+            }
         }
-
-        // Claim the ADB interface
-        result = LibUsb.claimInterface(handle, getINTERFACE());
-
-        if (result != LibUsb.SUCCESS)
-        {
-            throw new LibUsbException("Unable to claim interface", result);
-        }
-
-        ByteBuffer data = null;
-        String messageFromBalance = null;
-        //@SuppressWarnings("unused")
-        for(int i=0;i<3;i++){
-            data = read(handle, 25);
-            messageFromBalance = byteBufferToString(data);
-            System.out.println("Message de la balance = " + messageFromBalance);
-        }
-        masse = stringTotalMessageToDouble(messageFromBalance);
-
-        // Release the ADB interface
-        result = LibUsb.releaseInterface(handle, getINTERFACE());
-        if (result != LibUsb.SUCCESS)
-        {
-            throw new LibUsbException("Unable to release interface", result);
-        }
-
-        // Close the device
-        LibUsb.close(handle);
-
-        // Deinitialize the libusb context
-        LibUsb.exit(null);
-
-    }
 }

@@ -64,8 +64,7 @@ public class V_jDialogMasse extends JDialog {
 
         initComposants();
 
-        threadJlabelValeurBalance = new V_jlabelDoubleValeurBalanceThread(jlabelDoubleValeurBalance);
-        threadJlabelValeurBalance.start();
+
         this.setVisible(true);
     }
 
@@ -110,6 +109,9 @@ public class V_jDialogMasse extends JDialog {
 
         this.getContentPane().add(jpanelButtons, BorderLayout.SOUTH);
         this.getContentPane().add(jpcomposants, BorderLayout.CENTER);
+
+        threadJlabelValeurBalance = new V_jlabelDoubleValeurBalanceThread(jlabelDoubleValeurBalance);
+        threadJlabelValeurBalance.start();
 
         addControler();
     }

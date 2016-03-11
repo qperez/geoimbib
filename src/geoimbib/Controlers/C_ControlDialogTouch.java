@@ -228,6 +228,7 @@ public class C_ControlDialogTouch implements ActionListener, KeyListener {
             }
         }
         else if (e.getKeyCode() == 77) {
+            v_jDialogMasse.getThreadJlabelValeurBalance().stopThread();
             v_jDialogMasse.setManuel();
         }
     }
